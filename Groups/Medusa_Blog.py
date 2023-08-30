@@ -2,20 +2,19 @@ from selenium import webdriver
 import pandas as pd
 import time
 
-
 # set up TOR and the TOR browser
 tor_proxy = "socks5://127.0.0.1:9150"
-profile = webdriver.FirefoxProfile()
-profile.set_preference('network.proxy.type', 1)
-profile.set_preference('network.proxy.socks', '127.0.0.1')
-profile.set_preference('network.proxy.socks_port', 9150)
-profile.set_preference('network.proxy.socks_remote_dns', True)
-profile.update_preferences()
-driver = webdriver.Firefox(firefox_profile=profile, executable_path='/path/to/geckodriver')
+options = webdriver.FirefoxOptions()
+options.set_preference('network.proxy.type', 1)
+options.set_preference('network.proxy.socks', '127.0.0.1')
+options.set_preference('network.proxy.socks_port', 9150)
+options.set_preference('network.proxy.socks_remote_dns', True)
+driver = webdriver.Firefox(options=options, executable_path='./geckodriver')
 
 # navigate to the website
 site = 'http://medusaxko7jxtrojdkxo66j7ck4q5tgktf7uqsqyfry4ebnxlcbkccyd.onion/'
 driver.get(site)
+
 
 while True:
     # Get current page height
@@ -71,5 +70,5 @@ df = pd.DataFrame({
     'download_data': Data,
     'company_website': ['https://www.example.com/'] * len(company_names),
 })
-
+print(df)
 driver.quit()
