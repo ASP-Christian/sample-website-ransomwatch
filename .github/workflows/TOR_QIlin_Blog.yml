@@ -1,25 +1,29 @@
-name: Run Qilin_Blog.py with Tor
+name: Run Qilin Blog Manually
 
-on: [workflow_dispatch]
+on:
+  workflow_dispatch:  # This event allows manual triggering
 
 jobs:
-  run_with_tor:
+  run_qilin_blog:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Set up Tor
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y tor
-        tor &
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x  # Choose the appropriate Python version
 
-    - name: Install dependencies
+    - name: Install Dependencies
       run: |
-        python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Run Qilin_Blog.py
+    - name: Start TOR
+      run: |
+        # Start TOR here (commands to start TOR as a background service)
+        # Example: tor &
+        
+    - name: Run Qilin Blog Script
       run: python Groups/Qilin_Blog.py
