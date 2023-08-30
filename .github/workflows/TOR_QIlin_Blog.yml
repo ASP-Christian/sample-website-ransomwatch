@@ -1,26 +1,25 @@
-name: Run Qilin Blog Script
-on:
-  push:
-    branches:
-      - main
+name: Run Qilin_Blog.py with Tor
+
+on: [workflow_dispatch]
 
 jobs:
-  run_qilin_blog:
+  run_with_tor:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Install Tor
-        run: sudo apt-get install -y tor
+    - name: Set up Tor
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y tor
+        tor &
 
-      - name: Set up Tor configuration
-        run: |
-          # Set up your Tor configuration here, e.g., start Tor service
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
 
-      - name: Install Python dependencies
-        run: pip install -r requirements.txt
-
-      - name: Run Qilin_Blog.py
-        run: python Groups/Qilin_Blog.py
+    - name: Run Qilin_Blog.py
+      run: python /Groups/Qilin_Blog.py
