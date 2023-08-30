@@ -1,9 +1,7 @@
 name: Run Qilin Blog Script
 
 on:
-  push:
-    branches:
-      - main  # or the branch you want to trigger the workflow on
+  workflow_dispatch:  # This enables manual triggering
 
 jobs:
   run_script:
