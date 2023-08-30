@@ -1,29 +1,23 @@
-name: Run Qilin Blog Manually
+name: Run Qilin Blog Script
 
 on:
-  workflow_dispatch:  # This event allows manual triggering
+  push:
+    branches:
+      - main  # or the branch you want to trigger the workflow on
 
 jobs:
-  run_qilin_blog:
+  run_script:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
+    - name: Checkout repository
       uses: actions/checkout@v2
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.x  # Choose the appropriate Python version
-
-    - name: Install Dependencies
-      run: |
-        pip install -r requirements.txt
-
-    - name: Start TOR
-      run: |
-        # Start TOR here (commands to start TOR as a background service)
-        # Example: tor &
-        
-    - name: Run Qilin Blog Script
-      run: python Groups/Qilin_Blog.py
+      
+    - name: Set up Docker
+      uses: docker/setup-docker@v2
+      
+    - name: Build Docker image
+      run: docker build -t qilin-blog .
+      
+    - name: Run Docker container
+      run: docker run -v $PWD/Groups:/app/Groups --network host qilin-blog python3 /app/Qilin_Blog.py
