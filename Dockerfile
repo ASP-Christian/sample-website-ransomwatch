@@ -1,14 +1,28 @@
-FROM python:3.8
+# Use a base image with Tor, Firefox, and geckodriver installed
+FROM debian:bullseye-slim
 
-# Install Tor and other dependencies
-RUN apt-get update && apt-get install -y tor
+# Install dependencies
+RUN apt-get update && \
+    apt-get install -y tor firefox-esr && \
+    apt-get clean
 
-# Copy your code and requirements into the container
-COPY . /app
+# Download and install geckodriver
+RUN apt-get install -y wget && \
+    GECKODRIVER_VERSION=$(wget -qO- https://api.github.com/repos/mozilla/geckodriver/releases/latest | grep '"tag_name":' | sed -E 's/.*"v(.*)".*/\1/') && \
+    wget https://github.com/mozilla/geckodriver/releases/download/v${GECKODRIVER_VERSION}/geckodriver-v${GECKODRIVER_VERSION}-linux64.tar.gz -O /tmp/geckodriver.tar.gz && \
+    tar -C /opt -xzf /tmp/geckodriver.tar.gz && \
+    rm /tmp/geckodriver.tar.gz && \
+    ln -s /opt/geckodriver /usr/local/bin/geckodriver
+
+# Set environment variables for Tor and geckodriver
+ENV TOR_SKIP_LAUNCH=1
+ENV PATH="/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin"
+
+# Copy your script and any other files into the container
+COPY Groups/Qilin_Blog.py /app/Qilin_Blog.py
+
+# Set the working directory
 WORKDIR /app
 
-# Install Python packages
-RUN pip install -r requirements.txt
-
-# Set the entry point command
-CMD ["python", "Groups/Qilin_Blog.py"]
+# Start your script when the container starts
+CMD ["python", "Qilin_Blog.py"]
