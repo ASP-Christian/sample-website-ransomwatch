@@ -8,19 +8,11 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: python:3  # Use an appropriate base image that has Python and other required dependencies
+      image: selenium/standalone-firefox:4.1.0  # Use an image with Firefox and Selenium pre-installed
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
       
-    - name: Set up environment
-      run: |
-        apt-get update
-        apt-get install -y tor
-
-    - name: Install Python dependencies
-      run: pip install -r requirements.txt
-
     - name: Run Qilin Blog script
       run: python Groups/Qilin_Blog.py
