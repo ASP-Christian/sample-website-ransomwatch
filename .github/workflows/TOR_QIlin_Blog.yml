@@ -1,23 +1,18 @@
 name: Run Qilin Blog Script
 
 on:
-  push:
-    branches:
-      - main  # or the branch you want to trigger the workflow on
+  workflow_dispatch:  # This enables manual triggering
 
 jobs:
   run_script:
     runs-on: ubuntu-latest
 
+    container:
+      image: selenium/standalone-firefox:4.1.0  # Use an image with Firefox and Selenium pre-installed
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
       
-    - name: Set up Docker
-      uses: docker/setup-docker@v2
-      
-    - name: Build Docker image
-      run: docker build -t qilin-blog .
-      
-    - name: Run Docker container
-      run: docker run -v $PWD/Groups:/app/Groups --network host qilin-blog python3 /app/Qilin_Blog.py
+    - name: Run Qilin Blog script
+      run: python Groups/Qilin_Blog.py
