@@ -1,28 +1,32 @@
-name: Run Qilin_Blog with TOR
+
+
+name: Run Qilin Blog Script
 
 on:
   workflow_dispatch:  # Manually trigger the workflow
+
 jobs:
-  run_qilin_blog:
-    runs-on: ubuntu-latest  # You can choose a different runner
+  run-script:
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Set up TOR
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y tor
-          sudo service tor start
-          sleep 10  # Give TOR time to start
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
 
-      - name: Run Qilin_Blog.py
-        run: |
-          # Add any setup commands here
-          pip install -r requirements.txt  # Install dependencies
-          python Groups/Qilin_Blog.py
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
 
-      - name: Stop TOR
-        run: |
-          sudo service tor stop
+    - name: Run Qilin Blog Script
+      run: |
+        # Start the TOR service (if not already running)
+        # (Add the command to start the TOR service here)
+        
+        # Run the script
+        python Groups/Qilin_Blog.py
+        
