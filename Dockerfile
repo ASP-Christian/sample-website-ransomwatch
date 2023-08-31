@@ -1,14 +1,12 @@
-# Use a base image that includes TOR and Python
-FROM some-tor-python-image
+FROM python:3.8
 
-# Copy your script to the container
-COPY Groups/Qilin_Blog.py /app/Qilin_Blog.py
+# Install Tor and other dependencies
+RUN apt-get update && apt-get install -y tor
+RUN pip install -r requirements.txt
 
-# Set the working directory
+# Copy your code into the container
+COPY . /app
 WORKDIR /app
 
-# Set up any additional dependencies
-RUN pip install pandas selenium
-
-# Define the command to run your script
-CMD ["python", "Qilin_Blog.py"]
+# Define the entry point command
+CMD ["python", "Groups/Qilin_Blog.py"]
