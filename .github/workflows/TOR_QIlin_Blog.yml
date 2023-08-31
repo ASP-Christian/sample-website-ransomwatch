@@ -1,8 +1,10 @@
 name: Run Qilin Blog Script
 
 on:
-  workflow_dispatch:  # This enables manual triggerin
-  
+  push:
+    branches:
+      - main
+
 jobs:
   run_qilin_blog:
     runs-on: ubuntu-latest
@@ -26,6 +28,3 @@ jobs:
         ONION_PROXY_PORT: ${{ secrets.ONION_PROXY_PORT }}
         ONION_PROXY_USERNAME: ${{ secrets.ONION_PROXY_USERNAME }}
         ONION_PROXY_PASSWORD: ${{ secrets.ONION_PROXY_PASSWORD }}
-
-
-  
