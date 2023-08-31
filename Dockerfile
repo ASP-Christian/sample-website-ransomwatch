@@ -16,5 +16,9 @@ COPY Groups /app
 # Set the working directory
 WORKDIR /app
 
+# Install Python dependencies
+COPY requirements.txt /app/
+RUN pip install -r requirements.txt
+
 # Start your script when the container starts
 CMD ["python", "Qilin_Blog.py"]
