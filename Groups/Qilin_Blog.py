@@ -4,14 +4,14 @@ import pandas as pd
 import time
 
 # Read proxy details from environment variables
-tor_proxy = f"socks5://{os.environ['ONION_PROXY_URL']}:{os.environ['ONION_PROXY_PORT']}"
+tor_proxy = f"socks5://{os.environ['ONION_PROXY_URL']}:{os.environ['ONION_PROXY_PORT'].strip()}"
 tor_username = os.environ['ONION_PROXY_USERNAME']
 tor_password = os.environ['ONION_PROXY_PASSWORD']
 
 options = webdriver.FirefoxOptions()
 options.set_preference('network.proxy.type', 1)
 options.set_preference('network.proxy.socks', tor_proxy)
-options.set_preference('network.proxy.socks_port', int(os.environ['ONION_PROXY_PORT']))
+options.set_preference('network.proxy.socks_port', int(os.environ['ONION_PROXY_PORT'].strip()))
 options.set_preference('network.proxy.socks_remote_dns', True)
 options.headless = True
 
