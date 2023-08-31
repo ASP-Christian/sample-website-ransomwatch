@@ -1,6 +1,11 @@
 # Use a base image with Tor, Firefox, and geckodriver installed
 FROM debian:bullseye-slim
 
+# Install Python and other dependencies
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip tor firefox-esr && \
+    apt-get clean
+
 # Install dependencies
 RUN apt-get update && \
     apt-get install -y tor firefox-esr && \
