@@ -1,18 +1,31 @@
 name: Run Qilin Blog Script
 
 on:
-  workflow_dispatch:  # This enables manual triggering
-
+  workflow_dispatch:  # This enables manual triggerin
+  
 jobs:
-  run_script:
+  run_qilin_blog:
     runs-on: ubuntu-latest
 
-    container:
-      image: selenium/standalone-firefox:4.1.0  # Use an image with Firefox and Selenium pre-installed
-
     steps:
-    - name: Checkout repository
+    - name: Checkout Repository
       uses: actions/checkout@v2
-      
-    - name: Run Qilin Blog script
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install Dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run Qilin Blog Script
       run: python Groups/Qilin_Blog.py
+      env:
+        ONION_PROXY_URL: ${{ secrets.ONION_PROXY_URL }}
+        ONION_PROXY_PORT: ${{ secrets.ONION_PROXY_PORT }}
+        ONION_PROXY_USERNAME: ${{ secrets.ONION_PROXY_USERNAME }}
+        ONION_PROXY_PASSWORD: ${{ secrets.ONION_PROXY_PASSWORD }}
+
+
+  
