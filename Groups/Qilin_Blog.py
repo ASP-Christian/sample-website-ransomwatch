@@ -1,5 +1,5 @@
 from selenium import webdriver
-import pandas as pd
+
 import time
 
 # set up TOR and the TOR browser
