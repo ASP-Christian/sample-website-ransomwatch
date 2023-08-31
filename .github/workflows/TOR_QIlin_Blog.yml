@@ -7,17 +7,18 @@ jobs:
   run_script:
     runs-on: ubuntu-latest
 
+    container:
+      image: python:3  # Use an appropriate base image that has Python and other required dependencies
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-
-    - name: Set up Docker
+      
+    - name: Set up environment
       run: |
-        sudo apt-get update
-        sudo apt-get install -y docker.io
+        pip install -r Groups/requirements.txt
+        apt-get update
+        apt-get install -y tor
 
-    - name: Build Docker image
-      run: docker build -t qilin-blog .
-
-    - name: Run Docker container
-      run: docker run -v $PWD/Groups:/app/Groups --network host qilin-blog python3 /app/Qilin_Blog.py
+    - name: Run Qilin Blog script
+      run: python Groups/Qilin_Blog.py
