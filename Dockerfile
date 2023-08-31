@@ -20,5 +20,5 @@ WORKDIR /app
 COPY requirements.txt /app/
 RUN pip install -r requirements.txt
 
-# Start your script when the container starts
-CMD ["python", "Qilin_Blog.py"]
+# Start Tor service and your script when the container starts
+CMD service tor start && python Qilin_Blog.py
