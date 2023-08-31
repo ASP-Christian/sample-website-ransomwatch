@@ -16,9 +16,11 @@ jobs:
       
     - name: Set up environment
       run: |
-        pip install -r Groups/requirements.txt
         apt-get update
         apt-get install -y tor
+
+    - name: Install Python dependencies
+      run: pip install -r requirements.txt
 
     - name: Run Qilin Blog script
       run: python Groups/Qilin_Blog.py
