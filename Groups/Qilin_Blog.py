@@ -5,10 +5,13 @@ import time
 # set up TOR and the TOR browser
 tor_proxy = "socks5://127.0.0.1:9150"
 options = webdriver.FirefoxOptions()
+options.add_argument('-headless')
 options.set_preference('network.proxy.type', 1)
 options.set_preference('network.proxy.socks', '127.0.0.1')
 options.set_preference('network.proxy.socks_port', 9150)
 options.set_preference('network.proxy.socks_remote_dns', True)
+driver = webdriver.Firefox(options=options)
+
 
 # Set the WebDriver to run in headless mode
 options.headless = True
