@@ -1,6 +1,5 @@
-
-
 name: Run Qilin Blog Script
+
 
 on:
   workflow_dispatch:  # Manually trigger the workflow
@@ -22,11 +21,13 @@ jobs:
       run: |
         pip install -r requirements.txt
 
+    - name: Download geckodriver
+      run: |
+        wget https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz
+        tar -xvzf geckodriver-v0.30.0-linux64.tar.gz
+        chmod +x geckodriver
+        mv geckodriver /usr/local/bin/
+
     - name: Run Qilin Blog Script
       run: |
-        # Start the TOR service (if not already running)
-        # (Add the command to start the TOR service here)
-        
-        # Run the script
         python Groups/Qilin_Blog.py
-        
