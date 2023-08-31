@@ -9,9 +9,12 @@ options.set_preference('network.proxy.socks', '127.0.0.1')
 options.set_preference('network.proxy.socks_port', 9150)
 options.set_preference('network.proxy.socks_remote_dns', True)
 
-# Set the WebDriver executable path
-driver_path = './geckodriver'  # Update the path here
-driver = webdriver.Firefox(executable_path=driver_path, options=options)
+# Set the PATH environment variable to include the directory where geckodriver is located
+import os
+os.environ['PATH'] = f'{os.getcwd()}{os.pathsep}{os.environ["PATH"]}'
+
+# Create a Firefox WebDriver instance
+driver = webdriver.Firefox(options=options)
 
 # Navigate to the website
 site = 'http://kbsqoivihgdmwczmxkbovk7ss2dcynitwhhfu5yw725dboqo5kthfaad.onion/'
@@ -19,5 +22,3 @@ driver.get(site)
 
 # Perform additional actions here
 print("Success, Success, Success")
-# Close the driver when done
-driver.quit()
