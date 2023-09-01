@@ -11,8 +11,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up Docker
-      uses: docker/setup-docker@v2
+    # Note: No need to set up Docker explicitly, as it's available on GitHub-hosted runners
 
     - name: Build Docker image
       run: docker build -t docker-scrape-runner .
