@@ -1,30 +1,26 @@
 from selenium import webdriver
 import time
-# Tor SOCKS proxy configuration
+
+# set up TOR and the TOR browser
 tor_proxy = "socks5://127.0.0.1:9150"
+options = webdriver.FirefoxOptions()
+options.set_preference('network.proxy.type', 1)
+options.set_preference('network.proxy.socks', '127.0.0.1')
+options.set_preference('network.proxy.socks_port', 9150)
+options.set_preference('network.proxy.socks_remote_dns', True)
 
-# Configure Firefox options
-firefox_options = webdriver.FirefoxOptions()
-firefox_options.add_argument('--headless')  # Run Firefox in headless mode
-firefox_options.add_argument('--no-sandbox')  # Required for running in a container
+# Set the WebDriver to run in headless mode
+options.headless = True
 
-# Set up proxy preferences
-firefox_options.set_preference('network.proxy.type', 1)
-firefox_options.set_preference('network.proxy.socks', '127.0.0.1')
-firefox_options.set_preference('network.proxy.socks_port', 9150)
-firefox_options.set_preference('network.proxy.socks_remote_dns', True)
+# Create a Firefox WebDriver instance with the options
+driver = webdriver.Firefox(options=options)
 
-# Configure the WebDriver with options
-driver = webdriver.Firefox(options=firefox_options)
-
-time.sleep(10)  # Wait for 10 seconds
-
-# Navigate to the website
+# navigate to the website
 site = 'http://kbsqoivihgdmwczmxkbovk7ss2dcynitwhhfu5yw725dboqo5kthfaad.onion/'
 driver.get(site)
+print("Success!, Success!, Success! , Success!, Success!, Success!, Success!, Success!, Success!, Success!, Success!, Success!")
 
-# Perform additional actions here
-print("Success, Success, Success")
+# You can perform additional actions here
 
-# Close the WebDriver
+# Close the driver when done
 driver.quit()
