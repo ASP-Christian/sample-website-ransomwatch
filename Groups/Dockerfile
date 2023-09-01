@@ -1,14 +1,17 @@
-# Use a base image that includes TOR and Python
-FROM some-tor-python-image
+# Use the official Python image as the base image
+FROM python:3.9
 
-# Copy your script to the container
-COPY Groups/Qilin_Blog.py /app/Qilin_Blog.py
-
-# Set the working directory
+# Set the working directory inside the container
 WORKDIR /app
 
-# Set up any additional dependencies
-RUN pip install pandas selenium
+# Install Firefox and other required dependencies
+RUN apt-get update && apt-get install -y firefox-esr
 
-# Define the command to run your script
-CMD ["python", "Qilin_Blog.py"]
+# Copy the script and requirements file into the container
+COPY Groups/Qilin_Blog.py /app/Qilin_Blog.py
+COPY requirements.txt /app/requirements.txt
+
+# Install required Python dependencies
+RUN pip install -r requirements.txt
+
+# Continue with the rest of your Dockerfile configuration...

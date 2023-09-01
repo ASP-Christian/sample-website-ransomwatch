@@ -4,20 +4,14 @@ FROM python:3.9
 # Set the working directory inside the container
 WORKDIR /app
 
+# Install Firefox and other required dependencies
+RUN apt-get update && apt-get install -y firefox-esr
+
 # Copy the script and requirements file into the container
 COPY Groups/Qilin_Blog.py /app/Qilin_Blog.py
 COPY requirements.txt /app/requirements.txt
 
-# Install required dependencies
+# Install required Python dependencies
 RUN pip install -r requirements.txt
 
-# Install TOR
-RUN apt-get update && \
-    apt-get install -y tor && \
-    apt-get clean
-
-# Expose the necessary port for TOR (if needed)
-# EXPOSE 9050
-
-# Run the script when the container starts
-CMD ["python", "Qilin_Blog.py"]
+# Continue with the rest of your Dockerfile configuration...
