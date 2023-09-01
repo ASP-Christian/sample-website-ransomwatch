@@ -1,7 +1,7 @@
 name: Run Qilin Blog
 
 on:
-  workflow_dispatch:  # Manually trigger the workflow
+  workflow_dispatch:
 
 jobs:
   build:
@@ -10,8 +10,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
-    # Note: No need to set up Docker explicitly, as it's available on GitHub-hosted runners
 
     - name: Build Docker image
       run: docker build -t docker-scrape-runner .
