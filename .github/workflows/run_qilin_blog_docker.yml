@@ -4,7 +4,6 @@ name: Run Qilin Blog
 on:
   workflow_dispatch:  # Manually trigger the workflow
 
-
 jobs:
   run_qilin_blog:
     runs-on: ubuntu-latest
@@ -23,14 +22,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Start TOR and run script
+    - name: Run script using torsocks
       run: |
-        # Start TOR, assuming you have the TOR service available
-        # You might need to adjust the command to start TOR based on your setup
-        service tor start
-
-        # Run your script
-        python Groups/Qilin_Blog.py
-
-        # Stop TOR after script execution (optional)
-        service tor stop
+        torsocks python Groups/Qilin_Blog.py
