@@ -1,7 +1,9 @@
 name: Run Qilin Blog
 
 on:
-  workflow_dispatch:  # Manually trigger the workflow
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -10,9 +12,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
-    - name: Set up Docker
-      uses: docker/setup-docker@v2
 
     - name: Build Docker image
       run: docker build -t qilin-blog .
