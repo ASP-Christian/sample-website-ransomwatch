@@ -1,5 +1,5 @@
 from selenium import webdriver
-
+import time
 # Tor SOCKS proxy configuration
 tor_proxy = "socks5://127.0.0.1:9150"
 
@@ -16,6 +16,8 @@ firefox_options.set_preference('network.proxy.socks_remote_dns', True)
 
 # Configure the WebDriver with options
 driver = webdriver.Firefox(options=firefox_options)
+
+time.sleep(10)  # Wait for 10 seconds
 
 # Navigate to the website
 site = 'http://kbsqoivihgdmwczmxkbovk7ss2dcynitwhhfu5yw725dboqo5kthfaad.onion/'
