@@ -1,18 +1,36 @@
-name: Run Qilin Blog with Docker
+name: Run Qilin Blog
+
 
 on:
   workflow_dispatch:  # Manually trigger the workflow
 
+
 jobs:
-  build:
+  run_qilin_blog:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Build Docker image
-        run: docker build -t qilin-blog-container .
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8  # Use the appropriate Python version
 
-      - name: Run Docker container
-        run: docker run --rm -v $(pwd)/Groups:/app qilin-blog-container
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Start TOR and run script
+      run: |
+        # Start TOR, assuming you have the TOR service available
+        # You might need to adjust the command to start TOR based on your setup
+        service tor start
+
+        # Run your script
+        python Groups/Qilin_Blog.py
+
+        # Stop TOR after script execution (optional)
+        service tor stop
