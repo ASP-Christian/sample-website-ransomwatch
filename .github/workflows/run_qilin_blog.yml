@@ -1,7 +1,7 @@
 name: Run Qilin Blog
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:  # Manually trigger the workflow
 
 jobs:
   build:
@@ -11,8 +11,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Set up Docker
+      uses: docker/setup-docker@v2
+
     - name: Build Docker image
-      run: docker build -t qilin-blog .
+      run: docker build -t docker-scrape-runner .
 
     - name: Run Docker container
-      run: docker run --rm qilin-blog
+      run: docker run --rm docker-scrape-runner

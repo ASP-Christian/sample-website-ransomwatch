@@ -15,3 +15,7 @@ COPY requirements.txt /app/requirements.txt
 RUN pip install -r requirements.txt
 
 # Continue with the rest of your Dockerfile configuration...
+
+# Build the Docker image with the new image name
+# Change 'qilin-blog' to 'docker-scrape-runner'
+RUN docker build -t docker-scrape-runner .
