@@ -1,24 +1,23 @@
-# Use a base image with Python
-FROM python:3.8-slim
+# Use the official Python image as the base image
+FROM python:3.9
 
-# Install required dependencies
-RUN apt-get update && \
-    apt-get install -y tor firefox-esr wget && \
-    wget -O /tmp/geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux64.tar.gz && \
-    tar -C /usr/local/bin -xzvf /tmp/geckodriver.tar.gz && \
-    chmod +x /usr/local/bin/geckodriver && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/geckodriver.tar.gz
-
-# Copy your script and dependencies into the container
-COPY Groups /app
-
-# Set the working directory
+# Set the working directory inside the container
 WORKDIR /app
 
-# Install Python dependencies
-COPY requirements.txt /app/
+# Copy the script and requirements file into the container
+COPY Groups/Qilin_Blog.py /app/Qilin_Blog.py
+COPY requirements.txt /app/requirements.txt
+
+# Install required dependencies
 RUN pip install -r requirements.txt
 
-# Start Tor service and your script when the container starts
-CMD service tor start && python Qilin_Blog.py
+# Install TOR
+RUN apt-get update && \
+    apt-get install -y tor && \
+    apt-get clean
+
+# Expose the necessary port for TOR (if needed)
+# EXPOSE 9050
+
+# Run the script when the container starts
+CMD ["python", "Qilin_Blog.py"]
