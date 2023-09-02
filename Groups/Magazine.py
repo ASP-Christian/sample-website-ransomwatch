@@ -62,27 +62,40 @@ us_eastern_timezone = pytz.timezone('US/Eastern')
 current_date_time = datetime.now(us_eastern_timezone)
 
 # Format the current date and time as a string in ISO format
-current_date = current_date_time.strftime('%Y-%m-%d')
+current_date = current_date_time.strftime('%Y-%m-%d %H:%M:%S %Z%z')
 
-# Create a list of dictionaries to represent the data
-data_list = []
-for i in range(len(company_names)):
-    data_dict = {
-        'company': company_names[i],
-        'company_description': company_description[i],
-        'ransomware_name': 'Magazine',
-        'ransomware_site': 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/',
-        'data_description': company_description[i],
-        'data_date': current_date,  # Use the modified current_date
-        'download_data': Data[i],
-        'company_website': company_websites[i]
-    }
-    data_list.append(data_dict)
-
-# Save the data as JSON in the 'Datas' folder
+# Load existing data from the JSON file if it exists
 json_file_path = os.path.join(datas_folder, 'post_datas.json')
+existing_data = []
+if os.path.exists(json_file_path):
+    with open(json_file_path, 'r', encoding='utf-8') as json_file:
+        existing_data = json.load(json_file)
+
+# Create a set of existing company names for efficient lookup
+existing_company_names = set(entry['company'] for entry in existing_data)
+
+# Create a list of new entries to add to the data
+new_entries = []
+for i in range(len(company_names)):
+    if company_names[i] not in existing_company_names:
+        data_dict = {
+            'company': company_names[i],
+            'company_description': company_description[i],
+            'ransomware_name': 'Magazine',
+            'ransomware_site': 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/',
+            'data_description': company_description[i],
+            'data_date': current_date,  # Use the modified current_date
+            'download_data': Data[i],
+            'company_website': company_websites[i]
+        }
+        new_entries.append(data_dict)
+
+# Append new entries to the existing data
+existing_data.extend(new_entries)
+
+# Save the updated data as JSON in the 'Datas' folder
 with open(json_file_path, 'w', encoding='utf-8') as json_file:
-    json.dump(data_list, json_file, ensure_ascii=False, indent=4)
+    json.dump(existing_data, json_file, ensure_ascii=False, indent=4)
 
 print(f"Data saved to {json_file_path}")
 
