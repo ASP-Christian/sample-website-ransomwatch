@@ -15,4 +15,12 @@ jobs:
       run: docker build -t docker-scrape-runner .
 
     - name: Run Docker container
-      run: docker run --rm docker-scrape-runner
+      run: docker run --rm -v $(pwd):/app docker-scrape-runner python /app/Qilin_Blog.py
+
+    - name: Commit and push updated JSON file
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add Data/post_datas.json
+        git commit -m "Update post_datas.json"
+        git push
