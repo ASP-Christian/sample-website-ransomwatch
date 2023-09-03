@@ -15,4 +15,4 @@ jobs:
       run: docker build -t docker-scrape-runner .
 
     - name: Run Docker container
-      run: docker run --rm docker-scrape-runner
+      run: docker run --rm -v $(pwd):/github/workspace docker-scrape-runner

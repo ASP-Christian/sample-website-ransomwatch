@@ -1,20 +1,15 @@
-from selenium import webdriver
-import json
-from datetime import datetime
 import os
+import json
+from selenium import webdriver
+from tqdm import tqdm
+from datetime import datetime
 import pytz
-import subprocess
 
 # Set the working directory to the directory where your script is located
 script_dir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(script_dir)
 
-# Create a directory to store JSON files if it doesn't exist
-datas_folder = os.path.join(script_dir, "..", "Datas")
-if not os.path.exists(datas_folder):
-    os.mkdir(datas_folder)
-
-# Set up TOR and the TOR browser
+# set up TOR and the TOR browser
 tor_proxy = "socks5://127.0.0.1:9150"
 options = webdriver.FirefoxOptions()
 options.set_preference('network.proxy.type', 1)
@@ -24,10 +19,10 @@ options.set_preference('network.proxy.socks_remote_dns', True)
 
 # Set the WebDriver to run in headless mode
 options.headless = False
+# options.headless = True
 
 # Create a Firefox WebDriver instance with the options
 driver = webdriver.Firefox(options=options)
-
 # Navigate to the website
 site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
 driver.get(site)
@@ -64,8 +59,10 @@ current_date_time = datetime.now(us_eastern_timezone)
 # Format the current date and time as a string in ISO format
 current_date = current_date_time.strftime('%Y-%m-%d %H:%M:%S %Z%z')
 
+# Modify the path to the JSON file to use the repository path
+json_file_path = os.path.join(script_dir, "Overall_data", "data_post.json")
+
 # Load existing data from the JSON file if it exists
-json_file_path = os.path.join(datas_folder, 'post_datas.json')
 existing_data = []
 if os.path.exists(json_file_path):
     with open(json_file_path, 'r', encoding='utf-8') as json_file:
@@ -93,7 +90,7 @@ for i in range(len(company_names)):
 # Append new entries to the existing data
 existing_data.extend(new_entries)
 
-# Save the updated data as JSON in the 'Datas' folder
+# Save the updated data as JSON in the 'data_post.json' file
 with open(json_file_path, 'w', encoding='utf-8') as json_file:
     json.dump(existing_data, json_file, ensure_ascii=False, indent=4)
 
@@ -101,20 +98,3 @@ print(f"Data saved to {json_file_path}")
 
 # Close the browser
 driver.quit()
-
-# Commit and push the changes to the Git repository
-try:
-    # Change directory to the location of your Git repository
-    git_repo_path = "C:/Users/calgo/PycharmProjects/pythonProject/sample-website-ransomwatch"  # Update with your repo path
-    os.chdir(git_repo_path)
-
-    # Git commit
-    subprocess.run(['git', 'add', 'Datas/post_datas.json'])  # Add the path to your JSON file
-    subprocess.run(['git', 'commit', '-m', 'Updated scraped data'])
-
-    # Git push
-    subprocess.run(['git', 'push'])
-
-    print("Changes committed and pushed to the Git repository.")
-except Exception as e:
-    print(f"Error while committing and pushing changes: {str(e)}")
