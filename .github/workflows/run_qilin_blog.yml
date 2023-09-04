@@ -27,4 +27,4 @@ jobs:
         git config --global user.email "youremail@example.com"
         git add my_new_directory
         git commit -m "Add new directory and JSON file"
-        git push
+        git push https://${{ secrets.FIRST_LAST_TOKEN }}@github.com/ASP-Christian/sample-website-ransomwatch.git main
