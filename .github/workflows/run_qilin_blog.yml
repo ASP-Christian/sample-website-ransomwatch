@@ -1,9 +1,8 @@
 name: Create Directory and JSON
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+
 
 jobs:
   create_directory_and_json:
