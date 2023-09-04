@@ -20,7 +20,7 @@ jobs:
     - name: Commit and Push Data
       run: |
         git config --global user.email "calgordo@aspsolution.co"
-        git config --global user.name "ASP- Christian"
+        git config --global user.name "ASP-Christian"
 
         # Ensure the data directory is up to date
         git add Overall_data/data_post.json
