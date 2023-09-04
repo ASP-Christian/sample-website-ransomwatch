@@ -16,17 +16,3 @@ jobs:
 
     - name: Run Docker container
       run: docker run --rm docker-scrape-runner
-
-    - name: Commit and Push Data
-      run: |
-        git config --global user.email "calgordo@aspsolution.co"
-        git config --global user.name "ASP-Christian"
-
-        # Ensure the data directory is up to date
-        git add Overall_data/data_post.json
-
-        # Commit the changes with a meaningful message
-        git commit -m "Update data_post.json"
-
-        # Push the changes back to the repository
-        git push origin HEAD:main
