@@ -17,10 +17,22 @@ jobs:
     - name: Run Docker container
       run: docker run --rm docker-scrape-runner
 
+    - name: Configure Git
+      run: |
+        git config --global user.email "you@example.com"
+        git config --global user.name "Your Name"
+
+    - name: Commit and Push Changes
+      run: |
+        git add Overall_data/data_post.json
+        git commit -m "Update data_post.json"
+        git push
+
     - name: Upload JSON file as artifact
       uses: actions/upload-artifact@v2
       with:
         name: scraped-data
         path: Overall_data/data_post.json
       env:
+
         GITHUB_TOKEN: ${{ secrets.FIRST_LAST_TOKEN }}
