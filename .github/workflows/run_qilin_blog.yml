@@ -19,7 +19,7 @@ jobs:
         python-version: 3.x
 
     - name: Create Directory and JSON
-      run: python Qilin_Blog.py
+      run: python Groups/Qilin_Blog.py
 
     - name: Commit and Push Changes
       run: |
