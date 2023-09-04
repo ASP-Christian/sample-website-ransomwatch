@@ -19,7 +19,7 @@ jobs:
 
     - name: Commit and Push Data
       run: |
-        git config --global user.email "you@example.com"
+        git config --global user.email "calgordo@aspsolution.co"
         git config --global user.name "ASP- Christian"
 
         # Ensure the data directory is up to date
@@ -29,4 +29,4 @@ jobs:
         git commit -m "Update data_post.json"
 
         # Push the changes back to the repository
-        git push
+        git push origin HEAD:main
