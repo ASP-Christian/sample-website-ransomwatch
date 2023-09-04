@@ -1,18 +1,8 @@
-from selenium import webdriver
-from tqdm import tqdm
+import os
 import json
 from datetime import datetime
-import os
-import pytz  # Import pytz
-
-# Set the working directory to the directory where your script is located
-script_dir = os.path.dirname(os.path.abspath(__file__))
-os.chdir(script_dir)
-
-# Create a directory to store JSON files if it doesn't exist
-datas_folder = os.path.join(script_dir, "Overall_data")
-if not os.path.exists(datas_folder):
-    os.mkdir(datas_folder)
+import pytz
+from selenium import webdriver
 
 # Set up TOR and the TOR browser
 tor_proxy = "socks5://127.0.0.1:9150"
@@ -57,6 +47,18 @@ Data_elements = driver.find_elements("xpath", '//h2[@class="post-title"]/a')
 for element in Data_elements:
     Data.append(element.get_attribute("href") if element.get_attribute("href") else 'n/a')
 
+# Close the browser
+driver.quit()
+
+# Set the working directory to the directory where your script is located
+script_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_dir)
+
+# Create a directory to store JSON files if it doesn't exist
+datas_folder = os.path.join(script_dir, "Overall_data")
+if not os.path.exists(datas_folder):
+    os.mkdir(datas_folder)
+
 # Get the current date and time in US Eastern Time (ET)
 us_eastern_timezone = pytz.timezone('US/Eastern')
 current_date_time = datetime.now(us_eastern_timezone)
@@ -98,6 +100,3 @@ with open(json_file_path, 'w', encoding='utf-8') as json_file:
     json.dump(existing_data, json_file, ensure_ascii=False, indent=4)
 
 print(f"Data saved to {json_file_path}")
-
-# Close the browser
-driver.quit()
