@@ -101,3 +101,4 @@ print(f"Data saved to {json_file_path}")
 
 # Close the browser
 driver.quit()
+print("Script execution complete")  # Add this line for debugging
