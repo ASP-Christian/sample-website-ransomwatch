@@ -1,15 +1,20 @@
-import os
-import json
 from selenium import webdriver
 from tqdm import tqdm
+import json
 from datetime import datetime
-import pytz
+import os
+import pytz  # Import pytz
 
 # Set the working directory to the directory where your script is located
 script_dir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(script_dir)
 
-# set up TOR and the TOR browser
+# Create a directory to store JSON files if it doesn't exist
+datas_folder = os.path.join(script_dir, "Overall_data")
+if not os.path.exists(datas_folder):
+    os.mkdir(datas_folder)
+
+# Set up TOR and the TOR browser
 tor_proxy = "socks5://127.0.0.1:9150"
 options = webdriver.FirefoxOptions()
 options.set_preference('network.proxy.type', 1)
@@ -59,10 +64,8 @@ current_date_time = datetime.now(us_eastern_timezone)
 # Format the current date and time as a string in ISO format
 current_date = current_date_time.strftime('%Y-%m-%d %H:%M:%S %Z%z')
 
-# Modify the path to the JSON file to use the repository path
-json_file_path = os.path.join(script_dir, "Overall_data", "data_post.json")
-
 # Load existing data from the JSON file if it exists
+json_file_path = os.path.join(datas_folder, 'data_post.json')
 existing_data = []
 if os.path.exists(json_file_path):
     with open(json_file_path, 'r', encoding='utf-8') as json_file:
@@ -90,7 +93,7 @@ for i in range(len(company_names)):
 # Append new entries to the existing data
 existing_data.extend(new_entries)
 
-# Save the updated data as JSON in the 'data_post.json' file
+# Save the updated data as JSON in the 'Overall_data' folder
 with open(json_file_path, 'w', encoding='utf-8') as json_file:
     json.dump(existing_data, json_file, ensure_ascii=False, indent=4)
 

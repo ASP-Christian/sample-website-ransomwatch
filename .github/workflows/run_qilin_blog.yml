@@ -15,4 +15,13 @@ jobs:
       run: docker build -t docker-scrape-runner .
 
     - name: Run Docker container
-      run: docker run --rm -v $(pwd):/github/workspace docker-scrape-runner
+      run: docker run --rm docker-scrape-runner
+
+    - name: Commit and push changes
+      run: |
+        git config user.email "github-actions@example.com"
+        git config user.name "GitHub Actions"
+        git checkout main  # Replace 'main' with the name of your default branch
+        git add Overall_data/data_post.json
+        git commit -m "Update data_post.json"
+        git push
