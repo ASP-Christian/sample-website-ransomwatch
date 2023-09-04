@@ -19,7 +19,7 @@ jobs:
         python-version: 3.x
 
     - name: Create Directory and JSON
-      run: python ./create_directory_and_json.py
+      run: python create_directory_and_json.py
 
     - name: Commit and Push Changes
       run: |
