@@ -22,3 +22,5 @@ jobs:
       with:
         name: scraped-data
         path: Overall_data/data_post.json
+      env:
+        GITHUB_TOKEN: ${{ secrets.FIRST_LAST_TOKEN }}
