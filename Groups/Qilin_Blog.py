@@ -1,6 +1,5 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -26,8 +25,7 @@ options.add_argument('--proxy-server=%s' % tor_proxy)
 
 # Set up Firefox WebDriver with explicit timeouts
 geckodriver_path = '/usr/local/bin/geckodriver'  # Replace with your geckodriver path
-service = Service(geckodriver_path)
-driver = webdriver.Firefox(service=service, options=options)
+driver = webdriver.Firefox(executable_path=geckodriver_path, options=options)
 driver.set_page_load_timeout(60)  # Adjust the timeout value as needed
 driver.implicitly_wait(10)  # Adjust the timeout value as needed
 
