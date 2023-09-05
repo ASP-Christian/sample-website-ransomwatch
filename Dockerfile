@@ -1,12 +1,12 @@
-# Use an official Python runtime with Firefox and geckodriver
-FROM python:3.8-slim
+# Use an official Selenium with Python runtime
+FROM selenium/standalone-python:3.8
 
 # Set the working directory in the container
 WORKDIR /app
 
 # Install any needed packages specified in requirements.txt
 COPY requirements.txt /app/requirements.txt
-RUN apt-get update && apt-get install -y firefox-esr && pip install -r requirements.txt
+RUN pip install -r requirements.txt
 
 # Copy the Python script into the container
 COPY Groups/Qilin_Blog.py /app/Qilin_Blog.py
