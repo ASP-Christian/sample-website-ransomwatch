@@ -22,17 +22,12 @@ options.set_preference('network.proxy.socks_port', 9150)
 options.set_preference('network.proxy.socks_remote_dns', True)
 
 # Set the WebDriver to run in headless mode
-options.headless = False
-# options.headless = True
-
-# Specify the path to geckodriver in the Groups/ directory
-geckodriver_path = os.path.join(script_dir, "Groups", "geckodriver")
+#options.headless = False
+options.headless = True
 
 # Create a Firefox WebDriver instance with the options
-driver = webdriver.Firefox(executable_path=geckodriver_path, options=options)
-
-# Continue with the rest of your script as before...
-
+driver = webdriver.Firefox(options=options)
+# Navigate to the website
 site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
 driver.get(site)
 

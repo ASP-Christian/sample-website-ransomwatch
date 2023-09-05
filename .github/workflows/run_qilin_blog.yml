@@ -11,11 +11,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Firefox
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y firefox
-
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
@@ -24,13 +19,7 @@ jobs:
       - name: Install Python dependencies
         run: pip install -r requirements.txt
 
-      - name: Copy geckodriver into Docker container
-        run: |
-          cp Groups/geckodriver /usr/local/bin/
-          chmod +x /usr/local/bin/geckodriver
-
       - name: Build and run Docker container
         run: |
-          docker build -t qilin-blog .
-          docker run qilin-blog
-
+          docker build -t my-python-app .
+          docker run my-python-app
