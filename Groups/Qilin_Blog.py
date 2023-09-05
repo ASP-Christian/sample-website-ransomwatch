@@ -1,8 +1,11 @@
 from selenium import webdriver
+from selenium.webdriver.firefox.service import Service as FirefoxService
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 import json
 from datetime import datetime
 import os
-import pytz  # Import pytz
+import pytz
+import subprocess
 
 # Set the working directory to the directory where your script is located
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -25,8 +28,14 @@ options.set_preference('network.proxy.socks_remote_dns', True)
 options.headless = False
 # options.headless = True
 
-# Create a Firefox WebDriver instance with the options
-driver = webdriver.Firefox(options=options)
+# Find the path to the Firefox binary using the 'which' command
+firefox_binary_path = subprocess.check_output(['which', 'firefox']).strip().decode('utf-8')
+
+# Set up the Firefox service with the binary location
+firefox_service = FirefoxService(executable_path=firefox_binary_path)
+
+# Create a Firefox WebDriver instance with the options and service
+driver = webdriver.Firefox(service=firefox_service, options=options)
 # Navigate to the website
 site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
 driver.get(site)
