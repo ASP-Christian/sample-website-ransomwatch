@@ -1,9 +1,7 @@
 name: Run Qilin Blog
 
 on:
-  push:
-    branches:
-      - main  # Adjust this branch name to match your repository's main branch
+  workflow_dispatch:
 
 jobs:
   build:
