@@ -22,19 +22,16 @@ proxy.proxy_type = ProxyType.MANUAL
 proxy.http_proxy = tor_proxy
 proxy.ssl_proxy = tor_proxy
 
-# Set Firefox to run in headless mode
+# Set Firefox to run in headless mode and configure proxy settings
 options = webdriver.FirefoxOptions()
 options.headless = True
+options.set_preference("network.proxy.type", 1)
+options.set_preference("network.proxy.socks", "127.0.0.1")
+options.set_preference("network.proxy.socks_port", 9150)
+options.set_preference("network.proxy.socks_remote_dns", True)
 
-# Create a Firefox profile with proxy settings
-firefox_profile = webdriver.FirefoxProfile()
-firefox_profile.set_preference("network.proxy.type", 1)
-firefox_profile.set_preference("network.proxy.socks", "127.0.0.1")
-firefox_profile.set_preference("network.proxy.socks_port", 9150)
-firefox_profile.set_preference("network.proxy.socks_remote_dns", True)
-
-# Create a Firefox WebDriver instance with the Firefox profile and options
-driver = webdriver.Firefox(firefox_profile=firefox_profile, options=options)
+# Create a Firefox WebDriver instance with the options
+driver = webdriver.Firefox(options=options)
 
 # Navigate to the website
 site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
