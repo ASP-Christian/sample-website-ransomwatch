@@ -22,16 +22,23 @@ proxy.proxy_type = ProxyType.MANUAL
 proxy.http_proxy = tor_proxy
 proxy.ssl_proxy = tor_proxy
 
+# Create a Firefox profile with proxy settings
+firefox_profile = webdriver.FirefoxProfile()
+firefox_profile.set_proxy(proxy)
+
 # Set Firefox to run in headless mode
 options = webdriver.FirefoxOptions()
 options.headless = True
 
-# Create a Firefox WebDriver instance with the proxy settings and options
-driver = webdriver.Firefox(options=options, proxy=proxy)
+# Create a Firefox WebDriver instance with the Firefox profile and options
+driver = webdriver.Firefox(options=options, firefox_profile=firefox_profile)
 
 # Navigate to the website
 site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
 driver.get(site)
+
+# Continue with the rest of your script...
+
 
 company_names = []
 company_description = []
