@@ -1,8 +1,13 @@
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import json
 from datetime import datetime
 import os
-import pytz  # Import pytz
+import pytz
 
 # Set the working directory to the directory where your script is located
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -15,22 +20,15 @@ if not os.path.exists(datas_folder):
 
 # Set up TOR and the TOR browser
 tor_proxy = "socks5://127.0.0.1:9150"
-options = webdriver.FirefoxOptions()
+options = Options()
+options.headless = True  # Run in headless mode
+options.add_argument('--proxy-server=%s' % tor_proxy)
 
-# Specify the path to the Firefox executable in the Docker container
-options.binary_location = '/usr/bin/firefox'
-
-# Set other preferences as needed
-options.set_preference('network.proxy.type', 1)
-options.set_preference('network.proxy.socks', '127.0.0.1')
-options.set_preference('network.proxy.socks_port', 9150)
-options.set_preference('network.proxy.socks_remote_dns', True)
-
-# Set the WebDriver to run in headless mode
-options.headless = True  # or True, depending on your needs
-
-# Create a Firefox WebDriver instance with the options
-driver = webdriver.Firefox(options=options)
+# Set up Firefox WebDriver with explicit timeouts
+service = Service('/usr/local/bin/geckodriver')
+driver = webdriver.Firefox(service=service, options=options)
+driver.set_page_load_timeout(60)  # Adjust the timeout value as needed
+driver.implicitly_wait(10)  # Adjust the timeout value as needed
 
 # Navigate to the website
 site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
@@ -41,25 +39,34 @@ company_description = []
 company_websites = []
 Data = []
 
-name_elements = driver.find_elements("xpath", '//h2[@class="post-title"]/a')
-for element in name_elements:
-    company_names.append(element.text if element.text else 'n/a')
+try:
+    # Wait for an element with class 'post-title' to be present
+    element = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CLASS_NAME, 'post-title'))
+    )
 
-company_description_elements = driver.find_elements("xpath", "//div[@class='post-des dropcap']/p")
-for element in company_description_elements:
-    company_description.append(element.text if element.text else 'n/a')
+    name_elements = driver.find_elements(By.XPATH, '//h2[@class="post-title"]/a')
+    for element in name_elements:
+        company_names.append(element.text if element.text else 'n/a')
 
-company_elements = driver.find_elements("xpath", '//div[@class="category-mid-post-two"]/div[1]/span/a')
-for element in company_elements:
-    href = element.get_attribute("href")
-    if href:
-        company_websites.append(href.replace('https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/', ''))
-    else:
-        company_websites.append('n/a')
+    company_description_elements = driver.find_elements(By.XPATH, "//div[@class='post-des dropcap']/p")
+    for element in company_description_elements:
+        company_description.append(element.text if element.text else 'n/a')
 
-Data_elements = driver.find_elements("xpath", '//h2[@class="post-title"]/a')
-for element in Data_elements:
-    Data.append(element.get_attribute("href") if element.get_attribute("href") else 'n/a')
+    company_elements = driver.find_elements(By.XPATH, '//div[@class="category-mid-post-two"]/div[1]/span/a')
+    for element in company_elements:
+        href = element.get_attribute("href")
+        if href:
+            company_websites.append(href.replace('https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/', ''))
+        else:
+            company_websites.append('n/a')
+
+    Data_elements = driver.find_elements(By.XPATH, '//h2[@class="post-title"]/a')
+    for element in Data_elements:
+        Data.append(element.get_attribute("href") if element.get_attribute("href") else 'n/a')
+
+except Exception as e:
+    print(f"An error occurred: {str(e)}")
 
 # Get the current date and time in US Eastern Time (ET)
 us_eastern_timezone = pytz.timezone('US/Eastern')
@@ -103,6 +110,6 @@ with open(json_file_path, 'w', encoding='utf-8') as json_file:
 
 print(f"Data saved to {json_file_path}")
 print(new_entries)
+
 # Close the browser
 driver.quit()
-
