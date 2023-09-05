@@ -1,18 +1,14 @@
-# Use the official Python image as the base image
-FROM python:3.9
+# Use an official Python runtime as a parent image
+FROM python:3.8
 
-# Set the working directory inside the container
+# Set the working directory in the container
 WORKDIR /app
 
-# Install Firefox and other required dependencies
-RUN apt-get update && apt-get install -y firefox-esr
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-# Copy the script and requirements file into the container
-COPY Groups/Qilin_Blog.py /app/Qilin_Blog.py
-COPY Groups/sample2.py /app/sample2.py
-COPY requirements.txt /app/requirements.txt
-
-# Install required Python dependencies
+# Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
 
-# Continue with the rest of your Dockerfile configuration...
+# Run the Python script when the container launches
+CMD ["python", "Qilin_Blog.py"]

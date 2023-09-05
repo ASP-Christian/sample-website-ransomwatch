@@ -3,24 +3,18 @@ name: Run Qilin Blog
 on:
   workflow_dispatch:
 
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Build Docker image
-      run: docker build -t docker-scrape-runner .
+      - name: Build Docker image
+        run: docker build -t my-python-script .
 
-    - name: Run Docker container
-      run: docker run --rm docker-scrape-runner
+      - name: Run Python script in Docker container
+        run: docker run my-python-script
 
-    - name: Upload JSON file as artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: scraped-data
-        path: Overall_data/data_post.json
-      env:
-        GITHUB_TOKEN: ${{ secrets.FIRST_LAST_TOKEN }}
