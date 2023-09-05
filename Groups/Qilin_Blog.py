@@ -1,8 +1,9 @@
 from selenium import webdriver
+from tqdm import tqdm
 import json
 from datetime import datetime
 import os
-import pytz
+import pytz  # Import pytz
 
 # Set the working directory to the directory where your script is located
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -22,17 +23,19 @@ options.set_preference('network.proxy.socks', '127.0.0.1')
 options.set_preference('network.proxy.socks_port', 9150)
 options.set_preference('network.proxy.socks_remote_dns', True)
 
-
+# Add debug statements to print proxy settings
 print(f"Tor proxy: {tor_proxy}")
 print(f"Tor proxy address: {options.get_preference('network.proxy.socks')}")
 print(f"Tor proxy port: {options.get_preference('network.proxy.socks_port')}")
 
 # Create a Firefox WebDriver instance with the options
 driver = webdriver.Firefox(options=options)
-# Create a Firefox WebDriver instance with the options
-driver = webdriver.Firefox(options=options)
 # Navigate to the website
 site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
+
+# Add debug statement to print the site URL
+print(f"Navigating to site: {site}")
+
 driver.get(site)
 
 company_names = []
