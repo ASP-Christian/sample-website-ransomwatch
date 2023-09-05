@@ -4,9 +4,6 @@ FROM python:3.8
 # Set the working directory in the container
 WORKDIR /app
 
-# Install Firefox and its dependencies
-RUN apt-get update && apt-get install -y firefox-esr
-
 # Copy the Python script into the container
 COPY Groups/Qilin_Blog.py /app/Qilin_Blog.py
 

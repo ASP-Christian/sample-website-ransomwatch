@@ -11,10 +11,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Build and run Docker container
+      - name: Install Firefox and GeckoDriver
         run: |
-          docker build -t my-python-app .
-          docker run my-python-app
-        env:
-          MOZ_HEADLESS: 1  # This environment variable is used to enable headless mode in Firefox
+          sudo apt-get update
+          sudo apt-get install -y firefox
+          wget https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz
+          tar -xvzf geckodriver-v0.30.0-linux64.tar.gz
+          chmod +x geckodriver
+          sudo mv geckodriver /usr/local/bin/
+        continue-on-error: true # Continue even if this step fails, as it may be pre-installed in some environments
 
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Python script
+        run: python Groups/Qilin_Blog.py
