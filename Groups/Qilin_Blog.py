@@ -1,4 +1,6 @@
 from selenium import webdriver
+from selenium.webdriver.common.proxy import Proxy, ProxyType
+from tqdm import tqdm
 import json
 from datetime import datetime
 import os
@@ -15,26 +17,23 @@ if not os.path.exists(datas_folder):
 
 # Set up TOR and the TOR browser
 tor_proxy = "socks5://127.0.0.1:9150"
+proxy = Proxy()
+proxy.proxy_type = ProxyType.MANUAL
+proxy.http_proxy = tor_proxy
+proxy.ssl_proxy = tor_proxy
+
+capabilities = webdriver.DesiredCapabilities.FIREFOX
+proxy.add_to_capabilities(capabilities)
+
+# Set Firefox to run in headless mode
 options = webdriver.FirefoxOptions()
-options.add_argument('-headless')  # Run Firefox in headless mode
-options.set_preference('network.proxy.type', 1)
-options.set_preference('network.proxy.socks', '127.0.0.1')
-options.set_preference('network.proxy.socks_port', 9150)
-options.set_preference('network.proxy.socks_remote_dns', True)
+options.headless = True
 
-# Add debug statements to print proxy settings
-print(f"Tor proxy: {tor_proxy}")
-print(f"Tor proxy address: {options.get_preference('network.proxy.socks')}")
-print(f"Tor proxy port: {options.get_preference('network.proxy.socks_port')}")
+# Create a Firefox WebDriver instance with the options and proxy settings
+driver = webdriver.Firefox(options=options, desired_capabilities=capabilities)
 
-# Create a Firefox WebDriver instance with the options
-driver = webdriver.Firefox(options=options)
 # Navigate to the website
 site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
-
-# Add debug statement to print the site URL
-print(f"Navigating to site: {site}")
-
 driver.get(site)
 
 company_names = []
