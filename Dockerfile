@@ -21,5 +21,7 @@ RUN pip install -r requirements.txt
 # Set up the display for Firefox using Xvfb
 ENV DISPLAY=:99
 
-# Start Xvfb and Firefox
-CMD ["Xvfb", ":99", "-ac", "-screen", "0", "1920x1080x16", "-nolisten", "tcp", "&", "firefox-esr", "--no-remote"]
+# Start Xvfb and Firefox using a shell script
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
+CMD ["/app/start.sh"]
