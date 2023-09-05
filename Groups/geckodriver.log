@@ -11619,9 +11619,11 @@ console.error: Region.sys.mjs: "Failed to fetch region" (new Error("NO_RESULT", 
 1693854896771	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
 console.error: Region.sys.mjs: "Error fetching region" (new TypeError("NetworkError when attempting to fetch resource.", ""))
 console.error: Region.sys.mjs: "Failed to fetch region" (new Error("NO_RESULT", "resource://gre/modules/Region.sys.mjs", 411))
-1693854947807	geckodriver	INFO	Listening on 127.0.0.1:59389
-1693854950872	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "59390" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\calgo\\AppData\\Local\\Temp\\rust_mozprofilend71n7"
-console.warn: services.settings: Ignoring preference override of remote settings server
+1693909795916	Marionette	INFO	Stopped listening on port 59259
+Dynamically enable window occlusion 1
+console.error: "Failed to fetch https://spocs.getpocket.com/user:" "NetworkError when attempting to fetch resource."
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+sole.warn: services.settings: Ignoring preference override of remote settings server
 console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
 1693854951412	Marionette	INFO	Marionette enabled
 Dynamically enable window occlusion 0

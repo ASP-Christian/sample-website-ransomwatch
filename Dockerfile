@@ -1,14 +1,11 @@
-# Use an official Selenium with Python runtime
-FROM selenium/standalone-python:3.8
+# Use an official Python runtime as a parent image
+FROM python:3.8
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Install Firefox ESR
+# Install Firefox and its dependencies
 RUN apt-get update && apt-get install -y firefox-esr
-
-# Set the executable permission for the Firefox binary
-RUN chmod +x /usr/bin/firefox
 
 # Copy the Python script into the container
 COPY Groups/Qilin_Blog.py /app/Qilin_Blog.py

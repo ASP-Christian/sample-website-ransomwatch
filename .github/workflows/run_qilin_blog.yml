@@ -3,8 +3,6 @@ name: Run Qilin Blog
 on:
   workflow_dispatch:
 
-
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,18 +11,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Firefox
+      - name: Build and run Docker container
         run: |
-          sudo apt-get update
-          sudo apt-get install -y firefox
+          docker build -t my-python-app .
+          docker run my-python-app
+        env:
+          MOZ_HEADLESS: 1  # This environment variable is used to enable headless mode in Firefox
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
-
-      - name: Install Python dependencies
-        run: pip install -r requirements.txt
-
-      - name: Run Python script
-        run: python Groups/Qilin_Blog.py
