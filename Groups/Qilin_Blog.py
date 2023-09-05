@@ -94,7 +94,6 @@ for i in range(len(company_names)):
 existing_data.extend(new_entries)
 
 # Save the updated data as JSON in the 'Overall_data' folder
-json_file_path = os.path.join(datas_folder, 'data_post.json')
 with open(json_file_path, 'w', encoding='utf-8') as json_file:
     json.dump(existing_data, json_file, ensure_ascii=False, indent=4)
 
