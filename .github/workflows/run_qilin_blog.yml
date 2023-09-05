@@ -1,9 +1,9 @@
-name: Run Python Script
+name: Run Qilin Blog
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+
+
 
 jobs:
   build:
@@ -13,9 +13,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Build Docker image
-        run: docker build -t my-python-script .
+      - name: Install Firefox
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y firefox
 
-      - name: Run Python script in Docker container
-        run: docker run my-python-script
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Python script
+        run: python Groups/Qilin_Blog.py
 
