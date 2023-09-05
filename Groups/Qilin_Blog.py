@@ -25,7 +25,8 @@ options.headless = True  # Run in headless mode
 options.add_argument('--proxy-server=%s' % tor_proxy)
 
 # Set up Firefox WebDriver with explicit timeouts
-service = Service('/usr/local/bin/geckodriver')
+geckodriver_path = '/usr/local/bin/geckodriver'  # Replace with your geckodriver path
+service = Service(geckodriver_path)
 driver = webdriver.Firefox(service=service, options=options)
 driver.set_page_load_timeout(60)  # Adjust the timeout value as needed
 driver.implicitly_wait(10)  # Adjust the timeout value as needed
