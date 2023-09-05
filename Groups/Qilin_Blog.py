@@ -1,6 +1,5 @@
 from selenium import webdriver
 from selenium.webdriver.common.proxy import Proxy, ProxyType
-from tqdm import tqdm
 import json
 from datetime import datetime
 import os
