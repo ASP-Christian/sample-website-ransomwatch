@@ -3,26 +3,29 @@ name: Run Qilin Blog
 on:
   workflow_dispatch:
 
+
+
 jobs:
   build:
-    runs-on: ubuntu-latest  # You can choose a different runner if needed
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
 
       - name: Install Firefox
         run: |
           sudo apt-get update
           sudo apt-get install -y firefox
 
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
       - name: Install Python dependencies
         run: pip install -r requirements.txt
 
       - name: Run Python script
         run: python Groups/Qilin_Blog.py
+
