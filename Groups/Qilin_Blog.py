@@ -98,6 +98,7 @@ with open(json_file_path, 'w', encoding='utf-8') as json_file:
     json.dump(existing_data, json_file, ensure_ascii=False, indent=4)
 
 print(f"Data saved to {json_file_path}")
-
+print(new_entries)
 # Close the browser
 driver.quit()
+

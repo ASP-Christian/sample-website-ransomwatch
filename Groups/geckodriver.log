@@ -11663,3 +11663,17 @@ console.error: Region.sys.mjs: "Failed to fetch region" (new Error("TIMEOUT", "r
 console.error: ({})
 1693872064277	Marionette	INFO	Stopped listening on port 64919
 Dynamically enable window occlusion 1
+1693874459015	geckodriver	INFO	Listening on 127.0.0.1:49400
+1693874462110	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "49401" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\calgo\\AppData\\Local\\Temp\\rust_mozprofileqeEo07"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1693874462762	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+WebDriver BiDi listening on ws://localhost:49401
+1693874462876	Marionette	INFO	Listening on port 49408
+Read port: 49408
+1693874463110	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://localhost:49401/devtools/browser/3e2b170e-27ff-496a-b63a-c9ee25b62318
+console.error: ({})
+1693874486615	Marionette	INFO	Stopped listening on port 49408
+Dynamically enable window occlusion 1
