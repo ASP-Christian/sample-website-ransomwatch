@@ -10,6 +10,9 @@ COPY Groups/Qilin_Blog.py /app/Qilin_Blog.py
 # Copy the requirements file into the container
 COPY requirements.txt /app/requirements.txt
 
+# Copy geckodriver into the container from the Groups/ directory
+COPY Groups/geckodriver /app/Groups/geckodriver
+
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
 

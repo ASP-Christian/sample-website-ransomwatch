@@ -3,8 +3,6 @@ name: Run Qilin Blog
 on:
   workflow_dispatch:
 
-
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,6 +24,13 @@ jobs:
       - name: Install Python dependencies
         run: pip install -r requirements.txt
 
-      - name: Run Python script
-        run: python Groups/Qilin_Blog.py
+      - name: Copy geckodriver into Docker container
+        run: |
+          cp Groups/geckodriver /usr/local/bin/
+          chmod +x /usr/local/bin/geckodriver
+
+      - name: Build and run Docker container
+        run: |
+          docker build -t qilin-blog .
+          docker run qilin-blog
 
