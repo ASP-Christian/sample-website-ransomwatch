@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.proxy import Proxy, ProxyType
+
 import json
 from datetime import datetime
 import os
@@ -21,15 +22,12 @@ proxy.proxy_type = ProxyType.MANUAL
 proxy.http_proxy = tor_proxy
 proxy.ssl_proxy = tor_proxy
 
-capabilities = webdriver.DesiredCapabilities.FIREFOX
-proxy.add_to_capabilities(capabilities)
-
 # Set Firefox to run in headless mode
 options = webdriver.FirefoxOptions()
 options.headless = True
 
-# Create a Firefox WebDriver instance with the options and proxy settings
-driver = webdriver.Firefox(options=options, desired_capabilities=capabilities)
+# Create a Firefox WebDriver instance with the proxy settings and options
+driver = webdriver.Firefox(options=options, proxy=proxy)
 
 # Navigate to the website
 site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
