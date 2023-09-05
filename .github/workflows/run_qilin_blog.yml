@@ -1,11 +1,20 @@
 name: Run Qilin Blog
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main  # Adjust this branch name to match your repository's main branch
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    services:
+      xvfb:
+        image: dorowu/ubuntu-desktop-lxde-vnc
+        ports:
+          - 5900/tcp
+        options: --privileged
 
     steps:
     - name: Checkout code
@@ -15,4 +24,4 @@ jobs:
       run: docker build -t my-docker-image .
 
     - name: Run Docker container
-      run: docker run --rm my-docker-image
+      run: docker run --rm --net=host my-docker-image
