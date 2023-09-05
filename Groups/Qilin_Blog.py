@@ -22,6 +22,13 @@ options.set_preference('network.proxy.socks', '127.0.0.1')
 options.set_preference('network.proxy.socks_port', 9150)
 options.set_preference('network.proxy.socks_remote_dns', True)
 
+
+print(f"Tor proxy: {tor_proxy}")
+print(f"Tor proxy address: {options.get_preference('network.proxy.socks')}")
+print(f"Tor proxy port: {options.get_preference('network.proxy.socks_port')}")
+
+# Create a Firefox WebDriver instance with the options
+driver = webdriver.Firefox(options=options)
 # Create a Firefox WebDriver instance with the options
 driver = webdriver.Firefox(options=options)
 # Navigate to the website
