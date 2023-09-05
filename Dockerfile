@@ -1,8 +1,14 @@
-# Use the official Selenium Docker image
-FROM selenium/standalone-firefox:latest
+# Use an official Python runtime as a parent image
+FROM python:3.8
 
 # Set the working directory in the container
 WORKDIR /app
+
+# Install Firefox
+RUN apt-get update && apt-get install -y firefox
+
+# Copy the Firefox binary from the host to the container
+COPY /usr/bin/firefox /usr/bin/firefox
 
 # Copy the Python script into the container
 COPY Groups/Qilin_Blog.py /app/Qilin_Blog.py

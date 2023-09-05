@@ -3,6 +3,8 @@ name: Run Qilin Blog
 on:
   workflow_dispatch:
 
+
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -10,6 +12,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Install Firefox
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y firefox
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -19,7 +26,5 @@ jobs:
       - name: Install Python dependencies
         run: pip install -r requirements.txt
 
-      - name: Build and run Docker container
-        run: |
-          docker build -t my-python-app .
-          docker run my-python-app
+      - name: Run Python script
+        run: python Groups/Qilin_Blog.py
