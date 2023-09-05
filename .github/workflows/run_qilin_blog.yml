@@ -7,19 +7,32 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      xvfb:
-        image: dorowu/ubuntu-desktop-lxde-vnc
-        ports:
-          - 5900/tcp
-        options: --privileged
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Set up Tor
+      run: |
+        sudo service tor start
+        sleep 5  # Wait for Tor to start
+        sudo service tor status  # Check Tor status
+      continue-on-error: true  # Continue even if Tor setup fails
+
     - name: Build Docker image
-      run: docker build -t my-docker-image .
+      run: docker build -t docker-scrape-runner .
 
     - name: Run Docker container
-      run: docker run --rm --net=host my-docker-image
+      run: docker run --rm -p 9150:9150 docker-scrape-runner  # Expose Tor SocksPort
+
+    - name: Run Python script
+      run: |
+        docker exec -it docker-scrape-runner python /app/Qilin_Blog.py
+      continue-on-error: true  # Continue even if the script fails
+
+    - name: Upload JSON file as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: scraped-data
+        path: Overall_data/data_post.json
+      env:
+        GITHUB_TOKEN: ${{ secrets.FIRST_LAST_TOKEN }}
