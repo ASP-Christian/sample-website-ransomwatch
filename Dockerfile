@@ -1,4 +1,3 @@
-
 # Use the official Python image as the base image
 FROM python:3.9
 
@@ -16,4 +15,8 @@ COPY requirements.txt /app/requirements.txt
 # Install required Python dependencies
 RUN pip install -r requirements.txt
 
-# Continue with the rest of your Dockerfile configuration...
+# Set up the display for Firefox (useful when running in headless mode)
+ENV DISPLAY=:1
+
+# Start Firefox (you may need to adjust this command based on your script)
+CMD ["firefox-esr"]
