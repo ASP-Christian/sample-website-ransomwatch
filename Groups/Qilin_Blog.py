@@ -1,4 +1,5 @@
 from selenium import webdriver
+from tqdm import tqdm
 import json
 from datetime import datetime
 import os
@@ -16,14 +17,11 @@ if not os.path.exists(datas_folder):
 # Set up TOR and the TOR browser
 tor_proxy = "socks5://127.0.0.1:9150"
 options = webdriver.FirefoxOptions()
+options.add_argument('-headless')  # Run Firefox in headless mode
 options.set_preference('network.proxy.type', 1)
 options.set_preference('network.proxy.socks', '127.0.0.1')
 options.set_preference('network.proxy.socks_port', 9150)
 options.set_preference('network.proxy.socks_remote_dns', True)
-
-# Set the WebDriver to run in headless mode
-options.headless = False
-# options.headless = True
 
 # Create a Firefox WebDriver instance with the options
 driver = webdriver.Firefox(options=options)
