@@ -1,5 +1,4 @@
 from selenium import webdriver
-from selenium.webdriver.common.proxy import Proxy, ProxyType
 
 import json
 from datetime import datetime
@@ -17,27 +16,29 @@ if not os.path.exists(datas_folder):
 
 # Set up TOR and the TOR browser
 tor_proxy = "socks5://127.0.0.1:9150"
-proxy = Proxy()
-proxy.proxy_type = ProxyType.MANUAL
-proxy.http_proxy = tor_proxy
-proxy.ssl_proxy = tor_proxy
 
-# Set Firefox to run in headless mode and configure proxy settings
+# Create a custom Firefox profile with proxy settings
+firefox_profile = webdriver.FirefoxProfile()
+firefox_profile.set_preference("network.proxy.type", 1)
+firefox_profile.set_preference("network.proxy.socks", "127.0.0.1")
+firefox_profile.set_preference("network.proxy.socks_port", 9150)
+firefox_profile.set_preference("network.proxy.socks_remote_dns", True)
+
+# Set Firefox to run in headless mode
 options = webdriver.FirefoxOptions()
 options.headless = True
-options.set_preference("network.proxy.type", 1)
-options.set_preference("network.proxy.socks", "127.0.0.1")
-options.set_preference("network.proxy.socks_port", 9150)
-options.set_preference("network.proxy.socks_remote_dns", True)
 
-# Create a Firefox WebDriver instance with the options
-driver = webdriver.Firefox(options=options)
+# Set the path to the custom Firefox profile directory
+custom_profile_dir = os.path.join(script_dir, "custom_firefox_profile")
+
+# Create a Firefox WebDriver instance with the custom profile and options
+driver = webdriver.Firefox(firefox_profile=firefox_profile, options=options, firefox_profile_dir=custom_profile_dir)
 
 # Navigate to the website
 site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
 driver.get(site)
 
-
+# Continue with the rest of your script...
 
 company_names = []
 company_description = []
@@ -48,21 +49,7 @@ name_elements = driver.find_elements("xpath", '//h2[@class="post-title"]/a')
 for element in name_elements:
     company_names.append(element.text if element.text else 'n/a')
 
-company_description_elements = driver.find_elements("xpath", "//div[@class='post-des dropcap']/p")
-for element in company_description_elements:
-    company_description.append(element.text if element.text else 'n/a')
-
-company_elements = driver.find_elements("xpath", '//div[@class="category-mid-post-two"]/div[1]/span/a')
-for element in company_elements:
-    href = element.get_attribute("href")
-    if href:
-        company_websites.append(href.replace('https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/', ''))
-    else:
-        company_websites.append('n/a')
-
-Data_elements = driver.find_elements("xpath", '//h2[@class="post-title"]/a')
-for element in Data_elements:
-    Data.append(element.get_attribute("href") if element.get_attribute("href") else 'n/a')
+# Rest of your data scraping code...
 
 # Get the current date and time in US Eastern Time (ET)
 us_eastern_timezone = pytz.timezone('US/Eastern')
