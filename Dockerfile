@@ -10,6 +10,9 @@ RUN apt-get update && apt-get install -y firefox
 # Copy the Firefox binary from the host to the container
 COPY /usr/bin/firefox /usr/bin/firefox
 
+# Set the executable permission for the Firefox binary
+RUN chmod +x /usr/bin/firefox
+
 # Copy the Python script into the container
 COPY Groups/Qilin_Blog.py /app/Qilin_Blog.py
 
