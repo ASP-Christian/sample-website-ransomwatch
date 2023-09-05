@@ -3,6 +3,7 @@ name: Run Qilin Blog
 on:
   workflow_dispatch:
 
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -10,16 +11,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Install Firefox and GeckoDriver
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y firefox
-          wget https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz
-          tar -xvzf geckodriver-v0.30.0-linux64.tar.gz
-          chmod +x geckodriver
-          sudo mv geckodriver /usr/local/bin/
-        continue-on-error: true # Continue even if this step fails, as it may be pre-installed in some environments
 
       - name: Set up Python
         uses: actions/setup-python@v2
