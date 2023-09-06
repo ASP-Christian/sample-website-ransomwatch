@@ -17,11 +17,12 @@ jobs:
         python-version: 3.x  # Specify the Python version you need
 
     - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
-        # Install geckodriver for Firefox
-        apt-get update
-        apt-get install firefox-geckodriver
+      run: pip install -r requirements.txt
+
+    - name: Set up Firefox
+      uses: actions/setup-firefox@v3  # Use the setup-firefox action
+      with:
+        headless: true  # You can choose to run Firefox in headless mode or not
 
     - name: Run scraper
       run: python Qilin_Blog.py  # Replace with the actual filename of your script
