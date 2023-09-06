@@ -31,4 +31,4 @@ jobs:
         chmod +x /usr/local/bin/geckodriver.exe
 
     - name: Run scraper
-      run: python Qilin_Blog.py  # Replace with the actual filename of your script
+      run: python Groups/Qilin_Blog.py  # Replace with the actual filename of your script
