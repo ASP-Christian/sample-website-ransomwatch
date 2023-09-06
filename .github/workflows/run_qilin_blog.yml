@@ -53,13 +53,9 @@ jobs:
       run: |
         sudo systemctl status tor
 
-    - name: Run Python script with Tor
-      run: |
-        # Run the Tor service in the background
-        sudo systemctl start tor
-        # Wait for Tor to establish a connection (increase sleep time if needed)
-        sleep 30  # Wait for 30 seconds (you can adjust the sleep time)
-        python Groups/Qilin_Blog.py
+    - name: Run Python script with Torify
+      run: torify python Groups/Qilin_Blog.py
+
 
     - name: Stop Tor
       run: |
