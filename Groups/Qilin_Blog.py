@@ -25,25 +25,11 @@ geckodriver_path = "/snap/bin/geckodriver"  # Update to the correct path
 service = FirefoxService(geckodriver_path)
 driver = webdriver.Firefox(service=service, options=options)
 
-try:
-    # Wait for Tor to establish a connection (increase sleep time if needed)
-    time.sleep(10)
+# Wait for Tor to establish a connection (increase sleep time if needed)
+time.sleep(10)
 
-    # Navigate to the website
-    site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
-    driver.get(site)
+# Navigate to the website
+site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
+driver.get(site)
 
-    # Rest of your script remains the same
-    # ...
-
-except WebDriverException as e:
-    print(f"WebDriver Exception: {e}")
-    # Handle any WebDriverExceptions, such as inability to access the site
-
-except Exception as e:
-    print(f"An unexpected error occurred: {e}")
-    # Handle any other unexpected exceptions
-
-finally:
-    # Close the driver, even if an exception occurred
-    driver.quit()
+print("DONE SUCCESS")
