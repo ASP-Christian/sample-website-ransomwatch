@@ -27,7 +27,7 @@ options.headless = True  # Change to True for headless mode
 
 # Set up the WebDriver with GeckoDriver
 geckodriver_path = "/snap/bin/geckodriver"
-service = FirefoxService(geckodriver_path)
+service = FirefoxService(geckodriver_path, log_path="Groups/geckodriver.log")
 driver = webdriver.Firefox(service=service, options=options)
 
 # Navigate to the website
