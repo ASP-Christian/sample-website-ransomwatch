@@ -24,11 +24,9 @@ options.set_preference('network.proxy.socks_remote_dns', True)
 # Set the WebDriver to run in headless mode
 options.headless = True  # Change to True for headless mode
 
-# Specify the path to your Firefox binary
-firefox_binary_path = "/snap/bin/firefox"  # Replace with the actual path
-
-# Create a Firefox WebDriver instance with the options
-driver = webdriver.Firefox(executable_path="/snap/bin/geckodriver", firefox_binary=firefox_binary_path, options=options)
+# Set up the WebDriver with GeckoDriver
+geckodriver_path = "/snap/bin/geckodriver"
+driver = webdriver.Firefox(executable_path=geckodriver_path, options=options)
 
 # Navigate to the website
 site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
