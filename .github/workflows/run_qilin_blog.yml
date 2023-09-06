@@ -45,10 +45,18 @@ jobs:
         sudo apt-get install -y tor
 
     - name: Start Tor
-      run: sudo systemctl start tor
+      run: |
+        sudo systemctl start tor
+        sleep 10  # Wait for Tor to start (you can adjust the sleep time)
 
-    - name: Run Python script
-      run: python Groups/Qilin_Blog.py
+    - name: Run Python script with Tor
+      run: |
+        # Run the Tor service in the background
+        sudo systemctl start tor
+        # Wait for Tor to establish a connection (increase sleep time if needed)
+        sleep 30  # Wait for 30 seconds (you can adjust the sleep time)
+        python Groups/Qilin_Blog.py
 
     - name: Stop Tor
-      run: sudo systemctl stop tor
+      run: |
+        sudo systemctl stop tor
