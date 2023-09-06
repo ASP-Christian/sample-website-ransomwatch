@@ -49,6 +49,10 @@ jobs:
         sudo systemctl start tor
         sleep 60  # Wait for Tor to start (you can adjust the sleep time)
 
+    - name: Check Tor Status
+      run: |
+        sudo systemctl status tor
+
     - name: Run Python script with Tor
       run: |
         # Run the Tor service in the background
