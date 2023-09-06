@@ -22,7 +22,7 @@ options.set_preference('network.proxy.socks_port', 9150)
 options.set_preference('network.proxy.socks_remote_dns', True)
 
 # Specify the path to the custom Firefox binary
-firefox_binary_path = './firefox_bin/firefox.exe'
+firefox_binary_path = '/firefox_bin/firefox.exe'
 options.binary_location = firefox_binary_path
 
 # Set the WebDriver to run in headless mode
