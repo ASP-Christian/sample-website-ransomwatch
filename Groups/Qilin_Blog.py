@@ -22,8 +22,8 @@ options.set_preference('network.proxy.socks_port', 9150)
 options.set_preference('network.proxy.socks_remote_dns', True)
 
 # Set the WebDriver to run in headless mode
-options.headless = False
-# options.headless = True
+#options.headless = False
+options.headless = True
 
 # Create a Firefox WebDriver instance with the options
 driver = webdriver.Firefox(options=options)
