@@ -1,5 +1,4 @@
 from selenium import webdriver
-from tqdm import tqdm
 import json
 from datetime import datetime
 import os

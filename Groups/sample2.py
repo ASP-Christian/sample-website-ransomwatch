@@ -16,7 +16,7 @@ options.headless = True
 driver = webdriver.Firefox(options=options)
 
 # navigate to the website
-site = 'http://fxrx6qvrri4ldt7dhytdvkuakai75bpdlxlmner6zrlkq34rpcqpyqyd.onion/'
+site = 'http://kbsqoivihgdmwczmxkbovk7ss2dcynitwhhfu5yw725dboqo5kthfaad.onion/'
 driver.get(site)
 print("Success!, Success!, Success! , Success!, Success!, Success!, Success!, Success!, Success!, Success!, Success!, Success!")
 
