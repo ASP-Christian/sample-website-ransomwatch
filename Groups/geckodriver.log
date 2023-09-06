@@ -11786,3 +11786,31 @@ DevTools listening on ws://localhost:55843/devtools/browser/360550f2-572d-4fd6-b
 console.error: ({})
 1694040683432	Marionette	INFO	Stopped listening on port 55858
 Dynamically enable window occlusion 1
+1694041700671	geckodriver	INFO	Listening on 127.0.0.1:58167
+1694041703767	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "58168" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\calgo\\AppData\\Local\\Temp\\rust_mozprofileBla9oC"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1694041704393	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+WebDriver BiDi listening on ws://localhost:58168
+1694041704482	Marionette	INFO	Listening on port 58177
+Read port: 58177
+1694041704744	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://localhost:58168/devtools/browser/e65ce601-5a68-4492-8f6b-a97d8f4dada6
+console.error: ({})
+1694041713909	Marionette	INFO	Stopped listening on port 58177
+Dynamically enable window occlusion 1
+1694042406636	geckodriver	INFO	Listening on 127.0.0.1:58961
+1694042409738	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "58962" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\calgo\\AppData\\Local\\Temp\\rust_mozprofilear1197"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1694042410325	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+WebDriver BiDi listening on ws://localhost:58962
+1694042410412	Marionette	INFO	Listening on port 58969
+Read port: 58969
+1694042410693	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://localhost:58962/devtools/browser/af65d662-bff0-40c7-853c-80e46ddbcbbe
+console.error: ({})
+1694042419825	Marionette	INFO	Stopped listening on port 58969
+Dynamically enable window occlusion 1
