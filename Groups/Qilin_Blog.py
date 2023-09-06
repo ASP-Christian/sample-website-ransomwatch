@@ -1,5 +1,6 @@
 from selenium import webdriver
 import json
+from selenium.webdriver.firefox.service import Service as FirefoxService
 from datetime import datetime
 import os
 import pytz
@@ -26,7 +27,8 @@ options.headless = True  # Change to True for headless mode
 
 # Set up the WebDriver with GeckoDriver
 geckodriver_path = "/snap/bin/geckodriver"
-driver = webdriver.Firefox(executable_path=geckodriver_path, options=options)
+service = FirefoxService(geckodriver_path)
+driver = webdriver.Firefox(service=service, options=options)
 
 # Navigate to the website
 site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
