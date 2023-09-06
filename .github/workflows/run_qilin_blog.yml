@@ -3,27 +3,28 @@ name: Run Qilin Blog
 on:
   workflow_dispatch:
 
+
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.x  # Specify the Python version you need
+      - name: Install Firefox
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y firefox
 
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
-        # Download and unzip the Firefox WebDriver for Linux
-          wget https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux64.tar.gz
-          tar -xzvf geckodriver-v0.33.0-linux64.tar.gz
-          sudo mv geckodriver /usr/local/bin/
-          rm geckodriver-v0.33.0-linux64.tar.gz
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
 
-    - name: Run scraper
-      run: python Groups/Qilin_Blog.py  # Replace with the actual filename of your script
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Python script
+        run: python Groups/Qilin_Blog.py

@@ -2,7 +2,7 @@ from selenium import webdriver
 import json
 from datetime import datetime
 import os
-import pytz
+import pytz  # Import pytz
 
 # Set the working directory to the directory where your script is located
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -98,5 +98,6 @@ with open(json_file_path, 'w', encoding='utf-8') as json_file:
 
 print(f"Data saved to {json_file_path}")
 print(new_entries)
+
 # Close the browser
 driver.quit()
