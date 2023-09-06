@@ -2,7 +2,7 @@ from selenium import webdriver
 import json
 from datetime import datetime
 import os
-import pytz  # Import pytz
+import pytz
 
 # Set the working directory to the directory where your script is located
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -22,11 +22,14 @@ options.set_preference('network.proxy.socks_port', 9150)
 options.set_preference('network.proxy.socks_remote_dns', True)
 
 # Set the WebDriver to run in headless mode
-options.headless = False
-# options.headless = True
+options.headless = True  # Change to True for headless mode
+
+# Specify the path to your Firefox binary
+firefox_binary_path = "/snap/bin/firefox"  # Replace with the actual path
 
 # Create a Firefox WebDriver instance with the options
-driver = webdriver.Firefox(options=options)
+driver = webdriver.Firefox(executable_path="/snap/bin/geckodriver", firefox_binary=firefox_binary_path, options=options)
+
 # Navigate to the website
 site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
 driver.get(site)
@@ -99,5 +102,6 @@ with open(json_file_path, 'w', encoding='utf-8') as json_file:
 print(f"Data saved to {json_file_path}")
 print(new_entries)
 
-# Close the browser
+# Close
+
 driver.quit()
