@@ -47,7 +47,7 @@ jobs:
     - name: Start Tor
       run: |
         sudo systemctl start tor
-        sleep 10  # Wait for Tor to start (you can adjust the sleep time)
+        sleep 60  # Wait for Tor to start (you can adjust the sleep time)
 
     - name: Run Python script with Tor
       run: |
