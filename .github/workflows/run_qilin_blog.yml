@@ -24,13 +24,11 @@ jobs:
         sudo apt-get update
         sudo apt-get install firefox -y
 
-    - name: Install Geckodriver
+    - name: Use local geckodriver.exe
       run: |
-        GECKODRIVER_VERSION="0.24.0"  # Use the correct Geckodriver version
-        wget https://github.com/mozilla/geckodriver/releases/download/${GECKODRIVER_VERSION}/geckodriver-${GECKODRIVER_VERSION}-linux64.tar.gz
-        tar -xvzf geckodriver-${GECKODRIVER_VERSION}-linux64.tar.gz
-        chmod +x geckodriver
-        sudo mv geckodriver /usr/local/bin/
+        # Copy the local geckodriver.exe to the appropriate location
+        cp geckodriver.exe /usr/local/bin/
+        chmod +x /usr/local/bin/geckodriver.exe
 
     - name: Run scraper
       run: python Qilin_Blog.py  # Replace with the actual filename of your script
