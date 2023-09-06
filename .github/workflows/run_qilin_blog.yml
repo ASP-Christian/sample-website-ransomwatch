@@ -19,19 +19,18 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
 
-    # Install Firefox
     - name: Install Firefox
       run: |
-        choco install firefox -y
+        sudo apt-get update
+        sudo apt-get install firefox -y
 
-    # Install Geckodriver for Windows
     - name: Install Geckodriver
       run: |
-        $geckodriver_version = "0.33.0"  # Replace with the Geckodriver version you need
-        $geckodriver_url = "https://github.com/mozilla/geckodriver/releases/download/v$geckodriver_version/geckodriver-v$geckodriver_version-win64.zip"
-        Invoke-WebRequest -Uri $geckodriver_url -OutFile "geckodriver.zip"
-        Expand-Archive -Path "geckodriver.zip" -DestinationPath $env:ProgramFiles
-        Remove-Item "geckodriver.zip"
+        GECKODRIVER_VERSION="0.33.0"  # Replace with the Geckodriver version you need
+        wget https://github.com/mozilla/geckodriver/releases/download/${GECKODRIVER_VERSION}/geckodriver-${GECKODRIVER_VERSION}-linux64.tar.gz
+        tar -xvzf geckodriver-${GECKODRIVER_VERSION}-linux64.tar.gz
+        chmod +x geckodriver
+        sudo mv geckodriver /usr/local/bin/
 
     - name: Run scraper
       run: python Qilin_Blog.py  # Replace with the actual filename of your script
