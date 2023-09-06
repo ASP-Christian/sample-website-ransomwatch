@@ -19,10 +19,11 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
-        # Download and install the Firefox WebDriver for Windows using curl
-          curl -Lo geckodriver.zip https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-win64.zip
-          Expand-Archive -Path geckodriver.zip -DestinationPath $env:ProgramFiles\geckodriver
-          Remove-Item geckodriver.zip
+        # Download and unzip the Firefox WebDriver for Linux
+          wget https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz
+          tar -xzvf geckodriver-v0.30.0-linux64.tar.gz
+          sudo mv geckodriver /usr/local/bin/
+          rm geckodriver-v0.30.0-linux64.tar.gz
 
     - name: Run scraper
       run: python Groups/Qilin_Blog.py  # Replace with the actual filename of your script
