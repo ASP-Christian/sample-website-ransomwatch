@@ -1,4 +1,5 @@
 from selenium import webdriver
+from tqdm import tqdm
 import json
 from datetime import datetime
 import os
@@ -21,16 +22,12 @@ options.set_preference('network.proxy.socks', '127.0.0.1')
 options.set_preference('network.proxy.socks_port', 9150)
 options.set_preference('network.proxy.socks_remote_dns', True)
 
-# Specify the path to the custom Firefox binary
-firefox_binary_path = '/firefox_bin/firefox.exe'
-options.binary_location = firefox_binary_path
-
 # Set the WebDriver to run in headless mode
-options.headless = True  # Change to False if you want to run in non-headless mode
+options.headless = False
+# options.headless = True
 
 # Create a Firefox WebDriver instance with the options
 driver = webdriver.Firefox(options=options)
-
 # Navigate to the website
 site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
 driver.get(site)
