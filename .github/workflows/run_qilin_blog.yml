@@ -25,6 +25,8 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y firefox
+        # Display Firefox version
+        firefox --version
 
     - name: Install Geckodriver
       run: |
@@ -34,6 +36,9 @@ jobs:
         sudo mv geckodriver /usr/local/bin/
         sudo chmod +x /usr/local/bin/geckodriver
         rm geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
+        # Display GeckoDriver version and path
+        echo "GeckoDriver Version: $GECKODRIVER_VERSION"
+        echo "GeckoDriver Path: /usr/local/bin/geckodriver"
 
     - name: Install Tor
       run: |
