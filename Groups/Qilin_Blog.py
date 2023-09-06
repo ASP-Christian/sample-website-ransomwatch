@@ -21,7 +21,7 @@ options.headless = True
 options.add_argument(f'-proxy-server={tor_proxy}')
 
 # Set up the WebDriver with GeckoDriver
-geckodriver_path = "/usr/local/bin/geckodriver"  # Update to the correct path
+geckodriver_path = "/snap/bin/geckodriver"  # Update to the correct path
 service = FirefoxService(geckodriver_path)
 driver = webdriver.Firefox(service=service, options=options)
 
