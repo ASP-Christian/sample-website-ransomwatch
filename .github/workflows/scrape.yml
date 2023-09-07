@@ -1,0 +1,49 @@
+name: Selenium Scraping with Tor
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: |
+          pip install selenium
+          pip install pyvirtualdisplay
+
+      - name: Start virtual display
+        run: |
+          export DISPLAY=:99
+          Xvfb $DISPLAY -ac &
+          sleep 5
+
+      - name: Start Tor Browser
+        run: |
+          wget https://www.torproject.org/dist/torbrowser/10.0.15/tor-browser-linux64-10.0.15_en-US.tar.xz
+          tar -xvf tor-browser-linux64-10.0.15_en-US.tar.xz
+          cd tor-browser_en-US/
+          ./start-tor-browser.desktop &
+
+      - name: Run Selenium Script
+        run: |
+          python your_selenium_script.py
+
+      - name: Stop Tor Browser
+        run: |
+          pkill -f start-tor-browser.desktop
+
+      - name: Stop virtual display
+        run: |
+          pkill Xvfb
