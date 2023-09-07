@@ -32,6 +32,11 @@ s = Service(geckodriver_path)
 
 # Set the WebDriver to run in headless mode
 options.headless = True
+# Add these lines to your script for debugging
+print(f"Script Directory: {script_dir}")
+print(f"Geckodriver Path: {geckodriver_path}")
+print(f"Is Geckodriver Executable Exists: {os.path.exists(geckodriver_path)}")
+
 
 # Create a Firefox WebDriver instance with the options and service
 driver = webdriver.Firefox(options=options, service=s)
