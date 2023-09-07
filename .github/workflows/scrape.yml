@@ -1,4 +1,4 @@
-name: Selenium Scraping with Tor
+name: Selenium Web Scraping with Tor
 
 on:
   push:
@@ -6,47 +6,36 @@ on:
       - main
 
 jobs:
-  build:
+  selenium:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.x
+      - name: Install Tor
+        run: |
+          sudo apt-get update
+          sudo apt-get install tor
 
-      - name: Install dependencies
+      - name: Configure Tor
+        run: |
+          echo "SocksPort 9050" | sudo tee -a /etc/tor/torrc
+          echo "ControlPort 9051" | sudo tee -a /etc/tor/torrc
+          echo "CookieAuthentication 1" | sudo tee -a /etc/tor/torrc
+          sudo systemctl restart tor
+
+      - name: Install Selenium and geckodriver
         run: |
           pip install selenium
-          pip install pyvirtualdisplay
-
-      - name: Start virtual display
-        run: |
-          export DISPLAY=:99
-          Xvfb $DISPLAY -ac &
-          sleep 5
-
-      - name: Download Tor Browser
-        run: |
-          wget https://www.torproject.org/dist/torbrowser/12.5.3/tor-browser-linux64-12.5.3_ALL.tar.xz
-          tar -xvf tor-browser-linux64-12.5.3_ALL.tar.xz
-          # Adjust the directory name as needed based on the actual structure
-          cd tor-browser-linux64-12.5.3_ALL/
-          ./start-tor-browser.desktop &
-        shell: /usr/bin/bash -e {0}
-
+          wget https://github.com/mozilla/geckodriver/releases/download/v0.29.0/geckodriver-v0.29.0-linux64.tar.gz
+          tar -xvzf geckodriver-v0.29.0-linux64.tar.gz
+          sudo mv geckodriver /usr/local/bin/
 
       - name: Run Selenium Script
         run: |
-          python your_selenium_script.py
+          python your_selenium_script.py  # Replace with the actual name of your Python script
 
-      - name: Stop Tor Browser
+      - name: Stop Tor Service
         run: |
-          pkill -f start-tor-browser.desktop
-
-      - name: Stop virtual display
-        run: |
-          pkill Xvfb
+          sudo systemctl stop tor
