@@ -1,5 +1,4 @@
 from selenium import webdriver
-from selenium.webdriver.firefox.service import Service
 import json
 from datetime import datetime
 import os
@@ -14,6 +13,9 @@ datas_folder = os.path.join(script_dir, "Overall_data")
 if not os.path.exists(datas_folder):
     os.mkdir(datas_folder)
 
+# Set the path to the geckodriver executable (relative to the script's location)
+geckodriver_path = os.path.join(script_dir, "geckodriver")
+
 # Set up TOR and the TOR browser
 tor_proxy = "socks5://127.0.0.1:9150"
 options = webdriver.FirefoxOptions()
@@ -26,20 +28,11 @@ options.set_preference('network.proxy.socks_remote_dns', True)
 firefox_path = os.path.join(script_dir, "firefox.exe")
 options.binary_location = firefox_path
 
-# Create a service object for the geckodriver
-geckodriver_path = os.path.join(script_dir, "geckodriver")
-s = Service(geckodriver_path)
-
 # Set the WebDriver to run in headless mode
 options.headless = True
-# Add these lines to your script for debugging
-print(f"Script Directory: {script_dir}")
-print(f"Geckodriver Path: {geckodriver_path}")
-print(f"Is Geckodriver Executable Exists: {os.path.exists(geckodriver_path)}")
 
-
-# Create a Firefox WebDriver instance with the options and service
-driver = webdriver.Firefox(options=options, service=s)
+# Create a Firefox WebDriver instance with the options
+driver = webdriver.Firefox(executable_path=geckodriver_path, options=options)
 
 # Navigate to the website
 site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
