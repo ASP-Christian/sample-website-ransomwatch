@@ -9,7 +9,7 @@ options.add_argument('--headless')
 
 # Configure custom proxy settings for Firefox
 proxy = webdriver.Proxy()
-proxy.proxy_type = ProxyType.MANUAL
+proxy.proxy_type = 'manual'
 proxy.http_proxy = "127.0.0.1:9050"
 proxy.ssl_proxy = "127.0.0.1:9050"
 
