@@ -36,6 +36,12 @@ jobs:
           name: geckodriver
           path: geckodriver
 
+      - name: Upload Firefox
+        uses: actions/upload-artifact@v2
+        with:
+          name: Firefox
+          path: firefox.exe
+
       - name: Run Qilin Blog Script
         run: python Groups/Qilin_Blog.py
         env:
