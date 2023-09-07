@@ -16,11 +16,11 @@ options.set_preference('network.proxy.socks', '127.0.0.1')
 options.set_preference('network.proxy.socks_port', 9150)
 options.set_preference('network.proxy.socks_remote_dns', True)
 
-# Set the path to the manually uploaded GeckoDriver
-geckodriver_path = "/geckodriver"
+# Set the path to the manually uploaded Firefox executable
+firefox_binary_path = "/firefox/firefox.exe"  # Replace with the actual path
 
-# Set the WebDriver to use the specified GeckoDriver path
-options.binary_location = geckodriver_path
+# Set the WebDriver to use the specified Firefox binary
+options.binary_location = firefox_binary_path
 
 # Create a Firefox WebDriver instance with the options
 driver = webdriver.Firefox(options=options)
