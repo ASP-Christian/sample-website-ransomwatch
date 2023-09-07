@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: geckodriver
-          path: /path/to/downloaded/geckodriver
+          path: geckodriver
 
       - name: Run Qilin Blog Script
         run: python Groups/Qilin_Blog.py
