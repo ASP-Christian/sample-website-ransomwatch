@@ -15,6 +15,8 @@ if not os.path.exists(datas_folder):
 
 # Set the path to the geckodriver executable (relative to the script's location)
 geckodriver_path = os.path.join(script_dir, "geckodriver")
+# Set the path to the Firefox executable (relative to the script's location)
+firefox_path = os.path.join(script_dir, "firefox.exe")
 
 # Set up TOR and the TOR browser
 tor_proxy = "socks5://127.0.0.1:9150"
