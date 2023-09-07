@@ -8,26 +8,19 @@ import pytz  # Import pytz
 script_dir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(script_dir)
 
-# Create a directory to store JSON files if it doesn't exist
-datas_folder = os.path.join(script_dir, "Overall_data")
-if not os.path.exists(datas_folder):
-    os.mkdir(datas_folder)
-
 # Set up TOR and the TOR browser
-tor_proxy_host = os.environ.get("TOR_PROXY_HOST", "127.0.0.1")
-tor_proxy_port = os.environ.get("TOR_PROXY_PORT", "9150")
-
-tor_proxy = f"socks5://{tor_proxy_host}:{tor_proxy_port}"
+tor_proxy = "socks5://127.0.0.1:9150"
 options = webdriver.FirefoxOptions()
 options.set_preference('network.proxy.type', 1)
-options.set_preference('network.proxy.socks', tor_proxy_host)
-options.set_preference('network.proxy.socks_port', int(tor_proxy_port))
+options.set_preference('network.proxy.socks', '127.0.0.1')
+options.set_preference('network.proxy.socks_port', 9150)
 options.set_preference('network.proxy.socks_remote_dns', True)
-# Set the WebDriver to run in headless mode
-#options.headless = False
-# options.headless = True
-# Enable headless mode
-options.add_argument('-headless')
+
+# Set the path to the manually uploaded GeckoDriver
+geckodriver_path = "/geckodriver"
+
+# Set the WebDriver to use the specified GeckoDriver path
+options.binary_location = geckodriver_path
 
 # Create a Firefox WebDriver instance with the options
 driver = webdriver.Firefox(options=options)
