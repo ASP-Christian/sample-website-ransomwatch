@@ -36,7 +36,7 @@ jobs:
 
       - name: Test Tor Connection
         run: |
-          curl --socks5h 127.0.0.1:9050 -I https://check.torproject.org
+          curl --socks5 127.0.0.1:9050 -I https://check.torproject.org
 
       - name: Run Selenium Script
         run: |
