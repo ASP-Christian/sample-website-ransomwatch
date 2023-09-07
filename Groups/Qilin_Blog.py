@@ -26,7 +26,7 @@ options.set_preference('network.proxy.socks_remote_dns', True)
 firefox_path = os.path.join(script_dir, "firefox.exe")
 options.binary_location = firefox_path
 
-# Create a service object for the geckodriver (replace with your geckodriver path)
+# Create a service object for the geckodriver
 geckodriver_path = os.path.join(script_dir, "geckodriver")
 s = Service(geckodriver_path)
 
