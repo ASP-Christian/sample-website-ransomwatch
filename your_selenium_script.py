@@ -1,9 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
+from selenium.common.exceptions import WebDriverException
 
 options = Options()
-# Use SOCKS5h instead of SOCKS5 to enable DNS resolution through the proxy
-options.add_argument('--proxy-server=socks5h://127.0.0.1:9050')
+options.add_argument('--proxy-server=socks5://127.0.0.1:9050')
 options.add_argument('--log-level=DEBUG')  # Add this line to enable WebDriver logging
 options.add_argument('--headless')
 
@@ -20,6 +20,8 @@ try:
     site_title = driver.title
     print(f'Title of the site: {site_title}')
 
+except WebDriverException as e:
+    print(f'Selenium WebDriver Error: {str(e)}')
 except Exception as e:
     print(f'An error occurred: {str(e)}')
 finally:

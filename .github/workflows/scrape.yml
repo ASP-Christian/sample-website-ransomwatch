@@ -1,5 +1,4 @@
 name: Selenium Web Scraping with Tor
-
 on:
   workflow_dispatch:
 
@@ -19,8 +18,6 @@ jobs:
       - name: Configure Tor
         run: |
           echo "SocksPort 9050" | sudo tee -a /etc/tor/torrc
-          echo "SocksListenAddress 127.0.0.1" | sudo tee -a /etc/tor/torrc
-          echo "SocksPort 9050 IPv6Traffic PreferIPv6 KeepAliveIsolateSOCKSAuth IsolateClientAddr IsolateSOCKSAuth" | sudo tee -a /etc/tor/torrc
           echo "ControlPort 9051" | sudo tee -a /etc/tor/torrc
           echo "CookieAuthentication 1" | sudo tee -a /etc/tor/torrc
           sudo systemctl restart tor
