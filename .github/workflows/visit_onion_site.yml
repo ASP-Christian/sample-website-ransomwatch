@@ -21,9 +21,9 @@ jobs:
       - name: Install dependencies
         run: |
           pip install selenium stem
-          # Download and install the TOR browser (replace with the latest version URL)
-          wget https://www.torproject.org/dist/torbrowser/11.0.4/tor-browser-linux64-11.0.4_en-US.tar.xz
-          tar -xvf tor-browser-linux64-11.0.4_en-US.tar.xz
+          # Download and install the latest TOR browser (update the URL)
+          wget https://www.torproject.org/dist/torbrowser/<version>/tor-browser-<platform>-<version>_en-US.tar.xz
+          tar -xvf tor-browser-<platform>-<version>_en-US.tar.xz
           mv tor-browser_en-US/ tor-browser/
         working-directory: ${{ github.workspace }}
 
@@ -32,4 +32,3 @@ jobs:
           python visit_onion_site.py
         env:
           TOR_BROWSER_PATH: './tor-browser'
-
