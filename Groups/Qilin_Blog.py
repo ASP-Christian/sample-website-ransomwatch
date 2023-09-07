@@ -1,10 +1,3 @@
-import sys
-
-# Redirect stderr and stdout to a log file
-sys.stdout = open('stdout.log', 'w')
-sys.stderr = open('stderr.log', 'w')
-
-
 from selenium import webdriver
 import json
 from datetime import datetime
