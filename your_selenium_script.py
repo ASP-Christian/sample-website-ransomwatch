@@ -7,7 +7,7 @@ options.add_argument('--log-level=DEBUG')  # Add this line to enable WebDriver l
 options.add_argument('--headless')
 
 # Adjust the URL to the onion site you want to visit
-onion_url = 'https://github.com/webfp/tor-browser-selenium'
+onion_url = 'http://omegalock5zxwbhswbisc42o2q2i54vdulyvtqqbudqousisjgc7j7yd.onion/'
 
 driver = webdriver.Firefox(options=options)
 
