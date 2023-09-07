@@ -1,3 +1,10 @@
+import sys
+
+# Redirect stderr and stdout to a log file
+sys.stdout = open('stdout.log', 'w')
+sys.stderr = open('stderr.log', 'w')
+
+
 from selenium import webdriver
 import json
 from datetime import datetime
@@ -24,8 +31,10 @@ options.set_preference('network.proxy.socks', tor_proxy_host)
 options.set_preference('network.proxy.socks_port', int(tor_proxy_port))
 options.set_preference('network.proxy.socks_remote_dns', True)
 # Set the WebDriver to run in headless mode
-options.headless = False
+#options.headless = False
 # options.headless = True
+# Enable headless mode
+options.add_argument('-headless')
 
 # Create a Firefox WebDriver instance with the options
 driver = webdriver.Firefox(options=options)
