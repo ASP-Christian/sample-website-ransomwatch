@@ -1,10 +1,7 @@
 name: Run Qilin Blog Script
 
 on:
-  push:
-    branches:
-      - main  # Replace with your main branch name
-
+  workflow_dispatch:
 jobs:
   run_script:
     runs-on: ubuntu-latest  # You can choose a different runner if needed

@@ -31,10 +31,11 @@ jobs:
 
       - name: Download Tor Browser
         run: |
-          wget https://www.torproject.org/path/to/latest/tor-browser-linux64-xx.x.x_en-US.tar.xz
-          tar -xvf tor-browser-linux64-xx.x.x_en-US.tar.xz
+          wget https://www.torproject.org/dist/torbrowser/12.5.3/tor-browser-linux64-12.5.3_ALL.tar.xz
+          tar -xvf tor-browser-linux64-12.5.3_ALL.tar.xz
           cd tor-browser_en-US/
           ./start-tor-browser.desktop &
+        shell: /usr/bin/bash -e {0}
 
       - name: Run Selenium Script
         run: |
