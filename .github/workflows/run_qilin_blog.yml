@@ -1,5 +1,4 @@
-name: Run Qilin Blog
-
+name: Run Qilin Blog Script
 
 on:
   push:
@@ -17,7 +16,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: 3.x  # Specify your Python version
 
       - name: Install Tor
         run: |
@@ -29,10 +28,19 @@ jobs:
         run: sudo service tor start
 
       - name: Install Python Dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r Groups/requirements.txt
+
+      - name: Upload GeckoDriver
+        uses: actions/upload-artifact@v2
+        with:
+          name: geckodriver
+          path: /path/to/downloaded/geckodriver
 
       - name: Run Qilin Blog Script
         run: python Groups/Qilin_Blog.py
+        env:
+          TOR_PROXY_HOST: ${{ secrets.TOR_PROXY_HOST }}
+          TOR_PROXY_PORT: ${{ secrets.TOR_PROXY_PORT }}
 
       - name: Stop Tor Service
         run: sudo service tor stop
