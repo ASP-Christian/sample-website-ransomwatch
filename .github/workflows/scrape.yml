@@ -29,10 +29,10 @@ jobs:
           Xvfb $DISPLAY -ac &
           sleep 5
 
-      - name: Start Tor Browser
+      - name: Download Tor Browser
         run: |
-          wget https://www.torproject.org/dist/torbrowser/10.0.15/tor-browser-linux64-10.0.15_en-US.tar.xz
-          tar -xvf tor-browser-linux64-10.0.15_en-US.tar.xz
+          wget https://www.torproject.org/path/to/latest/tor-browser-linux64-xx.x.x_en-US.tar.xz
+          tar -xvf tor-browser-linux64-xx.x.x_en-US.tar.xz
           cd tor-browser_en-US/
           ./start-tor-browser.desktop &
 
