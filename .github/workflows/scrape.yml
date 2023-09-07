@@ -33,9 +33,11 @@ jobs:
         run: |
           wget https://www.torproject.org/dist/torbrowser/12.5.3/tor-browser-linux64-12.5.3_ALL.tar.xz
           tar -xvf tor-browser-linux64-12.5.3_ALL.tar.xz
-          cd tor-browser_en-US/
+          # Adjust the directory name as needed based on the actual structure
+          cd tor-browser-linux64-12.5.3_ALL/
           ./start-tor-browser.desktop &
         shell: /usr/bin/bash -e {0}
+
 
       - name: Run Selenium Script
         run: |
