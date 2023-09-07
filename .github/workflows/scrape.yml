@@ -1,9 +1,6 @@
 name: Selenium Web Scraping with Tor
-
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   selenium:
