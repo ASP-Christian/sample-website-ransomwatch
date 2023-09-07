@@ -7,5 +7,8 @@ options.add_argument('--log-level=DEBUG')  # Add this line to enable WebDriver l
 options.add_argument('--headless')
 
 driver = webdriver.Firefox(options=options)
+site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
+driver.get(site)
 
+driver.quit()
 print('Armlet Armlet')
