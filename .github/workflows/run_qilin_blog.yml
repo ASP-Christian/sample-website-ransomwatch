@@ -1,62 +1,30 @@
 name: Run Qilin Blog
 
 on:
-  push:
-    branches:
-      - main  # Change to your desired branch
+  workflow_dispatch:
+
+
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.x  # Use the desired Python version
+      - name: Install Firefox
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y firefox
 
-    - name: Install dependencies
-      run: pip install -r requirements.txt
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
 
-    - name: Install Firefox
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y firefox
-        firefox --version  # Display Firefox version
-        which firefox  # Display Firefox binary path
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
 
-    - name: Install Geckodriver
-      run: |
-        GECKODRIVER_VERSION=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest | grep tag_name | cut -d '"' -f 4)
-        wget https://github.com/mozilla/geckodriver/releases/download/$GECKODRIVER_VERSION/geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
-        tar -xzf geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
-        sudo mv geckodriver /usr/local/bin/
-        sudo chmod +x /usr/local/bin/geckodriver
-        rm geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
-        geckodriver --version  # Display GeckoDriver version
-        which geckodriver  # Display GeckoDriver binary path
-
-    - name: Install Tor
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y tor
-
-    - name: Start Tor
-      run: |
-        sudo systemctl start tor
-        sleep 60  # Wait for Tor to start (you can adjust the sleep time)
-
-    - name: Check Tor Status
-      run: |
-        sudo systemctl status tor
-
-    - name: Run Python script with Torify
-      run: torify python Groups/Qilin_Blog.py
-
-
-    - name: Stop Tor
-      run: |
-        sudo systemctl stop tor
+      - name: Run Python script
+        run: python Groups/Qilin_Blog.py
