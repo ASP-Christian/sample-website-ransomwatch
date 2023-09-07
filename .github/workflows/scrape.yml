@@ -32,6 +32,10 @@ jobs:
           tar -xvzf geckodriver-v0.33.0-linux64.tar.gz
           sudo mv geckodriver /usr/local/bin/
 
+      - name: Test Tor Connection
+        run: |
+          curl --socks5 127.0.0.1:9050 -I https://check.torproject.org
+
       - name: Run Selenium Script
         run: |
           python your_selenium_script.py  # Replace with the actual name of your Python script
