@@ -1,0 +1,35 @@
+name: Visit Onion Site
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  visit_onion_site:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install selenium stem
+          # Download and install the TOR browser (replace with the latest version URL)
+          wget https://www.torproject.org/dist/torbrowser/11.0.4/tor-browser-linux64-11.0.4_en-US.tar.xz
+          tar -xvf tor-browser-linux64-11.0.4_en-US.tar.xz
+          mv tor-browser_en-US/ tor-browser/
+        working-directory: ${{ github.workspace }}
+
+      - name: Run Python script
+        run: |
+          python visit_onion_site.py
+        env:
+          TOR_BROWSER_PATH: './tor-browser'
+
