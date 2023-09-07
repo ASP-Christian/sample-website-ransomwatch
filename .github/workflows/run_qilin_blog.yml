@@ -28,7 +28,7 @@ jobs:
         run: sudo service tor start
 
       - name: Install Python Dependencies
-        run: pip install -r Groups/requirements.txt
+        run: pip install -r requirements.txt
 
       - name: Upload GeckoDriver
         uses: actions/upload-artifact@v2
