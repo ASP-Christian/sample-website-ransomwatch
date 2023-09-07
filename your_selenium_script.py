@@ -1,11 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.common.proxy import Proxy, ProxyType
+from selenium.webdriver.firefox.options import Options
 
-tor_proxy = "socks5://127.0.0.1:9050"
-profile = webdriver.FirefoxProfile()
-profile.set_preference("network.proxy.type", 1)
-profile.set_preference("network.proxy.socks", "127.0.0.1")
-profile.set_preference("network.proxy.socks_port", 9050)
-profile.set_preference("network.proxy.socks_version", 5)
+options = Options()
+options.add_argument('--proxy-server=socks5://127.0.0.1:9050')
 
-driver = webdriver.Firefox(firefox_profile=profile)
+driver = webdriver.Firefox(options=options)
+
