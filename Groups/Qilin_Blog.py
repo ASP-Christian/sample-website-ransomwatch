@@ -23,22 +23,18 @@ options.set_preference('network.proxy.type', 1)
 options.set_preference('network.proxy.socks', '127.0.0.1')
 options.set_preference('network.proxy.socks_port', 9150)
 options.set_preference('network.proxy.socks_remote_dns', True)
-
-# Set the path to the Firefox executable (relative to the script's location)
-firefox_path = os.path.join(script_dir, "firefox.exe")
 options.binary_location = firefox_path
-
-# Set the WebDriver to run in headless mode
 options.headless = True
 
-# Create a Firefox WebDriver instance with the options
-driver = webdriver.Firefox(executable_path=geckodriver_path, firefox_options=options)
+# Specify the path to the GeckoDriver executable using the 'executable_path' option
+options.add_argument(f'--webdriver.gecko.driver={geckodriver_path}')
 
+# Create a Firefox WebDriver instance with the options
+driver = webdriver.Firefox(options=options)
 
 # Navigate to the website
 site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
 driver.get(site)
-
 
 company_names = []
 company_description = []
@@ -107,5 +103,6 @@ with open(json_file_path, 'w', encoding='utf-8') as json_file:
 
 print(f"Data saved to {json_file_path}")
 print(new_entries)
+
 # Close the browser
 driver.quit()
