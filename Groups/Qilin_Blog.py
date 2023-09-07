@@ -32,7 +32,8 @@ options.binary_location = firefox_path
 options.headless = True
 
 # Create a Firefox WebDriver instance with the options
-driver = webdriver.Firefox(executable_path=geckodriver_path, options=options)
+driver = webdriver.Firefox(executable_path=geckodriver_path, firefox_options=options)
+
 
 # Navigate to the website
 site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
