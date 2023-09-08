@@ -19,5 +19,7 @@ ENV TOR_PROXY socks5://127.0.0.1:9150
 # Copy your Python scripts and other files into the container
 COPY . /app
 
+COPY Groups/Qilin_Blog.py /app/Qilin_Blog.py
+
 # This is the default entry point; you can override it in GitHub Actions
 CMD ["python3", "Qilin_Blog.py"]
