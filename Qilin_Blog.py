@@ -13,6 +13,9 @@ datas_folder = os.path.join(script_dir, "Overall_data")
 if not os.path.exists(datas_folder):
     os.mkdir(datas_folder)
 
+# Set the path to the geckodriver executable (relative to the script's location)
+geckodriver_path = os.path.join(script_dir, "geckodriver")
+
 # Set up TOR and the TOR browser
 tor_proxy = "socks5://127.0.0.1:9150"
 options = webdriver.FirefoxOptions()
@@ -21,15 +24,20 @@ options.set_preference('network.proxy.socks', '127.0.0.1')
 options.set_preference('network.proxy.socks_port', 9150)
 options.set_preference('network.proxy.socks_remote_dns', True)
 
+# Set the path to the Firefox executable (relative to the script's location)
+firefox_path = os.path.join(script_dir, "firefox.exe")
+options.binary_location = firefox_path
+
 # Set the WebDriver to run in headless mode
-options.headless = False
-# options.headless = True
+options.headless = True
 
 # Create a Firefox WebDriver instance with the options
-driver = webdriver.Firefox(options=options)
+driver = webdriver.Firefox(executable_path=geckodriver_path, options=options)
+
 # Navigate to the website
 site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
 driver.get(site)
+
 
 company_names = []
 company_description = []
@@ -100,4 +108,3 @@ print(f"Data saved to {json_file_path}")
 print(new_entries)
 # Close the browser
 driver.quit()
-
