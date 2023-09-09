@@ -1,25 +1,34 @@
-# Use an Ubuntu-based image as the base image
-FROM ubuntu:latest
+# Use an official Python runtime as a parent image
+FROM python:3
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-pip \
-    firefox \
-    tor
-
-# Install Python dependencies from requirements.txt
-COPY requirements.txt /app/requirements.txt
+# Set the working directory to /app
 WORKDIR /app
-RUN pip3 install -r requirements.txt
 
-# Set environment variables for TOR proxy
-ENV TOR_PROXY socks5://127.0.0.1:9150
+# Install Tor and Firefox
+RUN apt-get update && apt-get install -y tor firefox-esr
 
-# Copy your Python scripts and other files into the container
+# Start Tor as a background service when the container is launched
+CMD ["tor"]
+
+# Download and install Geckodriver
+RUN apt-get install -y wget && \
+    wget https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux64.tar.gz && \
+    tar -xvzf geckodriver-v0.33.0-linux64.tar.gz && \
+    chmod +x geckodriver && \
+    mv geckodriver /usr/local/bin/ && \
+    rm geckodriver-v0.33.0-linux64.tar.gz
+
+# Copy the requirements file into the container
+COPY requirements.txt /app/requirements.txt
+
+# Install any needed packages specified in requirements.txt
+RUN pip install -r requirements.txt
+
+# Copy the current directory contents into the container at /app
 COPY . /app
 
-COPY Groups/Qilin_Blog.py /app/Qilin_Blog.py
+# Copy the script into the container at /app
+COPY Groups/Qilin_Blog.py /app/
 
-# This is the default entry point; you can override it in GitHub Actions
-CMD ["python3", "Qilin_Blog.py"]
+# Run the Python script when the container launches
+CMD ["python", "Qilin_Blog.py"]
