@@ -1,24 +1,15 @@
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
-import stem.process
 import time
 
-# Set up TOR proxy
-tor_process = stem.process.launch_tor_with_config(
-    config={
-        'SocksPort': '9051',  # Use a different SocksPort
-        'ControlPort': '9052',  # Use a different ControlPort
-    },
-)
-
-# Set up Firefox with the TOR proxy
+# Set up Firefox options
 firefox_options = Options()
-firefox_options.add_argument('--proxy-server=socks5://localhost:9051')  # Use the new SocksPort
-firefox_options.add_argument('--headless')  # Run in headless mode (optional)
-firefox_options.add_argument('--ignore-certificate-errors')  # Ignore certificate errors (optional)
+firefox_options.headless = True  # Run in headless mode (optional)
 
-# Configure Firefox to use TOR for DNS resolution
-firefox_options.add_argument('--dns-over-https=https://1.1.1.1/dns-query')  # Use Cloudflare DNS over HTTPS
+# Configure Firefox to use TOR proxy for DNS resolution
+firefox_options.set_preference("network.proxy.type", 1)
+firefox_options.set_preference("network.proxy.socks", "127.0.0.1")
+firefox_options.set_preference("network.proxy.socks_port", 9050)  # Use TOR SocksPort
 
 # Initialize the Firefox WebDriver
 driver = webdriver.Firefox(options=firefox_options)
@@ -34,6 +25,5 @@ time.sleep(5)
 title = driver.title
 print("Title of the Onion site:", title)
 
-# Close the WebDriver and TOR proxy
+# Close the WebDriver
 driver.quit()
-tor_process.terminate()
