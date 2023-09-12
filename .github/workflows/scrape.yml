@@ -1,42 +1,62 @@
-name: Selenium Web Scraping with Tor
+name: Scrape Onion Site Title
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
-  selenium:
+  scrape_title:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Install Tor
-        run: |
-          sudo apt-get update
-          sudo apt-get install tor
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
 
-      - name: Configure Tor
-        run: |
-          echo "SocksPort 9050" | sudo tee -a /etc/tor/torrc
-          echo "ControlPort 9051" | sudo tee -a /etc/tor/torrc
-          echo "CookieAuthentication 1" | sudo tee -a /etc/tor/torrc
-          sudo systemctl restart tor
+    - name: Install dependencies
+      run: |
+        pip install selenium requests stem
 
-      - name: Install Selenium and geckodriver
-        run: |
-          pip install selenium
-          wget https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux64.tar.gz
-          tar -xvzf geckodriver-v0.33.0-linux64.tar.gz
-          sudo mv geckodriver /usr/local/bin/
+    - name: Start TOR
+      run: |
+        tor --RunAsDaemon 1
+        sleep 5  # Wait for TOR to start
 
-      - name: Test Tor Connection
-        run: |
-          curl --socks5 127.0.0.1:9050 -I https://check.torproject.org
+    - name: Run Selenium script
+      run: |
+        python - <<EOF
+        from selenium import webdriver
+        from selenium.webdriver.firefox.options import Options
+        import stem.process
+        import requests
 
-      - name: Run Selenium Script
-        run: |
-          python your_selenium_script.py  # Replace with the actual name of your Python script
+        # Configure Firefox to use TOR as a proxy
+        tor_process = stem.process.launch_tor_with_config(
+            config = {
+                'SocksPort': '9050',
+            },
+        )
 
-      - name: Stop Tor Service
-        run: |
-          sudo systemctl stop tor
+        tor_proxy = "socks5://127.0.0.1:9050"
+        firefox_options = Options()
+        firefox_options.add_argument("--proxy-server={}".format(tor_proxy))
+
+        # Initialize Firefox WebDriver
+        driver = webdriver.Firefox(options=firefox_options)
+
+        # Access the onion site
+        onion_url = "http://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/"
+        driver.get(onion_url)
+
+        # Get the title of the onion site
+        title = driver.title
+        print("Title:", title)
+
+        # Close the browser and TOR
+        driver.quit()
+        tor_process.kill()
+        EOF
