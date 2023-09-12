@@ -14,6 +14,8 @@ tor_process = stem.process.launch_tor_with_config(
 # Set up Firefox with the TOR proxy
 firefox_options = Options()
 firefox_options.add_argument('--proxy-server=socks5://localhost:9051')  # Use the new SocksPort
+firefox_options.add_argument('--headless')  # Run in headless mode (optional)
+firefox_options.add_argument('--ignore-certificate-errors')  # Ignore certificate errors (optional)
 
 # Initialize the Firefox WebDriver
 driver = webdriver.Firefox(options=firefox_options)
