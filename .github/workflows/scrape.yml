@@ -1,11 +1,12 @@
 name: Scrape Onion Site Title
+
 on:
   push:
     branches:
       - main
 
 jobs:
-  scrape_title:
+  scrape_onion_title:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,48 +16,20 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'
+        python-version: 3.x
 
     - name: Install dependencies
       run: |
-        pip install selenium requests stem
+        pip install selenium
+        pip install stem
 
-    - name: Start TOR
+    - name: Start TOR service
       run: |
-        tor --RunAsDaemon 1
-        sleep 5  # Wait for TOR to start
+        sudo apt-get install tor
+        sudo service tor start
+        sleep 5 # Wait for TOR to start
 
-    - name: Run Selenium script
+    - name: Run Python script
       run: |
-        python - <<EOF
-        from selenium import webdriver
-        from selenium.webdriver.firefox.options import Options
-        import stem.process
-        import requests
+        python Groups/sample.py
 
-        # Configure Firefox to use TOR as a proxy
-        tor_process = stem.process.launch_tor_with_config(
-            config = {
-                'SocksPort': '9050',
-            },
-        )
-
-        tor_proxy = "socks5://127.0.0.1:9050"
-        firefox_options = Options()
-        firefox_options.add_argument("--proxy-server={}".format(tor_proxy))
-
-        # Initialize Firefox WebDriver
-        driver = webdriver.Firefox(options=firefox_options)
-
-        # Access the onion site
-        onion_url = "http://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/"
-        driver.get(onion_url)
-
-        # Get the title of the onion site
-        title = driver.title
-        print("Title:", title)
-
-        # Close the browser and TOR
-        driver.quit()
-        tor_process.kill()
-        EOF
