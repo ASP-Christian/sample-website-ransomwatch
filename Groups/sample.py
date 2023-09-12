@@ -6,13 +6,14 @@ import time
 # Set up TOR proxy
 tor_process = stem.process.launch_tor_with_config(
     config={
-        'SocksPort': '9050',
+        'SocksPort': '9051',  # Use a different SocksPort
+        'ControlPort': '9052',  # Use a different ControlPort
     },
 )
 
 # Set up Firefox with the TOR proxy
 firefox_options = Options()
-firefox_options.add_argument('--proxy-server=socks5://localhost:9050')  # Use TOR proxy
+firefox_options.add_argument('--proxy-server=socks5://localhost:9051')  # Use the new SocksPort
 
 # Initialize the Firefox WebDriver
 driver = webdriver.Firefox(options=firefox_options)
