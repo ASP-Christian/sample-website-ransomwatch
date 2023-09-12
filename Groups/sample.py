@@ -17,6 +17,9 @@ firefox_options.add_argument('--proxy-server=socks5://localhost:9051')  # Use th
 firefox_options.add_argument('--headless')  # Run in headless mode (optional)
 firefox_options.add_argument('--ignore-certificate-errors')  # Ignore certificate errors (optional)
 
+# Configure Firefox to use TOR for DNS resolution
+firefox_options.add_argument('--dns-over-https=https://1.1.1.1/dns-query')  # Use Cloudflare DNS over HTTPS
+
 # Initialize the Firefox WebDriver
 driver = webdriver.Firefox(options=firefox_options)
 
