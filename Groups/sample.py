@@ -13,7 +13,7 @@ try:
 
     driver = webdriver.Firefox(options=options)
 
-    site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
+    site = 'https://chrisodrogla.github.io/My-Website-Portfolio/'
     print("Accessing URL:", site)  # Print the URL you are trying to access
     driver.get(site)
 
