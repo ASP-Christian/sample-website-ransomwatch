@@ -1,27 +1,20 @@
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 
-# Set the path to Geckodriver executable
-geckodriver_path = '/path/to/geckodriver-directory/geckodriver'
+# Set up Firefox options for headless mode
+options = Options()
+options.headless = True
 
-# Set Firefox options
-firefox_options = webdriver.FirefoxOptions()
-firefox_options.binary_location = '/path/to/firefox-executable/firefox'
+# Initialize the Firefox WebDriver with the specified options
+driver = webdriver.Firefox(options=options)
 
-# Set Geckodriver path as a system property
-webdriver.Firefox(executable_path=geckodriver_path, firefox_options=firefox_options, service_log_path='geckodriver.log')
-
-# Initialize the Firefox WebDriver
-driver = webdriver.Firefox()
-
-# Navigate to the website
-url = "https://example.com"  # Replace with the URL of the website you want to scrape
+# Replace 'https://example.com' with the URL of the website you want to extract the title from
+url = 'https://example.com'
 driver.get(url)
 
-# Get the title of the website
+# Extract and print the title of the webpage
 title = driver.title
-
-# Print the title
-print("Title of the website:", title)
+print(f'Title of the webpage: {title}')
 
 # Close the browser
 driver.quit()

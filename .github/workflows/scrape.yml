@@ -1,34 +1,26 @@
-name: Selenium Web Scraping
+name: Selenium Extract Title
 
 on:
   push:
     branches:
-      - main  # Replace with the branch you want to trigger the action on
+      - main
 
 jobs:
-  scrape:
+  selenium:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8  # You can change this to your preferred Python version
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
 
-      - name: Install dependencies
-        run: |
-          pip install selenium
-          # You may need to install Firefox as well if it's not available
-          # Example command for Ubuntu:
-          # sudo apt-get install firefox
+    - name: Install dependencies
+      run: pip install selenium
 
-      - name: Set up Geckodriver and Firefox paths
-        run: |
-          export PATH=$PATH:/path/to/geckodriver-directory
-          export FIREFOX_BIN=/path/to/firefox-executable
 
-      - name: Run Python script
-        run: python Groups/sample.py  # Replace with the actual name of your Python script
+    - name: Run Python script
+      run: python Groups/sample.py  # Replace with the actual name of your Python script
