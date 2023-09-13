@@ -21,11 +21,14 @@ jobs:
       - name: Install dependencies
         run: |
           pip install selenium
-          # You may need to install geckodriver if it's not available on the runner
+          # You may need to install Firefox as well if it's not available
           # Example command for Ubuntu:
-          # sudo apt-get install firefox-geckodriver
+          # sudo apt-get install firefox
+
+      - name: Set up Geckodriver and Firefox paths
+        run: |
+          export PATH=$PATH:/path/to/geckodriver-directory
+          export FIREFOX_BIN=/path/to/firefox-executable
 
       - name: Run Python script
-        run: |
-          python Groups/sample.py
-        continue-on-error: true  # Continue execution even if there's an error
+        run: python Groups/sample.py  # Replace with the actual name of your Python script

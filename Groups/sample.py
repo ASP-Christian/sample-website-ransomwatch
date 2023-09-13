@@ -1,7 +1,15 @@
 from selenium import webdriver
 
-# Initialize the Firefox WebDriver
-driver = webdriver.Firefox()
+# Set the paths to Geckodriver and Firefox executable
+geckodriver_path = '/path/to/geckodriver-directory/geckodriver'
+firefox_binary_path = '/path/to/firefox-executable/firefox'
+
+# Set Firefox options
+firefox_options = webdriver.FirefoxOptions()
+firefox_options.binary_location = firefox_binary_path
+
+# Initialize the Firefox WebDriver with explicit paths
+driver = webdriver.Firefox(executable_path=geckodriver_path, options=firefox_options)
 
 # Navigate to the website
 url = "https://example.com"  # Replace with the URL of the website you want to scrape
