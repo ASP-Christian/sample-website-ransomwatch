@@ -46,3 +46,8 @@ jobs:
       run: |
         # Check the exit status of the Tor service
         sudo service tor status
+
+    - name: Run Python script
+      run: |
+        python Groups/sample.py
+      continue-on-error: true  # Continue execution even if there's an error
