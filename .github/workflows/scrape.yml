@@ -1,9 +1,9 @@
-# scrape.yml
-name: Scrape Website Title
+name: Run Python Script with Selenium and Tor
+
 on: [push]
 
 jobs:
-  build:
+  run-script:
     runs-on: ubuntu-latest
 
     steps:
@@ -13,17 +13,30 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'
+        python-version: 3.x  # Replace with your desired Python version
 
     - name: Install dependencies
-      run: pip install -r requirements.txt
+      run: |
+        pip install selenium
+        # Install Tor if not already available (you may need to adjust this based on your setup)
+        sudo apt-get update
+        sudo apt-get install -y tor
 
-    - name: Download geckodriver
+    - name: Start Tor service
+      run: sudo service tor start
+
+    - name: Download and install GeckoDriver
       run: |
         wget https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz
-        tar -xvzf geckodriver-v0.30.0-linux64.tar.gz
+        tar -xvf geckodriver-v0.30.0-linux64.tar.gz
         chmod +x geckodriver
-        mv geckodriver /usr/local/bin
+        sudo mv geckodriver /usr/local/bin/
+
+    - name: Run Python script
+      run: python your_script.py  # Replace with the name of your Python script
+
+    - name: Stop Tor service
+      run: sudo service tor stop
 
     - name: Run Python script
       run: |

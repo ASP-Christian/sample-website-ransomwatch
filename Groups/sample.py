@@ -1,16 +1,28 @@
 from selenium import webdriver
+from selenium.common.exceptions import WebDriverException
 
-# Set up the WebDriver (you may need to adjust the path to geckodriver)
-driver = webdriver.Firefox(executable_path='/usr/local/bin/geckodriver')
+try:
+    tor_proxy = "socks5://127.0.0.1:9150"
+    options = webdriver.FirefoxOptions()
+    options.set_preference('network.proxy.type', 1)
+    options.set_preference('network.proxy.socks', '127.0.0.1')
+    options.set_preference('network.proxy.socks_port', 9150)
+    options.set_preference('network.proxy.socks_remote_dns', True)
 
-# Navigate to the website
-driver.get("https://chrisodrogla.github.io/My-Website-Portfolio/")
+    options.add_argument('-headless')
 
-# Get the title of the website
-title = driver.title
+    driver = webdriver.Firefox(options=options)
 
-# Print the title to the console (you can modify this part as needed)
-print("Website Title:", title)
+    site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
+    driver.get(site)
 
-# Close the WebDriver
-driver.quit()
+    # Get and print the title of the website
+    print("Title:", driver.title)
+
+except WebDriverException as e:
+    print("An error occurred while running the WebDriver:", str(e))
+except Exception as e:
+    print("An unexpected error occurred:", str(e))
+finally:
+    # Close the driver
+    driver.quit()
