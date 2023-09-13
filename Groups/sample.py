@@ -1,15 +1,17 @@
 from selenium import webdriver
-from selenium.common.exceptions import WebDriverException
 
+# Configure your HTTP proxy here
+proxy_host = "your_proxy_host"  # Replace with your proxy host (e.g., "proxy.example.com")
+proxy_port = 8080  # Replace with your proxy port
 
-tor_proxy = "socks5://127.0.0.1:9150"
+# Set up the proxy in Selenium
+proxy = f"{proxy_host}:{proxy_port}"
+
 options = webdriver.FirefoxOptions()
-options.set_preference('network.proxy.type', 1)
-options.set_preference('network.proxy.socks', '127.0.0.1')
-options.set_preference('network.proxy.socks_port', 9150)
-options.set_preference('network.proxy.socks_remote_dns', True)
+options.add_argument(f"--proxy-server={proxy}")
 
-options.add_argument('-headless')
+# You can also add other Firefox options as needed
+# options.add_argument("-headless")
 
 driver = webdriver.Firefox(options=options)
 
@@ -19,3 +21,6 @@ driver.get(site)
 
 # Get and print the title of the website
 print("Title:", driver.title)
+
+# Don't forget to close the driver when done
+driver.quit()
