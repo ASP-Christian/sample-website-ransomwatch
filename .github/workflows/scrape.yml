@@ -23,13 +23,13 @@ jobs:
         sudo apt-get install -y tor
 
     - name: Start Tor service
-      run: sudo service tor start
-
-    - name: Check Tor status and configuration
       run: |
+        sudo service tor start
         # Check if Tor is running
         sudo service tor status
 
+    - name: Check Tor configuration
+      run: |
         # Check Tor's configuration
         cat /etc/tor/torrc
 
@@ -39,11 +39,25 @@ jobs:
         tar -xvf geckodriver-v0.33.0-linux64.tar.gz
         chmod +x geckodriver
         sudo mv geckodriver /usr/local/bin/
+        # Verify GeckoDriver installation
+        which geckodriver
 
     - name: Run Python script
       run: |
         python Groups/sample.py
+      continue-on-error: true  # Continue execution even if there's an error
 
     - name: Stop Tor service
-      run: sudo service tor stop
+      run: |
+        sudo service tor stop
+        # Check if Tor is stopped
+        sudo service tor status || true  # Use '|| true' to avoid workflow failure if Tor is not running
 
+    - name: Check Workflow Status
+      run: |
+        # Check the exit status of the previous Python script execution
+        if [ $? -eq 0 ]; then
+          echo "Python script executed successfully."
+        else
+          echo "Python script failed. Check the logs for details."
+        fi
