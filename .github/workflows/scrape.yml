@@ -26,5 +26,6 @@ jobs:
         sudo mv geckodriver /usr/local/bin/
         rm geckodriver-v0.30.0-linux64.tar.gz
 
-    - name: Run Selenium script
-      run: python selenium_extract_title.py
+
+    - name: Run Python script
+      run: python Groups/sample.py  # Replace with the actual name of your Python script
