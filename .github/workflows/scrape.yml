@@ -32,5 +32,5 @@ jobs:
       run: |
         sudo service tor start
 
-    - name: Run Selenium script with TOR
-      run: python selenium_extract_title.py
+    - name: Run Python script
+      run: python Groups/sample.py  # Replace with the actual name of your Python script
