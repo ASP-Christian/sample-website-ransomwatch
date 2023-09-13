@@ -1,26 +1,17 @@
 from selenium import webdriver
 
-# Configure your HTTP proxy here
-proxy_host = "your_proxy_host"  # Replace with your proxy host (e.g., "proxy.example.com")
-proxy_port = 8080  # Replace with your proxy port
+# Initialize the Firefox WebDriver
+driver = webdriver.Firefox()
 
-# Set up the proxy in Selenium
-proxy = f"{proxy_host}:{proxy_port}"
+# Navigate to the website
+url = "https://example.com"  # Replace with the URL of the website you want to scrape
+driver.get(url)
 
-options = webdriver.FirefoxOptions()
-options.add_argument(f"--proxy-server={proxy}")
+# Get the title of the website
+title = driver.title
 
-# You can also add other Firefox options as needed
-# options.add_argument("-headless")
+# Print the title
+print("Title of the website:", title)
 
-driver = webdriver.Firefox(options=options)
-
-site = 'https://chrisodrogla.github.io/My-Website-Portfolio/'
-print("Accessing URL:", site)  # Print the URL you are trying to access
-driver.get(site)
-
-# Get and print the title of the website
-print("Title:", driver.title)
-
-# Don't forget to close the driver when done
+# Close the browser
 driver.quit()

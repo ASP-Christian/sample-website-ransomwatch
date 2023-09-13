@@ -1,53 +1,35 @@
-name: Run Python Script with Selenium and Tor
+name: Selenium Web Scraping
 
-on: [push]
+on:
+  push:
+    branches:
+      - main  # Replace with the branch you want to trigger the action on
 
 jobs:
-  run-script:
+  scrape:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.x  # Replace with your desired Python version
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8  # You can change this to your preferred Python version
 
-    - name: Install dependencies
-      run: |
-        pip install selenium
-        # Install Tor if not already available (you may need to adjust this based on your setup)
-        sudo apt-get update
-        sudo apt-get install -y tor
+      - name: Install dependencies
+        run: |
+          pip install selenium
+          # You may need to install geckodriver if it's not available on the runner
+          # Example command for Ubuntu:
+          # sudo apt-get install firefox-geckodriver
 
-    - name: Start Tor service
-      run: |
-        sudo service tor start
-        # Check if Tor is running
-        sudo service tor status
+      - name: Run Python script
+        run: python your_script.py  # Replace with the actual name of your Python script
 
-    - name: Check Tor configuration
-      run: |
-        # Check Tor's configuration
-        cat /etc/tor/torrc
 
-    - name: Download and install GeckoDriver
-      run: |
-        wget https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux64.tar.gz
-        tar -xvf geckodriver-v0.33.0-linux64.tar.gz
-        chmod +x geckodriver
-        sudo mv geckodriver /usr/local/bin/
-        # Verify GeckoDriver installation
-        which geckodriver
-
-    - name: Check Tor Status
-      run: |
-        # Check the exit status of the Tor service
-        sudo service tor status
-
-    - name: Run Python script
-      run: |
-        python Groups/sample.py
-      continue-on-error: true  # Continue execution even if there's an error
+      - name: Run Python script
+        run: |
+          python Groups/sample.py
+        continue-on-error: true  # Continue execution even if there's an error
