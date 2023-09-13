@@ -1,6 +1,6 @@
 from selenium import webdriver
 
-# Set up the Firefox WebDriver with geckodriver
+# Set up the Firefox WebDriver with geckodriver (no need to specify path)
 driver = webdriver.Firefox()
 
 # Navigate to the website
