@@ -26,10 +26,6 @@ jobs:
           # sudo apt-get install firefox-geckodriver
 
       - name: Run Python script
-        run: python your_script.py  # Replace with the actual name of your Python script
-
-
-      - name: Run Python script
         run: |
           python Groups/sample.py
         continue-on-error: true  # Continue execution even if there's an error
