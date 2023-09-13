@@ -20,9 +20,10 @@ try:
     print("Title:", driver.title)
 
 except WebDriverException as e:
-    print("An error occurred while running the WebDriver:", str(e))
+    print("WebDriverException:", str(e))
 except Exception as e:
     print("An unexpected error occurred:", str(e))
+
 finally:
     # Close the driver
     driver.quit()

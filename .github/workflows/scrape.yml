@@ -25,16 +25,23 @@ jobs:
     - name: Start Tor service
       run: sudo service tor start
 
+    - name: Check Tor status and configuration
+      run: |
+        # Check if Tor is running
+        sudo service tor status
+
+        # Check Tor's configuration
+        cat /etc/tor/torrc
+
     - name: Download and install GeckoDriver
       run: |
-        wget https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux64.tar.gz
-        tar -xvf geckodriver-v0.33.0-linux64.tar.gz
+        wget https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz
+        tar -xvf geckodriver-v0.30.0-linux64.tar.gz
         chmod +x geckodriver
         sudo mv geckodriver /usr/local/bin/
 
+    - name: Run Python script
+      run: python your_script.py  # Replace with the name of your Python script
+
     - name: Stop Tor service
       run: sudo service tor stop
-
-    - name: Run Python script
-      run: |
-        python Groups/sample.py
