@@ -1,12 +1,9 @@
-name: Scrape Onion Site Title
-
-on:
-  push:
-    branches:
-      - main
+# scrape.yml
+name: Scrape Website Title
+on: [push]
 
 jobs:
-  scrape_onion_title:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,18 +13,10 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.x
+        python-version: '3.x'
 
     - name: Install dependencies
-      run: |
-        pip install selenium
-        pip install stem
-
-    - name: Start TOR service
-      run: |
-        sudo apt-get install tor
-        sudo service tor start
-        sleep 5 # Wait for TOR to start
+      run: pip install -r requirements.txt
 
     - name: Run Python script
       run: |
