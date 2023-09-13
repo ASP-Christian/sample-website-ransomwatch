@@ -13,14 +13,11 @@ def renew_tor_identity():
 options = Options()
 options.headless = True
 
-# Configure the Firefox WebDriver to use TOR as a proxy
-profile = webdriver.FirefoxProfile()
-profile.set_preference('network.proxy.type', 1)
-profile.set_preference('network.proxy.socks', '127.0.0.1')
-profile.set_preference('network.proxy.socks_port', 9050)  # Default TOR SOCKS port
+# Configure the Firefox WebDriver to use TOR as a proxy via the --proxy option
+options.add_argument('--proxy-server=socks5://127.0.0.1:9050')  # Default TOR SOCKS port
 
-# Initialize the Firefox WebDriver with the specified options and TOR proxy
-driver = webdriver.Firefox(firefox_profile=profile, options=options)
+# Initialize the Firefox WebDriver with the specified options
+driver = webdriver.Firefox(options=options)
 
 # Replace 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/' with your .onion website URL
 url = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
