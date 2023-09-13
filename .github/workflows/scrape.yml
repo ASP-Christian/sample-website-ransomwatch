@@ -1,4 +1,4 @@
-name: Selenium Extract Title
+name: Selenium Extract Title on Tor
 
 on:
   push:
@@ -19,8 +19,12 @@ jobs:
         python-version: 3.x
 
     - name: Install dependencies
-      run: pip install selenium
+      run: |
+        pip install selenium stem
+        wget https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz
+        tar -xvzf geckodriver-v0.30.0-linux64.tar.gz
+        sudo mv geckodriver /usr/local/bin/
+        rm geckodriver-v0.30.0-linux64.tar.gz
 
-
-    - name: Run Python script
-      run: python Groups/sample.py  # Replace with the actual name of your Python script
+    - name: Run Selenium script
+      run: python selenium_extract_title.py

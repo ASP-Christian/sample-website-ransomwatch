@@ -1,5 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
+from stem import Signal
+from stem.control import Controller
 
 # Set up Firefox options for headless mode
 options = Options()
@@ -8,8 +10,17 @@ options.headless = True
 # Initialize the Firefox WebDriver with the specified options
 driver = webdriver.Firefox(options=options)
 
-# Replace 'https://example.com' with the URL of the website you want to extract the title from
-url = 'https://chrisodrogla.github.io/My-Website-Portfolio/'
+# Change Tor identity (get a new IP address)
+def change_identity():
+    with Controller.from_port(port=9051) as controller:
+        controller.authenticate(password="your_password_here")  # Replace with your Tor control password
+        controller.signal(Signal.NEWNYM)
+
+# Change Tor identity to get a new IP address
+change_identity()
+
+# Replace 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/' with the actual .onion URL
+url = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
 driver.get(url)
 
 # Extract and print the title of the webpage
