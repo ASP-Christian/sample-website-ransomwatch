@@ -12046,3 +12046,37 @@ console.error: ({})
 DevTools listening on ws://localhost:55809/devtools/browser/7f8cb67b-f608-4c6f-9b4d-4887ef75540f
 1694574521545	Marionette	INFO	Stopped listening on port 55823
 Dynamically enable window occlusion 1
+1694576143149	geckodriver	INFO	Listening on 127.0.0.1:58008
+1694576146184	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--remote-debugging-port" "58009" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\calgo\\AppData\\Local\\Temp\\rust_mozprofileKWf1zM"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1694576146846	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+WebDriver BiDi listening on ws://localhost:58009
+1694576146938	Marionette	INFO	Listening on port 58016
+Read port: 58016
+1694576147204	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+DevTools listening on ws://localhost:58009/devtools/browser/7f3d02d6-d36f-4c24-85db-3e4061b44839
+1694576153131	Marionette	INFO	Stopped listening on port 58016
+JavaScript warning: https://chrisodrogla.github.io/My-Website-Portfolio/assets/js/jquery.min.js, line 2: Script terminated by timeout at:
+removeClass@https://chrisodrogla.github.io/My-Website-Portfolio/assets/js/jquery.min.js:2:68013
+@https://chrisodrogla.github.io/My-Website-Portfolio/assets/js/main.js:116:11
+
+Dynamically enable window occlusion 1
+1694576191252	geckodriver	INFO	Listening on 127.0.0.1:58105
+1694576194290	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--remote-debugging-port" "58106" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\calgo\\AppData\\Local\\Temp\\rust_mozprofile4XLA0P"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1694576194676	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+WebDriver BiDi listening on ws://localhost:58106
+1694576194754	Marionette	INFO	Listening on port 58113
+Read port: 58113
+1694576194968	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+DevTools listening on ws://localhost:58106/devtools/browser/ac12ed43-98af-4d80-a676-7bdd017e7c8b

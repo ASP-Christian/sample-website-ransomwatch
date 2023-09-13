@@ -17,5 +17,5 @@ site = 'https://chrisodrogla.github.io/My-Website-Portfolio/'
 print("Accessing URL:", site)  # Print the URL you are trying to access
 driver.get(site)
 
-
-driver.quit()
+# Get and print the title of the website
+print("Title:", driver.title)
