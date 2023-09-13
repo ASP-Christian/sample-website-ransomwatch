@@ -9,7 +9,7 @@ options.headless = True
 driver = webdriver.Firefox(options=options)
 
 # Replace 'https://example.com' with the URL of the website you want to extract the title from
-url = 'https://example.com'
+url = 'https://chrisodrogla.github.io/My-Website-Portfolio/'
 driver.get(url)
 
 # Extract and print the title of the webpage
