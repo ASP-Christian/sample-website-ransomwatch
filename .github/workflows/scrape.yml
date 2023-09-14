@@ -21,5 +21,12 @@ jobs:
     - name: Install dependencies
       run: pip install selenium
 
+    - name: Install Tor
+      run: |
+        sudo apt-get update
+        sudo apt-get install tor -y
+
+    - name: Start Tor
+      run: sudo service tor start
     - name: Run Python script
       run: python Groups/sample.py  # Replace with the actual name of your Python script
