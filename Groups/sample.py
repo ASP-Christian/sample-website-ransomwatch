@@ -9,7 +9,7 @@ options.headless = True
 driver = webdriver.Firefox(options=options)
 
 # Replace 'https://example.com' with the URL of the website you want to extract the title from
-url = 'https://www.apps.disneyplus.com/ph/shows/family-guy/1260024995/better-off-meg/1260025867/watch?episodeNumber=17&filters=content_type%3Depisode&seasonId=71'
+url = 'https://chrisodrogla.github.io/My-Website-Portfolio/'
 driver.get(url)
 
 # Extract and print the title of the webpage
