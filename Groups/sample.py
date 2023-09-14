@@ -1,34 +1,39 @@
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from stem import Signal
 from stem.control import Controller
+import time
 
-# Function to renew TOR identity
-def renew_tor_identity():
+# Function to change Tor IP address
+def change_tor_ip():
     with Controller.from_port(port=9051) as controller:
-        controller.authenticate()
+        controller.authenticate(password="your_password")  # Replace with your Tor password
         controller.signal(Signal.NEWNYM)
 
-# Set up Firefox options for headless mode
-options = Options()
-options.headless = True
+# Set up Firefox with Tor proxy
+binary = FirefoxBinary()  # No need to specify the binary path
+profile = webdriver.FirefoxProfile()
+profile.set_preference("network.proxy.type", 1)
+profile.set_preference("network.proxy.socks", "127.0.0.1")
+profile.set_preference("network.proxy.socks_port", 9050)
 
-# Configure the Firefox WebDriver to use TOR as a proxy via the --proxy option
-options.add_argument('--proxy-server=socks5://127.0.0.1:9050')  # Default TOR SOCKS port
 
-# Initialize the Firefox WebDriver with the specified options
-driver = webdriver.Firefox(options=options)
+# Create a Firefox WebDriver instance
+driver = webdriver.Firefox(firefox_binary=binary, firefox_profile=profile)
 
-# Replace 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/' with your .onion website URL
-url = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
+# Navigate to the website
+url = "https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/"
 driver.get(url)
 
-# Extract and print the title of the webpage
+# Wait for the page to load (adjust the sleep time as needed)
+time.sleep(10)
+
+# Scrape the title
 title = driver.title
-print(f'Title of the webpage: {title}')
+print("Title:", title)
 
-# Renew TOR identity to change the exit node (optional)
-renew_tor_identity()
-
-# Close the browser
+# Close the Firefox WebDriver
 driver.quit()
+
+# Change Tor IP address to avoid IP blocking
+change_tor_ip()

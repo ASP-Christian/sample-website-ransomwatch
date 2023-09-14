@@ -1,16 +1,13 @@
-name: Selenium Extract Title with TOR
+name: Web Scraping with Tor and Firefox
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
 
 jobs:
-  selenium:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v2
 
     - name: Set up Python
@@ -20,17 +17,17 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install selenium
-        pip install stem
+        python -m pip install --upgrade pip
+        pip install selenium stem requests
 
-    - name: Install TOR
+    - name: Start Tor
       run: |
-        sudo apt-get update
-        sudo apt-get install tor -y
+        sudo apt-get install -y tor
+        tor &
+        sleep 10
 
-    - name: Start TOR service
-      run: |
-        sudo service tor start
+    - name: Set up Firefox
+      uses: Laeti/setup-firefox@v1
 
     - name: Run Python script
       run: python Groups/sample.py  # Replace with the actual name of your Python script

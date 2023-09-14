@@ -11966,8 +11966,9 @@ Read port: 64618
 console.error: ({})
 DevTools listening on ws://localhost:64611/devtools/browser/91c21cab-8e0f-4dca-a4f2-7e1e3a9e40ff
 console.error: ({})
-1694567868011	geckodriver	INFO	Listening on 127.0.0.1:64975
-1694567871055	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--remote-debugging-port" "64976" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\calgo\\AppData\\Local\\Temp\\rust_mozprofilegFpwr4"
+Exiting due to channel error.
+Exiting due to channel error.
+94567871055	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--remote-debugging-port" "64976" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\calgo\\AppData\\Local\\Temp\\rust_mozprofilegFpwr4"
 *** You are running in headless mode.
 console.warn: services.settings: Ignoring preference override of remote settings server
 console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
