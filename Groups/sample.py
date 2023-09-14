@@ -1,5 +1,4 @@
 from selenium import webdriver
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.firefox.options import Options
 
 # Set up Firefox options for headless mode
@@ -8,19 +7,18 @@ options.headless = True
 
 # Set up the Tor SOCKS proxy
 tor_proxy_port = 9150  # Replace with the actual SOCKS proxy port if it's different
-proxy_capabilities = {
-    "proxy": {
-        "proxyType": "manual",
-        "socksProxy": f"127.0.0.1:{tor_proxy_port}",
-    }
-}
 
-# Create a DesiredCapabilities object and set the proxy
-capabilities = DesiredCapabilities.FIREFOX.copy()
-capabilities.update(proxy_capabilities)
+# Define the Firefox profile with the proxy settings
+firefox_profile = webdriver.FirefoxProfile()
+firefox_profile.set_preference("network.proxy.type", 1)
+firefox_profile.set_preference("network.proxy.socks", "127.0.0.1")
+firefox_profile.set_preference("network.proxy.socks_port", tor_proxy_port)
 
-# Initialize the Firefox WebDriver with the specified options and capabilities
-driver = webdriver.Firefox(desired_capabilities=capabilities, options=options)
+# Pass the profile to the Firefox WebDriver options
+options.profile = firefox_profile
+
+# Initialize the Firefox WebDriver with the specified options
+driver = webdriver.Firefox(options=options)
 
 # Replace 'https://example.com' with the URL of the website you want to visit
 url = 'https://example.com'
