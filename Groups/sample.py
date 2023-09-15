@@ -32,3 +32,5 @@ driver = webdriver.Firefox(options=options)
 # Navigate to the website
 site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
 driver.get(site)
+
+print("Success Success Success Success")
