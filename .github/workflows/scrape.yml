@@ -6,38 +6,47 @@ on:
       - main  # Change this to your main branch
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  run_script:
+    runs-on: ubuntu-latest  # You can choose a different runner if needed
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout Code
+        uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.x  # Choose your desired Python version
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x  # Specify your Python version
 
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt  # Replace with your requirements file if needed
+      - name: Install Tor
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tor
+        continue-on-error: true
 
-    - name: Download and extract Tor Browser
-      run: |
-        wget https://www.torproject.org/dist/torbrowser/10.0.0/tor-browser-linux64-10.0.0_en-US.tar.xz
-        tar -xvf tor-browser-linux64-10.0.0_en-US.tar.xz
+      - name: Start Tor Service
+        run: sudo service tor start
 
-    - name: Set up geckodriver
-      run: |
-        wget https://www.torproject.org/dist/torbrowser/<version>/tor-browser-linux64-<version>_en-US.tar.xz
-        tar -xvf tor-browser-linux64-<version>_en-US.tar.xz
+      - name: Install Python Dependencies
+        run: pip install -r requirements.txt
 
-    - name: Run Python script
-      run: python Groups/sample.py  # Replace with the actual name of your Python script
+      - name: Upload GeckoDriver
+        uses: actions/upload-artifact@v2
+        with:
+          name: geckodriver
+          path: geckodriver
 
+      - name: Upload Firefox
+        uses: actions/upload-artifact@v2
+        with:
+          name: Firefox
+          path: firefox.exe
 
-    - name: Cleanup
-      run: |
-        rm -rf tor-browser-linux64-10.0.0_en-US
-        rm geckodriver-v0.30.0-linux64.tar.gz
+      - name: Run Qilin Blog Script
+        run: python Groups/Qilin_Blog.py
+        env:
+          TOR_PROXY_HOST: ${{ secrets.TOR_PROXY_HOST }}
+          TOR_PROXY_PORT: ${{ secrets.TOR_PROXY_PORT }}
 
+      - name: Stop Tor Service
+        run: sudo service tor stop

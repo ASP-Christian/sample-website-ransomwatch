@@ -1,25 +1,34 @@
-# import necessary libraries
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.firefox.options import Options
+import json
+from datetime import datetime
+import os
+import pytz
 
-# Set up Firefox options
-firefox_options = Options()
-firefox_options.headless = True  # Run Firefox in headless mode (no GUI)
+# Set the working directory to the directory where your script is located
+script_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_dir)
 
-# Create a Firefox WebDriver instance
-driver = webdriver.Firefox(
-    executable_path="./geckodriver",  # Path to geckodriver executable
-    options=firefox_options
-)
+# Create a directory to store JSON files if it doesn't exist
+datas_folder = os.path.join(script_dir, "Overall_data")
+if not os.path.exists(datas_folder):
+    os.mkdir(datas_folder)
 
-# Visit a website (e.g., example.com)
-driver.get("https://example.com")
+# Set up TOR and the TOR browser
+tor_proxy = "socks5://127.0.0.1:9150"
+options = webdriver.FirefoxOptions()
+options.set_preference('network.proxy.type', 1)
+options.set_preference('network.proxy.socks', '127.0.0.1')
+options.set_preference('network.proxy.socks_port', 9150)
+options.set_preference('network.proxy.socks_remote_dns', True)
 
-# Perform scraping actions here
-# For example, let's get the page title
-page_title = driver.title
-print("Page Title:", page_title)
+# Set the WebDriver to run in headless mode
+#options.headless = False
+# options.headless = True
+# Set the WebDriver to run in headless mode
+options.add_argument('-headless')
 
-# Cleanup and close the browser
-driver.quit()
+# Create a Firefox WebDriver instance with the options
+driver = webdriver.Firefox(options=options)
+# Navigate to the website
+site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
+driver.get(site)
