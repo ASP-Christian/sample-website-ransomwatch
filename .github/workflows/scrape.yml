@@ -1,57 +1,43 @@
-name: Run Python Code
+name: Run Python script with Firefox and Tor Browser
 
 on:
   push:
     branches:
-      - main  # Change this to the branch you want to trigger the action on
+      - main  # Change this to your main branch
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # You can choose another OS if needed
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v2
 
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8  # Choose your desired Python version
+        python-version: 3.x  # Choose your desired Python version
 
     - name: Install dependencies
-      run: pip install selenium
+      run: |
+        pip install -r requirements.txt  # Replace with your requirements file if needed
+
+    - name: Download and extract Tor Browser
+      run: |
+        wget https://www.torproject.org/dist/torbrowser/10.0.0/tor-browser-linux64-10.0.0_en-US.tar.xz
+        tar -xvf tor-browser-linux64-10.0.0_en-US.tar.xz
+
+    - name: Set up geckodriver
+      run: |
+        wget https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz
+        tar -xvf geckodriver-v0.30.0-linux64.tar.gz
 
     - name: Run Python script
+      run: python Groups/sample.py  # Replace with the actual name of your Python script
+
+
+    - name: Cleanup
       run: |
-        from selenium import webdriver
-        from selenium.webdriver.firefox.options import Options
+        rm -rf tor-browser-linux64-10.0.0_en-US
+        rm geckodriver-v0.30.0-linux64.tar.gz
 
-        # Set up Firefox options for headless mode
-        options = Options()
-        options.headless = True
-
-        # Set up the Tor SOCKS proxy
-        tor_proxy_port = 9150  # Replace with the actual SOCKS proxy port if it's different
-
-        # Define the Firefox profile with the proxy settings
-        firefox_profile = webdriver.FirefoxProfile()
-        firefox_profile.set_preference("network.proxy.type", 1)
-        firefox_profile.set_preference("network.proxy.socks", "127.0.0.1")
-        firefox_profile.set_preference("network.proxy.socks_port", tor_proxy_port)
-
-        # Pass the profile to the Firefox WebDriver options
-        options.profile = firefox_profile
-
-        # Initialize the Firefox WebDriver with the specified options
-        driver = webdriver.Firefox(options=options)
-
-        # Replace 'https://example.com' with the URL of the website you want to visit
-        url = 'https://example.com'
-        driver.get(url)
-
-        # Extract and print the title of the webpage
-        title = driver.title
-        print(f'Title of the webpage: {title}')
-
-        # Close the browser
-        driver.quit()

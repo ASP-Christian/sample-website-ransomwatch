@@ -1,32 +1,25 @@
+# import necessary libraries
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 
-# Set up Firefox options for headless mode
-options = Options()
-options.headless = True
+# Set up Firefox options
+firefox_options = Options()
+firefox_options.headless = True  # Run Firefox in headless mode (no GUI)
 
-# Set up the Tor SOCKS proxy
-tor_proxy_port = 9150  # Replace with the actual SOCKS proxy port if it's different
+# Create a Firefox WebDriver instance
+driver = webdriver.Firefox(
+    executable_path="./geckodriver",  # Path to geckodriver executable
+    options=firefox_options
+)
 
-# Define the Firefox profile with the proxy settings
-firefox_profile = webdriver.FirefoxProfile()
-firefox_profile.set_preference("network.proxy.type", 1)
-firefox_profile.set_preference("network.proxy.socks", "127.0.0.1")
-firefox_profile.set_preference("network.proxy.socks_port", tor_proxy_port)
+# Visit a website (e.g., example.com)
+driver.get("https://example.com")
 
-# Pass the profile to the Firefox WebDriver options
-options.profile = firefox_profile
+# Perform scraping actions here
+# For example, let's get the page title
+page_title = driver.title
+print("Page Title:", page_title)
 
-# Initialize the Firefox WebDriver with the specified options
-driver = webdriver.Firefox(options=options)
-
-# Replace 'https://example.com' with the URL of the website you want to visit
-url = 'https://example.com'
-driver.get(url)
-
-# Extract and print the title of the webpage
-title = driver.title
-print(f'Title of the webpage: {title}')
-
-# Close the browser
+# Cleanup and close the browser
 driver.quit()
