@@ -40,7 +40,7 @@ jobs:
           path: firefox.exe
 
       - name: Run Qilin Blog Script
-        run: python Groups/Qilin_Blog.py
+        run: python Groups/sample.py
         env:
           TOR_PROXY_HOST: ${{ secrets.TOR_PROXY_HOST }}
           TOR_PROXY_PORT: ${{ secrets.TOR_PROXY_PORT }}
