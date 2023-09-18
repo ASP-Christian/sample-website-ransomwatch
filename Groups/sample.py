@@ -3,6 +3,7 @@ import json
 from datetime import datetime
 import os
 import pytz
+import time
 
 # Set the working directory to the directory where your script is located
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -22,13 +23,23 @@ options.set_preference('network.proxy.socks_port', 9150)
 options.set_preference('network.proxy.socks_remote_dns', True)
 
 # Set the WebDriver to run in headless mode
-#options.headless = False
-# options.headless = True
-# Set the WebDriver to run in headless mode
-options.add_argument('-headless')
+options.headless = True  # Change to True or False as needed
 
 # Create a Firefox WebDriver instance with the options
 driver = webdriver.Firefox(options=options)
+
+# Wait for the Tor service to be ready
+while True:
+    try:
+        driver.get("https://check.torproject.org/")
+        if "Congratulations. This browser is configured to use Tor." in driver.page_source:
+            break
+        else:
+            time.sleep(5)  # Wait for a few seconds before checking again
+    except Exception as e:
+        print(f"Error checking Tor status: {e}")
+        time.sleep(5)  # Wait for a few seconds before checking again
+
 # Navigate to the website
 site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
 driver.get(site)
