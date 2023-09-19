@@ -1,7 +1,9 @@
-name: lasty selenium
+name: BS$ TOR SCRAPER
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   scrape:
@@ -11,15 +13,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Set up TOR
+        run: |
+          sudo apt-get install tor
+          echo "ControlPort 9051" | sudo tee -a /etc/tor/torrc
+          echo "HashedControlPassword $(tor --hash-password YOUR_TOR_PASSWORD)" | sudo tee -a /etc/tor/torrc
+          sudo systemctl restart tor
+
       - name: Install Python
         uses: actions/setup-python@v2
         with:
           python-version: 3.x
 
       - name: Install dependencies
-        run: |
-          pip install selenium
+        run: pip install requests[socks] stem beautifulsoup4
 
-      - name: Run the scraper
-        run: |
-          python Groups/laster.py  # Replace with the actual filename of your Python script
+      - name: Run Qilin Blog Script
+        run: python Groups/laster.py

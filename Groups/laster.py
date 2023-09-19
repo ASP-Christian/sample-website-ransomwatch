@@ -1,26 +1,36 @@
-from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
+import os
+import requests
+from stem import Signal
+from stem.control import Controller
+from bs4 import BeautifulSoup
 
-# URL of the .onion website
-url = 'http://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
+# Function to renew the TOR IP address
+def renew_tor_ip():
+    with Controller.from_port(port=9051) as controller:
+        controller.authenticate(password="YOUR_TOR_PASSWORD")
+        controller.signal(Signal.NEWNYM)
 
-# Configure Firefox to use the Tor SOCKS proxy
-firefox_options = Options()
-firefox_options.add_argument('-headless')
-firefox_options.add_argument('--proxy-server=socks5://localhost:9050')  # Use your local Tor proxy
+# TOR proxy settings
+tor_proxy = {
+    'http': 'socks5h://localhost:9050',
+    'https': 'socks5h://localhost:9050',
+}
 
-# Start Firefox
-driver = webdriver.Firefox(options=firefox_options)
+# URL of the onion website
+url = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
 
+# Send a request through the TOR proxy with certificate verification disabled
 try:
-    driver.get(url)
+    renew_tor_ip()  # Renew TOR IP address before making the request
+    response = requests.get(url, proxies=tor_proxy, verify=False)
+    response.raise_for_status()
 
-    # Get the title of the website using Selenium
-    title = driver.title.strip()
+    # Parse the HTML content
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    # Get the title of the website
+    title = soup.title.string.strip()
     print("Website Title:", title)
 
 except Exception as e:
     print("Error:", str(e))
-
-finally:
-    driver.quit()
