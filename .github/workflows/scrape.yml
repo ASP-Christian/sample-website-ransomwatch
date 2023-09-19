@@ -1,32 +1,20 @@
-name: TOR Website Scraping
+name: Run Selenium Script
 
-on:
-  workflow_dispatch:
+on: [push]
 
 jobs:
-  scrape:
+  build-and-run:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Set up TOR
-        run: |
-          sudo apt-get install tor
-          echo "ControlPort 9051" | sudo tee -a /etc/tor/torrc
-          echo "HashedControlPassword $(tor --hash-password YOUR_TOR_PASSWORD)" | sudo tee -a /etc/tor/torrc
-          sudo systemctl restart tor
+    - name: Set up Docker
+      uses: docker/setup-action@v2
 
-      - name: Install Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.x
+    - name: Build Docker image
+      run: docker build -t my-python-app .
 
-      - name: Install dependencies
-        run: pip install requests[socks] stem beautifulsoup4
-
-
-      - name: Run Qilin Blog Script
-        run: python Groups/sample.py
-
+    - name: Run Docker container
+      run: docker run -e TZ=America/New_York my-python-app

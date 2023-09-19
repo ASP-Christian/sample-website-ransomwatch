@@ -1,36 +1,35 @@
+from selenium import webdriver
+import json
+from datetime import datetime
 import os
-import requests
-from stem import Signal
-from stem.control import Controller
-from bs4 import BeautifulSoup
+import pytz
 
-# Function to renew the TOR IP address
-def renew_tor_ip():
-    with Controller.from_port(port=9051) as controller:
-        controller.authenticate(password="YOUR_TOR_PASSWORD")
-        controller.signal(Signal.NEWNYM)
+# Set the working directory to the directory where your script is located
+script_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_dir)
 
-# TOR proxy settings
-tor_proxy = {
-    'http': 'socks5h://localhost:9050',
-    'https': 'socks5h://localhost:9050',
-}
+# Create a directory to store JSON files if it doesn't exist
+datas_folder = os.path.join(script_dir, "Overall_data")
+if not os.path.exists(datas_folder):
+    os.mkdir(datas_folder)
 
-# URL of the onion website
-url = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
+# Set up TOR and the TOR browser
+tor_proxy = "socks5://127.0.0.1:9150"
+options = webdriver.FirefoxOptions()
+options.set_preference('network.proxy.type', 1)
+options.set_preference('network.proxy.socks', '127.0.0.1')
+options.set_preference('network.proxy.socks_port', 9150)
+options.set_preference('network.proxy.socks_remote_dns', True)
 
-# Send a request through the TOR proxy with certificate verification disabled
-try:
-    renew_tor_ip()  # Renew TOR IP address before making the request
-    response = requests.get(url, proxies=tor_proxy, verify=False)
-    response.raise_for_status()
+# Set the WebDriver to run in headless mode
+#options.headless = False
+# options.headless = True
+# Set the WebDriver to run in headless mode
+options.add_argument('-headless')
 
-    # Parse the HTML content
-    soup = BeautifulSoup(response.text, 'html.parser')
-
-    # Get the title of the website
-    title = soup.title.string.strip()
-    print("Website Title:", title)
-
-except Exception as e:
-    print("Error:", str(e))
+# Create a Firefox WebDriver instance with the options
+driver = webdriver.Firefox(options=options)
+# Navigate to the website
+site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
+driver.get(site)
+print("success successssssssssssssssssssssssssssssssssssss")
