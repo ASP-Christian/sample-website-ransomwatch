@@ -1,7 +1,6 @@
 name: lasty selenium
 
 
-
 on:
   push:
     branches:
