@@ -1,9 +1,7 @@
 name: TOR Website Scraping
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   scrape:

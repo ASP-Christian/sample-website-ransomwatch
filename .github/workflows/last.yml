@@ -13,13 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up TOR
-        run: |
-          sudo apt-get install tor
-          echo "ControlPort 9051" | sudo tee -a /etc/tor/torrc
-          echo "HashedControlPassword $(tor --hash-password YOUR_TOR_PASSWORD)" | sudo tee -a /etc/tor/torrc
-          sudo systemctl restart tor
-
       - name: Install Python
         uses: actions/setup-python@v2
         with:
@@ -27,8 +20,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install stem selenium
+          pip install selenium
 
       - name: Run the scraper
         run: |
-          python Groups/laster.py
+          python Groups/laster.py  # Replace with the actual filename of your Python script
