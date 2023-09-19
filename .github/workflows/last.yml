@@ -1,0 +1,34 @@
+name: TOR Website Scraping
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up TOR
+        run: |
+          sudo apt-get install tor
+          echo "ControlPort 9051" | sudo tee -a /etc/tor/torrc
+          echo "HashedControlPassword $(tor --hash-password YOUR_TOR_PASSWORD)" | sudo tee -a /etc/tor/torrc
+          sudo systemctl restart tor
+
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: |
+          pip install stem selenium
+
+      - name: Run the scraper
+        run: |
+          python Groups/laster.py
