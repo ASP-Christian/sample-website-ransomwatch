@@ -1,47 +1,36 @@
-from selenium import webdriver
-import json
-from datetime import datetime
 import os
-import pytz
-import time
+import requests
+from stem import Signal
+from stem.control import Controller
+from bs4 import BeautifulSoup
 
-# Set the working directory to the directory where your script is located
-script_dir = os.path.dirname(os.path.abspath(__file__))
-os.chdir(script_dir)
+# Function to renew the TOR IP address
+def renew_tor_ip():
+    with Controller.from_port(port=9051) as controller:
+        controller.authenticate(password="YOUR_TOR_PASSWORD")
+        controller.signal(Signal.NEWNYM)
 
-# Create a directory to store JSON files if it doesn't exist
-datas_folder = os.path.join(script_dir, "Overall_data")
-if not os.path.exists(datas_folder):
-    os.mkdir(datas_folder)
+# TOR proxy settings
+tor_proxy = {
+    'http': 'socks5h://localhost:9050',
+    'https': 'socks5h://localhost:9050',
+}
 
-# Set up TOR and the TOR browser
-tor_proxy = "socks5://127.0.0.1:9150"
-options = webdriver.FirefoxOptions()
-options.set_preference('network.proxy.type', 1)
-options.set_preference('network.proxy.socks', '127.0.0.1')
-options.set_preference('network.proxy.socks_port', 9150)
-options.set_preference('network.proxy.socks_remote_dns', True)
+# URL of the onion website
+url = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
 
-# Set the WebDriver to run in headless mode
-options.headless = True  # Change to True or False as needed
+# Send a request through the TOR proxy
+try:
+    renew_tor_ip()  # Renew TOR IP address before making the request
+    response = requests.get(url, proxies=tor_proxy)
+    response.raise_for_status()
 
-# Create a Firefox WebDriver instance with the options
-driver = webdriver.Firefox(options=options)
+    # Parse the HTML content
+    soup = BeautifulSoup(response.text, 'html.parser')
 
-# Wait for the Tor service to be ready
-while True:
-    try:
-        driver.get("https://check.torproject.org/")
-        if "Congratulations. This browser is configured to use Tor." in driver.page_source:
-            break
-        else:
-            time.sleep(5)  # Wait for a few seconds before checking again
-    except Exception as e:
-        print(f"Error checking Tor status: {e}")
-        time.sleep(5)  # Wait for a few seconds before checking again
+    # Get the title of the website
+    title = soup.title.string.strip()
+    print("Website Title:", title)
 
-# Navigate to the website
-site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
-driver.get(site)
-
-print("Success Success Success Success")
+except Exception as e:
+    print("Error:", str(e))
