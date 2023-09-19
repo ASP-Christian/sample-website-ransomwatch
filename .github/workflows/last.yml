@@ -1,4 +1,4 @@
-name: TOR Website Scraping
+name: lasty selenium
 
 on:
   push:
