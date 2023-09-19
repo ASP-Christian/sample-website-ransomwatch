@@ -19,10 +19,10 @@ tor_proxy = {
 # URL of the onion website
 url = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
 
-# Send a request through the TOR proxy
+# Send a request through the TOR proxy with certificate verification disabled
 try:
     renew_tor_ip()  # Renew TOR IP address before making the request
-    response = requests.get(url, proxies=tor_proxy)
+    response = requests.get(url, proxies=tor_proxy, verify=False)
     response.raise_for_status()
 
     # Parse the HTML content
