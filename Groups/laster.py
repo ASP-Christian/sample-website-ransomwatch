@@ -1,8 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 
-# URL of the .onion website via the onion.to gateway
-url = 'http://onion.to/index.php?title=3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion'
+# URL of the .onion website via the proxy.tor2web.org gateway
+url = 'https://proxy.tor2web.org/http://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
 
 # Configure Firefox to use the network directly (no Tor proxy)
 firefox_options = Options()
