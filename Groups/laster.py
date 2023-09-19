@@ -2,6 +2,7 @@ from stem import Signal
 from stem.control import Controller
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
+import time
 
 # Function to renew the TOR IP address
 def renew_tor_ip():
@@ -27,16 +28,26 @@ firefox_options.add_argument('--proxy-server=socks5://localhost:9050')
 # Start Firefox with TOR settings
 driver = webdriver.Firefox(options=firefox_options)
 
-try:
-    renew_tor_ip()  # Renew TOR IP address before loading the website
-    driver.get(url)
+max_retries = 3  # Adjust the number of retries as needed
+retry_delay = 5  # Adjust the delay between retries as needed
 
-    # Get the title of the website using Selenium
-    title = driver.title.strip()
-    print("Website Title:", title)
+for retry in range(max_retries):
+    try:
+        renew_tor_ip()  # Renew TOR IP address before loading the website
+        driver.get(url)
 
-except Exception as e:
-    print("Error:", str(e))
+        # Get the title of the website using Selenium
+        title = driver.title.strip()
+        print("Website Title:", title)
 
-finally:
-    driver.quit()
+        break  # Successful, exit the loop
+
+    except Exception as e:
+        print("Error:", str(e))
+        if retry < max_retries - 1:
+            print(f"Retrying in {retry_delay} seconds...")
+            time.sleep(retry_delay)
+        else:
+            print("Max retries reached, giving up.")
+
+driver.quit()
