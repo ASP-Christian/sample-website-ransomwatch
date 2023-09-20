@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.proxy import Proxy, ProxyType
 import time
+tor_proxy = "socks5://127.0.0.1:9150"
 
 # Set up the TOR proxy
 proxy = Proxy()
