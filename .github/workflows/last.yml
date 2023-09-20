@@ -1,10 +1,7 @@
 name: BS$ TOR SCRAPER
 
 on:
-  push:
-    branches:
-      - main
-
+  workflow_dispatch:
 jobs:
   scrape:
     runs-on: ubuntu-latest
