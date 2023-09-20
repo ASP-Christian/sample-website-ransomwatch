@@ -1,35 +1,28 @@
 from selenium import webdriver
-import json
-from datetime import datetime
-import os
-import pytz
+from selenium.webdriver.firefox.firefox_profile import FirefoxProfile
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+from selenium.webdriver.common.keys import Keys
 
-# Set the working directory to the directory where your script is located
-script_dir = os.path.dirname(os.path.abspath(__file__))
-os.chdir(script_dir)
+# Configure Firefox to use Tor as a proxy
+tor_binary = './tor_browser/Tor Browser/firefox'
+tor_profile = './tor_browser/tor_profile'
 
-# Create a directory to store JSON files if it doesn't exist
-datas_folder = os.path.join(script_dir, "Overall_data")
-if not os.path.exists(datas_folder):
-    os.mkdir(datas_folder)
+binary = FirefoxBinary(tor_binary)
+profile = FirefoxProfile(tor_profile)
 
-# Set up TOR and the TOR browser
-tor_proxy = "socks5://127.0.0.1:9150"
-options = webdriver.FirefoxOptions()
-options.set_preference('network.proxy.type', 1)
-options.set_preference('network.proxy.socks', '127.0.0.1')
-options.set_preference('network.proxy.socks_port', 9150)
-options.set_preference('network.proxy.socks_remote_dns', True)
+# Rest of the script remains the same
 
-# Set the WebDriver to run in headless mode
-#options.headless = False
-# options.headless = True
-# Set the WebDriver to run in headless mode
-options.add_argument('-headless')
 
-# Create a Firefox WebDriver instance with the options
-driver = webdriver.Firefox(options=options)
-# Navigate to the website
-site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
-driver.get(site)
-print("success successssssssssssssssssssssssssssssssssssss")
+# Set up the Firefox WebDriver with the Tor settings
+driver = webdriver.Firefox(firefox_binary=binary, firefox_profile=profile)
+
+# Navigate to the Tor hidden service URL
+url = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
+driver.get(url)
+
+# Scrape the website title
+title = driver.title
+print(f'Title of the website: {title}')
+
+# Close the browser
+driver.quit()
