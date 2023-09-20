@@ -4,7 +4,7 @@ from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.common.keys import Keys
 
 # Configure Firefox to use Tor as a proxy
-tor_binary = './tor_browser/Tor Browser/firefox'
+tor_binary = './tor_browser/Tor Browser/firefox.exe'
 tor_profile = './tor_browser/tor_profile'
 
 binary = FirefoxBinary(tor_binary)
