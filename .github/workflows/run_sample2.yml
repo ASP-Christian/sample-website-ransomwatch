@@ -25,6 +25,22 @@ jobs:
       - name: Start Tor Service
         run: sudo service tor start
 
+      - name: Wait for Tor Proxy to Start
+        run: |
+          max_attempts=30
+          delay=5
+          for i in $(seq 1 $max_attempts); do
+            if nc -z 127.0.0.1 9150; then
+              echo "Tor proxy is running."
+              break
+            fi
+            if [ $i -eq $max_attempts ]; then
+              echo "Failed to start Tor proxy after waiting."
+              exit 1
+            fi
+            sleep $delay
+          done
+
       - name: Set up Python Environment
         run: |
           python -m pip install --upgrade pip
@@ -32,6 +48,9 @@ jobs:
         env:
           TOR_PROXY_HOST: "127.0.0.1"
           TOR_PROXY_PORT: "9150"
+
+      # ... rest of your steps remain the same
+
 
       - name: Download and Install geckodriver
         run: |
