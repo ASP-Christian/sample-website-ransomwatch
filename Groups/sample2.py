@@ -1,14 +1,14 @@
 from selenium import webdriver
 from selenium.webdriver.common.proxy import Proxy, ProxyType
 import time
-tor_proxy = "socks5://127.0.0.1:9150"
 
 # Set up the TOR proxy
+tor_proxy = "127.0.0.1:9150"  # Use your Tor proxy address without the scheme
+
 proxy = Proxy()
 proxy.proxy_type = ProxyType.MANUAL
-proxy.http_proxy = f"{tor_proxy}"  # Use your tor_proxy variable here
-proxy.socks_proxy = f"{tor_proxy}"  # Use your tor_proxy variable here
-proxy.ssl_proxy = f"{tor_proxy}"  # Use your tor_proxy variable here
+proxy.http_proxy = tor_proxy
+proxy.ssl_proxy = tor_proxy
 
 capabilities = webdriver.DesiredCapabilities.FIREFOX
 proxy.add_to_capabilities(capabilities)
