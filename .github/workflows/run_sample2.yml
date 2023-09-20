@@ -33,11 +33,6 @@ jobs:
           TOR_PROXY_HOST: "127.0.0.1"
           TOR_PROXY_PORT: "9150"
 
-      - name: Download Firefox
-        uses: actions/download-artifact@v2
-        with:
-          name: Firefox
-
       - name: Download and Install geckodriver
         run: |
           wget https://github.com/mozilla/geckodriver/releases/latest/download/geckodriver-linux64.tar.gz
