@@ -1,24 +1,24 @@
 from selenium import webdriver
+from selenium.webdriver.common.proxy import Proxy, ProxyType
 import time
 
-# set up TOR and the TOR browser
-tor_proxy = "socks5://127.0.0.1:9150"
-options = webdriver.FirefoxOptions()
-options.set_preference('network.proxy.type', 1)
-options.set_preference('network.proxy.socks', '127.0.0.1')
-options.set_preference('network.proxy.socks_port', 9150)
-options.set_preference('network.proxy.socks_remote_dns', True)
+# Set up the TOR proxy
+proxy = Proxy()
+proxy.proxy_type = ProxyType.MANUAL
+proxy.http_proxy = f"{tor_proxy}"  # Use your tor_proxy variable here
+proxy.socks_proxy = f"{tor_proxy}"  # Use your tor_proxy variable here
+proxy.ssl_proxy = f"{tor_proxy}"  # Use your tor_proxy variable here
 
-# Set the WebDriver to run in headless mode
-options.headless = True
+capabilities = webdriver.DesiredCapabilities.FIREFOX
+proxy.add_to_capabilities(capabilities)
 
 # Create a Firefox WebDriver instance with the options
-driver = webdriver.Firefox(options=options)
+driver = webdriver.Firefox(capabilities=capabilities)
 
-# navigate to the website
+# Navigate to the website
 site = 'http://kbsqoivihgdmwczmxkbovk7ss2dcynitwhhfu5yw725dboqo5kthfaad.onion/'
 driver.get(site)
-print("Success!, Success!, Success! , Success!, Success!, Success!, Success!, Success!, Success!, Success!, Success!, Success!")
+print("Success!")
 
 # You can perform additional actions here
 
