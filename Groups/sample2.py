@@ -13,8 +13,12 @@ proxy.ssl_proxy = tor_proxy
 capabilities = webdriver.DesiredCapabilities.FIREFOX
 proxy.add_to_capabilities(capabilities)
 
+# Set up headless mode for Firefox
+options = webdriver.FirefoxOptions()
+options.headless = True
+
 # Create a Firefox WebDriver instance with the options
-driver = webdriver.Firefox(capabilities=capabilities)
+driver = webdriver.Firefox(capabilities=capabilities, options=options)
 
 # Navigate to the website
 site = 'http://kbsqoivihgdmwczmxkbovk7ss2dcynitwhhfu5yw725dboqo5kthfaad.onion/'
