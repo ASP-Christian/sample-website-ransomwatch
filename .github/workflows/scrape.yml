@@ -1,31 +1,24 @@
 name: Run Selenium Script HEEEEEEEEEEEEEEEEEERE
 
-on: [push]
-
-
+on:
+  push:
+    branches:
+      - main
 jobs:
-  build-and-run:
+  scrape:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
 
-    - name: Set up QEMU for cross-platform builds
-      uses: docker/setup-qemu-action@v1
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
+      - name: Install dependencies
+        run: |
+          pip install selenium
 
-    - name: Build Docker image
-      uses: docker/build-push-action@v2
-      with:
-        context: .
-        file: ./Dockerfile
-        push: false  # Set this to true if you want to push the image to a Docker registry
-
-    - name: Run Python script inside Docker container
-      run: |
-        docker run -e TZ=America/New_York my-python-app python sample.py
-      env:
-        TZ: America/New_York
+      - name: Run Tor Scraper
+        run: python Groups/sample.py
