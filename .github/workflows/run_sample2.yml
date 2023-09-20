@@ -33,15 +33,18 @@ jobs:
           TOR_PROXY_HOST: "127.0.0.1"
           TOR_PROXY_PORT: "9150"
 
-      - name: Download GeckoDriver
-        uses: actions/download-artifact@v2
-        with:
-          name: geckodriver
-
       - name: Download Firefox
         uses: actions/download-artifact@v2
         with:
           name: Firefox
+
+      - name: Download and Install geckodriver
+        run: |
+          wget https://github.com/mozilla/geckodriver/releases/latest/download/geckodriver-linux64.tar.gz
+          tar -xzf geckodriver-linux64.tar.gz
+          chmod +x geckodriver
+          sudo mv geckodriver /usr/local/bin/
+          rm geckodriver-linux64.tar.gz
 
       - name: Run Qilin Blog Script
         run: python Groups/sample2.py
