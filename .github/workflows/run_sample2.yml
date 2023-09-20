@@ -2,17 +2,48 @@ name: Sample2
 
 on:
   workflow_dispatch:
-
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  run_script:
+    runs-on: ubuntu-latest  # You can choose a different runner if needed
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout Code
+        uses: actions/checkout@v2
 
-    - name: Build Docker image
-      run: docker build -t docker-scrape-runner .
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x  # Specify your Python version
 
-    - name: Run Docker container
-      run: docker run --rm docker-scrape-runner
+      - name: Install Tor
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tor
+        continue-on-error: true
+
+      - name: Start Tor Service
+        run: sudo service tor start
+
+      - name: Install Python Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Upload GeckoDriver
+        uses: actions/upload-artifact@v2
+        with:
+          name: geckodriver
+          path: geckodriver
+
+      - name: Upload Firefox
+        uses: actions/upload-artifact@v2
+        with:
+          name: Firefox
+          path: firefox.exe
+
+      - name: Run Qilin Blog Script
+        run: python sample2/Qilin_Blog.py
+        env:
+          TOR_PROXY_HOST: ${{ secrets.TOR_PROXY_HOST }}
+          TOR_PROXY_PORT: ${{ secrets.TOR_PROXY_PORT }}
+
+      - name: Stop Tor Service
+        run: sudo service tor stop
