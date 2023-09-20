@@ -36,6 +36,7 @@ jobs:
             fi
             if [ $i -eq $max_attempts ]; then
               echo "Failed to start Tor proxy after waiting."
+              sudo service tor stop  # Stop Tor if it didn't start correctly
               exit 1
             fi
             sleep $delay
@@ -48,9 +49,6 @@ jobs:
         env:
           TOR_PROXY_HOST: "127.0.0.1"
           TOR_PROXY_PORT: "9150"
-
-      # ... rest of your steps remain the same
-
 
       - name: Download and Install geckodriver
         run: |
