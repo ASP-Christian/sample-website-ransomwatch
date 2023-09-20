@@ -33,6 +33,16 @@ jobs:
           TOR_PROXY_HOST: "127.0.0.1"
           TOR_PROXY_PORT: "9150"
 
+      - name: Download GeckoDriver
+        uses: actions/download-artifact@v2
+        with:
+          name: geckodriver
+
+      - name: Download Firefox
+        uses: actions/download-artifact@v2
+        with:
+          name: Firefox
+
       - name: Run Qilin Blog Script
         run: python Groups/sample2.py
 
