@@ -3,6 +3,7 @@ name: Update Recent Data
 on:
   workflow_dispatch:
 
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,10 +27,7 @@ jobs:
       run: |
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
-        git config credential.helper store
         git add Groups/Overall_data/recent_data.json
         git commit -m "Update recent_data.json"
-        git push https://github.com/ASP-Christian/sample-website-ransomwatch.git HEAD:main
+        git push
 
-env:
-  GH_PAT: ${{ secrets.GH_PAT }}
