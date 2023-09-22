@@ -6,6 +6,8 @@
 <body>
     <header>
         <h1>Data Table</h1>
+        <!-- Search bar for Company -->
+        <input type="text" id="companySearch" placeholder="Search Company..." oninput="searchCompany()">
     </header>
     <main>
         <table>
@@ -40,6 +42,23 @@
             .catch(error => {
                 console.error('Error fetching JSON data:', error);
             });
+
+        // Function to filter companies based on the search input
+        function searchCompany() {
+            const searchTerm = document.getElementById('companySearch').value.toLowerCase();
+            const companyLinks = document.querySelectorAll('tbody tr td:nth-child(2) a');
+
+            companyLinks.forEach(link => {
+                const companyName = link.textContent.toLowerCase();
+                const row = link.parentElement.parentElement;
+
+                if (companyName.includes(searchTerm)) {
+                    row.style.display = 'table-row';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
     </script>
 </body>
 </html>
