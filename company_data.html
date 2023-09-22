@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Data</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Company Data</h1>
+    </header>
+    <main>
+        <h2>Data for <span id="companyName"></span></h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Attribute</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody id="companyDataRows">
+                <!-- JavaScript will populate this table body -->
+            </tbody>
+        </table>
+    </main>
+
+    <script>
+        // Function to extract query parameters
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        const companyName = getQueryParam('company');
+        const companyNameElement = document.getElementById('companyName');
+        companyNameElement.textContent = companyName;
+
+        fetch('Groups/Overall_data/data_post.json')
+            .then(response => response.json())
+            .then(data => {
+                const companyDataRows = document.getElementById('companyDataRows');
+                const filteredData = data.filter(entry => entry.company === companyName);
+                filteredData.forEach(entry => {
+                    for (const key in entry) {
+                        if (entry.hasOwnProperty(key)) {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${key}</td>
+                                <td>${entry[key]}</td>
+                            `;
+                            companyDataRows.appendChild(row);
+                        }
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching JSON data:', error);
+            });
+    </script>
+</body>
+</html>
