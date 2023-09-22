@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Table</title>
+</head>
+<body>
+    <header>
+        <h1>Data Table</h1>
+    </header>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Data Date</th>
+                    <th>Ransomware Name</th>
+                </tr>
+            </thead>
+            <tbody id="data-table">
+                <!-- Data will be dynamically added here -->
+            </tbody>
+        </table>
+    </main>
+
+    <script>
+        // JavaScript code to fetch and display JSON data in the table
+        fetch('Groups/Overall_data/data_post.json')
+            .then(response => response.json())
+            .then(data => {
+                const dataTable = document.getElementById('data-table');
+                data.forEach(entry => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${entry.company}</td>
+                        <td>${entry.data_date}</td>
+                        <td>${entry.ransomware_name}</td>
+                    `;
+                    dataTable.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching JSON data:', error);
+            });
+    </script>
+</body>
+</html>

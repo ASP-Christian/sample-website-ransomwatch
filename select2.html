@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grouped Data Tables</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        #searchBar {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Grouped Data Tables</h1>
+        <!-- Search bar -->
+        <input type="text" id="searchBar" placeholder="Search Ransomware Group name..." oninput="searchRansomwareName()">
+    </header>
+    <main>
+        <!-- JavaScript will populate these tables -->
+    </main>
+
+    <script>
+        let data = []; // Store JSON data
+
+        fetch('Groups/Overall_data/data_post.json')
+            .then(response => response.json())
+            .then(jsonData => {
+                data = jsonData; // Store JSON data
+                populateTables(data); // Populate tables initially
+            })
+            .catch(error => {
+                console.error('Error fetching JSON data:', error);
+            });
+
+        function populateTables(data) {
+            const groupedData = {};
+
+            data.forEach(entry => {
+                const ransomwareName = entry.ransomware_name;
+                if (!groupedData[ransomwareName]) {
+                    groupedData[ransomwareName] = [];
+                }
+                groupedData[ransomwareName].push({
+                    company: entry.company,
+                    data_date: entry.data_date
+                });
+            });
+
+            const mainElement = document.querySelector('main');
+            mainElement.innerHTML = ''; // Clear the main content
+
+            for (const ransomwareName in groupedData) {
+                if (groupedData.hasOwnProperty(ransomwareName)) {
+                    const filteredTable = document.createElement('table');
+                    const tbody = document.createElement('tbody');
+
+                    // Add table title
+                    const caption = document.createElement('caption');
+                    caption.textContent = ransomwareName;
+                    filteredTable.appendChild(caption);
+
+                    // Populate the table body
+                    groupedData[ransomwareName].forEach(entry => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${entry.company}</td>
+                            <td>${entry.data_date}</td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+
+                    filteredTable.appendChild(tbody);
+                    mainElement.appendChild(filteredTable);
+                }
+            }
+        }
+
+        // Function to Search Ransomware Group_name
+        function searchRansomwareName() {
+            const searchTerm = document.getElementById('searchBar').value.toLowerCase();
+            const filteredData = data.filter(entry => entry.ransomware_name.toLowerCase().includes(searchTerm));
+            populateTables(filteredData); // Update the tables with filtered data
+        }
+    </script>
+</body>
+</html>

@@ -63,7 +63,7 @@ us_eastern_timezone = pytz.timezone('US/Eastern')
 current_date_time = datetime.now(us_eastern_timezone)
 
 # Format the current date and time as a string in ISO format
-current_date = current_date_time.strftime('%Y-%m-%d %H:%M:%S %Z%z')
+current_date = current_date_time.strftime('%Y-%m-%d ')
 
 # Load existing data from the JSON file if it exists
 json_file_path = os.path.join(datas_folder, 'data_post.json')
