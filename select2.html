@@ -37,20 +37,30 @@
     </main>
 
     <script>
+        // Function to extract query parameters
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
         let data = []; // Store JSON data
 
-        fetch('Groups/Overall_data/data_post.json')
+        fetch('Groups/Overall_data/recent_data.json')
             .then(response => response.json())
             .then(jsonData => {
                 data = jsonData; // Store JSON data
-                populateTables(data); // Populate tables initially
+                populateTables(); // Populate tables based on query parameter or all data
             })
             .catch(error => {
                 console.error('Error fetching JSON data:', error);
             });
 
-        function populateTables(data) {
+        function populateTables() {
             const groupedData = {};
+
+            // Get the Ransomware Name from the query parameter
+            const ransomwareParam = getQueryParam('ransomware');
+            const searchTerm = ransomwareParam ? decodeURIComponent(ransomwareParam).toLowerCase() : '';
 
             data.forEach(entry => {
                 const ransomwareName = entry.ransomware_name;
@@ -67,7 +77,7 @@
             mainElement.innerHTML = ''; // Clear the main content
 
             for (const ransomwareName in groupedData) {
-                if (groupedData.hasOwnProperty(ransomwareName)) {
+                if (groupedData.hasOwnProperty(ransomwareName) && (searchTerm === '' || ransomwareName.toLowerCase().includes(searchTerm))) {
                     const filteredTable = document.createElement('table');
                     const tbody = document.createElement('tbody');
 
@@ -80,7 +90,7 @@
                     groupedData[ransomwareName].forEach(entry => {
                         const row = document.createElement('tr');
                         row.innerHTML = `
-                            <td>${entry.company}</td>
+                            <td><a href="company_data.html?company=${encodeURIComponent(entry.company)}" target="_blank">${entry.company}</a></td>
                             <td>${entry.data_date}</td>
                         `;
                         tbody.appendChild(row);
@@ -94,9 +104,7 @@
 
         // Function to Search Ransomware Group_name
         function searchRansomwareName() {
-            const searchTerm = document.getElementById('searchBar').value.toLowerCase();
-            const filteredData = data.filter(entry => entry.ransomware_name.toLowerCase().includes(searchTerm));
-            populateTables(filteredData); // Update the tables with filtered data
+            populateTables(); // Update the tables based on the current search bar value
         }
     </script>
 </body>
