@@ -24,13 +24,20 @@
         #searchBar {
             margin-bottom: 20px;
         }
+
+        #searchDropdown {
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>Grouped Data Tables</h1>
         <!-- Search bar -->
-        <input type="text" id="searchBar" placeholder="Search Ransomware Group name..." oninput="searchRansomwareName()">
+        <input type="text" id="searchBar" placeholder="Search Ransomware Name..." oninput="searchRansomwareName()">
+        <select id="searchDropdown" onchange="updateSearchBar()">
+            <option value="">All Ransomware Names</option>
+        </select>
     </header>
     <main>
         <!-- JavaScript will populate these tables -->
@@ -44,12 +51,14 @@
         }
 
         let data = []; // Store JSON data
+        let ransomwareNames = []; // Store ransomware names
 
         fetch('Groups/Overall_data/data_post.json')
             .then(response => response.json())
             .then(jsonData => {
                 data = jsonData; // Store JSON data
                 populateTables(); // Populate tables based on query parameter or all data
+                populateDropdown(); // Populate the dropdown with ransomware names
             })
             .catch(error => {
                 console.error('Error fetching JSON data:', error);
@@ -64,6 +73,7 @@
 
             data.forEach(entry => {
                 const ransomwareName = entry.ransomware_name;
+                ransomwareNames.push(ransomwareName);
                 if (!groupedData[ransomwareName]) {
                     groupedData[ransomwareName] = [];
                 }
@@ -102,9 +112,43 @@
             }
         }
 
-        // Function to Search Ransomware Group_name
+        // Function to populate the dropdown with ransomware names
+        function populateDropdown() {
+            const searchDropdown = document.getElementById('searchDropdown');
+            ransomwareNames = [...new Set(ransomwareNames)]; // Remove duplicates
+            ransomwareNames.sort(); // Sort alphabetically
+
+            ransomwareNames.forEach(name => {
+                const option = document.createElement('option');
+                option.value = name;
+                option.textContent = name;
+                searchDropdown.appendChild(option);
+            });
+        }
+
+        // Function to update the search bar when a dropdown option is selected
+        function updateSearchBar() {
+            const searchDropdown = document.getElementById('searchDropdown');
+            const selectedRansomware = searchDropdown.value;
+            document.getElementById('searchBar').value = selectedRansomware;
+            searchRansomwareName(); // Trigger search
+        }
+
+        // Function to Search Ransomware Name
         function searchRansomwareName() {
-            populateTables(); // Update the tables based on the current search bar value
+            const searchTerm = document.getElementById('searchBar').value.toLowerCase();
+
+            // Loop through all the table captions and rows to filter based on the search term
+            const captions = document.querySelectorAll('caption');
+            captions.forEach(caption => {
+                const ransomwareName = caption.textContent.toLowerCase();
+                const table = caption.parentElement;
+                if (ransomwareName.includes(searchTerm) || searchTerm === '') {
+                    table.style.display = '';
+                } else {
+                    table.style.display = 'none';
+                }
+            });
         }
     </script>
 </body>
