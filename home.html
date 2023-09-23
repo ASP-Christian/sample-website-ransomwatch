@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: row;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Hide overflow to prevent scrollbars */
+        }
+
+        #sidebar {
+            width: 20%;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+        }
+
+        #content {
+            flex: 1;
+            padding: 20px;
+            overflow: hidden; /* Hide overflow to prevent scrollbars */
+        }
+
+        #content iframe {
+            width: 100%;
+            height: 100vh;
+            border: none;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 5px; /* Add some padding to make the links clickable */
+            border-radius: 5px; /* Add rounded corners */
+        }
+
+        a:hover {
+            background-color: #555; /* Change background color on hover */
+        }
+
+        /* Style for the active link */
+        a.active {
+            background-color: #555;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar">
+        <h1>HTML Files</h1>
+        <ul>
+            <!-- List your HTML files here with their titles and file paths -->
+            <li><a href="select1.html" target="contentFrame">HTML Title 1</a></li>
+            <li><a href="select2.html" target="contentFrame">HTML Title 2</a></li>
+            <li><a href="select3.html" target="contentFrame">HTML Title 3</a></li>
+            <!-- Add more HTML files as needed -->
+        </ul>
+    </div>
+    <div id="content">
+        <iframe name="contentFrame" src="select1.html"></iframe>
+    </div>
+
+    <script>
+        // JavaScript to highlight the active link
+        const links = document.querySelectorAll('a');
+        const iframe = document.querySelector('iframe[name="contentFrame"]');
+
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                // Remove the "active" class from all links
+                links.forEach(otherLink => otherLink.classList.remove('active'));
+
+                // Add the "active" class to the clicked link
+                link.classList.add('active');
+
+                // Update the iframe source to the clicked link's href
+                iframe.src = link.href;
+            });
+        });
+    </script>
+</body>
+</html>
