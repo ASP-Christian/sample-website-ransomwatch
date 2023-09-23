@@ -34,7 +34,8 @@
     <header>
         <h1>Grouped Data Tables</h1>
         <!-- Search bar -->
-        <input type="text" id="searchBar" placeholder="Search Ransomware Name..." oninput="searchRansomwareName()">
+       <input type="text" id="searchBar" value="" placeholder="Search Ransomware Name..." oninput="searchRansomwareName()">
+
         <select id="searchDropdown" onchange="updateSearchBar()">
             <option value="">All Ransomware Names</option>
         </select>
@@ -59,6 +60,18 @@
                 data = jsonData; // Store JSON data
                 populateTables(); // Populate tables based on query parameter or all data
                 populateDropdown(); // Populate the dropdown with ransomware names
+
+                // Check for the 'ransomware' query parameter in the URL
+                const ransomwareParam = getQueryParam('ransomware');
+                const searchBar = document.getElementById('searchBar');
+
+                if (ransomwareParam) {
+                    // If the 'ransomware' query parameter exists, set it as the search bar value
+                    searchBar.value = decodeURIComponent(ransomwareParam);
+                }
+
+                // Trigger the initial search
+                searchRansomwareName();
             })
             .catch(error => {
                 console.error('Error fetching JSON data:', error);
@@ -150,9 +163,6 @@
                 }
             });
         }
-
-        // Initial search when the page loads
-        populateTables();
     </script>
 </body>
 </html>

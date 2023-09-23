@@ -60,24 +60,19 @@
             });
         }
 
-        // Function to open select2.html with a ransomware name
-function openSelect2WithRansomware(ransomwareName) {
-    // Open select2.html in a new tab/window
-    const newWindow = window.open('select2.html', '_blank');
-    if (newWindow) {
-        // After the window has loaded, set the ransomware name in the search bar
-        newWindow.onload = function () {
-            const searchInput = newWindow.document.getElementById('searchBar');
-            if (searchInput) {
-                searchInput.value = ransomwareName;
-                // Trigger the search function in select2.html
-                searchRansomwareName();
-
-                // Add the ransomware name to the browser's history
-                const state = { ransomware: ransomwareName };
-                const title = `Ransomware: ${ransomwareName}`;
-                const url = `select2.html?ransomware=${encodeURIComponent(ransomwareName)}`;
-                newWindow.history.pushState(state, title, url);
+        // Function to open select2.html with a ransomware name and update the search bar
+        function openSelect2WithRansomware(ransomwareName) {
+            // Open select2.html in a new tab/window
+            const newWindow = window.open('select2.html', '_blank');
+            if (newWindow) {
+                // After the window has loaded, set the ransomware name in the search bar of select2.html
+                newWindow.onload = function () {
+                    const searchInput = newWindow.document.getElementById('searchBar');
+                    if (searchInput) {
+                        // Set the value of the search bar to the selected ransomware name
+                        searchInput.value = ransomwareName;
+                        // Trigger the search function in select2.html
+                        searchRansomwareName();
                     }
                 };
             }
