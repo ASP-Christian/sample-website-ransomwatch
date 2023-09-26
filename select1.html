@@ -3,109 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grouped Data Tables</title>
+    <title>Dashboard</title>
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin-bottom: 20px;
+        canvas {
+            max-width: 6000px;
+            margin: 100px;
         }
-
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        #searchBar {
-            margin-bottom: 20px;
+        #pieChartContainer {
+            max-width: 600px; /* Adjust the maximum width as needed for the pie chart */
+            margin: 20px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Grouped Data Tables</h1>
-        <!-- Search bar -->
-        <input type="text" id="searchBar" placeholder="Search Ransomware Group name..." oninput="searchRansomwareName()">
-    </header>
-    <main>
-        <!-- JavaScript will populate these tables -->
-    </main>
+    <h1>Dashboard</h1>
+
+    <!-- Bar Chart -->
+    <div>
+        <canvas id="barChart"></canvas>
+    </div>
+
+    <!-- Pie Chart -->
+    <div id="pieChartContainer">
+        <canvas id="pieChart" width="300" height="300"></canvas> <!-- Adjust the width and height attributes for the pie chart -->
+        <div id="pieChartLabel" style="text-align: center; margin-top: 10px; font-weight: bold;">Ransomware Distribution</div>
+    </div>
 
     <script>
-        // Function to extract query parameters
-        function getQueryParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
-        }
-
-        let data = []; // Store JSON data
-
+        // Fetch data from data_post.json
         fetch('Groups/Overall_data/data_post.json')
             .then(response => response.json())
-            .then(jsonData => {
-                data = jsonData; // Store JSON data
-                populateTables(); // Populate tables based on query parameter or all data
+            .then(data => {
+                // Process the data to create datasets for the charts
+                const ransomwareCounts = {};
+                data.forEach(entry => {
+                    const ransomwareName = entry.ransomware_name;
+                    if (!ransomwareCounts[ransomwareName]) {
+                        ransomwareCounts[ransomwareName] = 1;
+                    } else {
+                        ransomwareCounts[ransomwareName]++;
+                    }
+                });
+
+                // Sort ransomwareCounts by count in descending order
+                const sortedRansomwareCounts = Object.entries(ransomwareCounts)
+                    .sort((a, b) => b[1] - a[1]);
+
+                // Get the top 10 ransomware names and counts
+                const top10Ransomware = sortedRansomwareCounts.slice(0, 10);
+                const otherRansomwareCount = sortedRansomwareCounts.slice(10);
+
+                // Extract names and counts for bar chart
+                const ransomwareNames = top10Ransomware.map(entry => entry[0]);
+                const ransomwareCountsData = top10Ransomware.map(entry => entry[1]);
+
+                // Calculate the count of "Others" for the bar chart
+                const otherRansomwareSum = otherRansomwareCount.reduce((acc, entry) => acc + entry[1], 0);
+
+                // Create the Bar Chart
+                const barChartCanvas = document.getElementById('barChart').getContext('2d');
+                new Chart(barChartCanvas, {
+                    type: 'bar',
+                    data: {
+                        labels: ransomwareNames,
+                        datasets: [{
+                            label: 'Ransomware Count',
+                            data: ransomwareCountsData,
+                            backgroundColor: 'rgba(128, 0, 0, 0.7)', // Darker color
+                            borderColor: 'rgba(128, 0, 0, 0.8)', // Darker border color
+                            borderWidth: 1,
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Count'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Ransomware Name'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false, // Hide legend
+                            }
+                        }
+                    }
+                });
+
+                // Create the Pie Chart
+                const pieChartCanvas = document.getElementById('pieChart').getContext('2d');
+                new Chart(pieChartCanvas, {
+                    type: 'pie',
+                    data: {
+                        labels: [...ransomwareNames, 'Others'],
+                        datasets: [{
+                            data: [...ransomwareCountsData, otherRansomwareSum],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.7)',
+                                'rgba(54, 162, 235, 0.7)',
+                                'rgba(255, 206, 86, 0.7)',
+                                'rgba(75, 192, 192, 0.7)',
+                                'rgba(153, 102, 255, 0.7)',
+                                'rgba(255, 159, 64, 0.7)',
+                                'rgba(128, 0, 0, 0.7)', // Darker color for "Others"
+                            ]
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                            },
+                        },
+                        title: {
+                            display: false, // Hide title
+                        }
+                    }
+                });
+
+                // Add label to the pie chart
+                const pieChartLabel = document.getElementById('pieChartLabel');
+                pieChartLabel.innerText = 'Ransomware Distribution';
             })
             .catch(error => {
                 console.error('Error fetching JSON data:', error);
             });
-
-        function populateTables() {
-            const groupedData = {};
-
-            // Get the Ransomware Name from the query parameter
-            const ransomwareParam = getQueryParam('ransomware');
-            const searchTerm = ransomwareParam ? decodeURIComponent(ransomwareParam).toLowerCase() : '';
-
-            data.forEach(entry => {
-                const ransomwareName = entry.ransomware_name;
-                if (!groupedData[ransomwareName]) {
-                    groupedData[ransomwareName] = [];
-                }
-                groupedData[ransomwareName].push({
-                    company: entry.company,
-                    data_date: entry.data_date
-                });
-            });
-
-            const mainElement = document.querySelector('main');
-            mainElement.innerHTML = ''; // Clear the main content
-
-            for (const ransomwareName in groupedData) {
-                if (groupedData.hasOwnProperty(ransomwareName) && (searchTerm === '' || ransomwareName.toLowerCase().includes(searchTerm))) {
-                    const filteredTable = document.createElement('table');
-                    const tbody = document.createElement('tbody');
-
-                    // Add table title
-                    const caption = document.createElement('caption');
-                    caption.textContent = ransomwareName;
-                    filteredTable.appendChild(caption);
-
-                    // Populate the table body
-                    groupedData[ransomwareName].forEach(entry => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td><a href="company_data.html?company=${encodeURIComponent(entry.company)}" target="_blank">${entry.company}</a></td>
-                            <td>${entry.data_date}</td>
-                        `;
-                        tbody.appendChild(row);
-                    });
-
-                    filteredTable.appendChild(tbody);
-                    mainElement.appendChild(filteredTable);
-                }
-            }
-        }
-
-        // Function to Search Ransomware Group_name
-        function searchRansomwareName() {
-            populateTables(); // Update the tables based on the current search bar value
-        }
     </script>
 </body>
 </html>

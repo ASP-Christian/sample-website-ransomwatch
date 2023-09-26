@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grouped Data Tables</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Style for the button */
+        .search-button {
+            background-color: #0074d9;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Grouped Data Tables</h1>
+        <!-- Button to open select2.html -->
+        <button class="search-button" onclick="openSelect2()">Search More Groups</button>
+    </header>
+    <main>
+        <!-- JavaScript will populate these tables -->
+    </main>
+
+    <script>
+        let data = []; // Store JSON data
+
+        fetch('Groups/Overall_data/data_post.json')
+            .then(response => response.json())
+            .then(jsonData => {
+                data = jsonData; // Store JSON data
+                populateTables(); // Populate tables based on query parameter or all data
+            })
+            .catch(error => {
+                console.error('Error fetching JSON data:', error);
+            });
+
+        function populateTables() {
+            const groupedData = {};
+
+            // Get the Ransomware Name from the query parameter
+            const ransomwareParam = getQueryParam('ransomware');
+            const searchTerm = ransomwareParam ? decodeURIComponent(ransomwareParam).toLowerCase() : '';
+
+            data.forEach(entry => {
+                const ransomwareName = entry.ransomware_name;
+                if (!groupedData[ransomwareName]) {
+                    groupedData[ransomwareName] = [];
+                }
+                groupedData[ransomwareName].push({
+                    company: entry.company,
+                    data_date: entry.data_date
+                });
+            });
+
+            const mainElement = document.querySelector('main');
+            mainElement.innerHTML = ''; // Clear the main content
+
+            for (const ransomwareName in groupedData) {
+                if (groupedData.hasOwnProperty(ransomwareName) && (searchTerm === '' || ransomwareName.toLowerCase().includes(searchTerm))) {
+                    const filteredTable = document.createElement('table');
+                    const tbody = document.createElement('tbody');
+
+                    // Add table title
+                    const caption = document.createElement('caption');
+                    caption.textContent = ransomwareName;
+                    filteredTable.appendChild(caption);
+
+                    // Populate the table body
+                    groupedData[ransomwareName].forEach(entry => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td><a href="company_data.html?company=${encodeURIComponent(entry.company)}" target="_blank">${entry.company}</a></td>
+                            <td>${entry.data_date}</td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+
+                    filteredTable.appendChild(tbody);
+                    mainElement.appendChild(filteredTable);
+                }
+            }
+        }
+
+        // Function to extract query parameters
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Function to open select2.html when the button is clicked
+        function openSelect2() {
+            // Navigate to select2.html in the same window
+            window.location.href = 'select2.html';
+        }
+    </script>
+</body>
+</html>

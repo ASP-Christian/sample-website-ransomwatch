@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Dashboard</h1>
+
+    <!-- Bar Chart -->
+    <div style="width: 50%; float: left;">
+        <h2>Bar Chart - Ransomware Name Count</h2>
+        <canvas id="barChart"></canvas>
+    </div>
+
+    <!-- Pie Chart -->
+    <div style="width: 50%; float: left;">
+        <h2>Pie Chart - Ransomware Name Distribution</h2>
+        <canvas id="pieChart"></canvas>
+    </div>
+
+    <script>
+        // Load data from data_post.json or provide your own data
+        const jsonData = [
+            { "ransomware_name": "Ransomware A" },
+            { "ransomware_name": "Ransomware B" },
+            { "ransomware_name": "Ransomware A" },
+            // Add more data entries as needed
+        ];
+
+        // Function to count the occurrences of each ransomware name
+        function countRansomwareNames(data) {
+            const countMap = new Map();
+            data.forEach(entry => {
+                const name = entry.ransomware_name;
+                countMap.set(name, (countMap.get(name) || 0) + 1);
+            });
+            return Array.from(countMap.values());
+        }
+
+        // Create a bar chart
+        const barChartData = {
+            labels: Array.from(new Set(jsonData.map(entry => entry.ransomware_name))),
+            datasets: [{
+                label: 'Ransomware Name Count',
+                data: countRansomwareNames(jsonData),
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        const barChartOptions = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        const barChartContext = document.getElementById('barChart').getContext('2d');
+        const barChart = new Chart(barChartContext, {
+            type: 'bar',
+            data: barChartData,
+            options: barChartOptions
+        });
+
+        // Create a pie chart
+        const pieChartData = {
+            labels: Array.from(new Set(jsonData.map(entry => entry.ransomware_name))),
+            datasets: [{
+                data: countRansomwareNames(jsonData),
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.7)',
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86, 0.7)',
+                    // Add more colors as needed
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    // Add more colors as needed
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const pieChartContext = document.getElementById('pieChart').getContext('2d');
+        const pieChart = new Chart(pieChartContext, {
+            type: 'pie',
+            data: pieChartData
+        });
+    </script>
+</body>
+</html>
