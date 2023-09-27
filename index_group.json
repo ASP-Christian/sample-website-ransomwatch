@@ -1,8 +1,8 @@
 [
     {
         "group_url": "https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/",
-        "title": "Magazine",
-        "status_code": 200,
+        "title": "",
+        "status_code": 404,
         "is_active": false,
         "date": "2023-09-27"
     },
