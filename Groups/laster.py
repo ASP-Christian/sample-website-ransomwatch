@@ -19,7 +19,7 @@ tor_proxy = {
 }
 
 # URL of the onion website
-url = 'https://3f7n123123123123xkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
+url = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
 
 # Send a request through the TOR proxy with certificate verification disabled
 try:
