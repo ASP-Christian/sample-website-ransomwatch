@@ -4,13 +4,11 @@ from stem import Signal
 from stem.control import Controller
 from bs4 import BeautifulSoup
 
-
 # Function to renew the TOR IP address
 def renew_tor_ip():
     with Controller.from_port(port=9051) as controller:
         controller.authenticate(password="YOUR_TOR_PASSWORD")
         controller.signal(Signal.NEWNYM)
-
 
 # TOR proxy settings
 tor_proxy = {
@@ -25,36 +23,29 @@ url = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
 try:
     renew_tor_ip()  # Renew TOR IP address before making the request
     response = requests.get(url, proxies=tor_proxy, verify=False)
+    response.raise_for_status()
 
     # Get the status code
     status_code = response.status_code
 
-    if status_code == 404:
-        status_message = "Not Found"
-        is_active = False
-    elif status_code >= 200 and status_code < 300:
-        status_message = "Success"
+    # Determine if the website is active based on status code
+    if 200 <= status_code < 300:
         is_active = True
-    elif status_code >= 400 and status_code < 500:
-        status_message = "Client Error"
-        is_active = False
-    elif status_code >= 500 and status_code < 600:
-        status_message = "Server Error"
-        is_active = False
     else:
-        status_message = "Unknown"
         is_active = False
 
+    # Parse the HTML content
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    # Get the title of the website
+    title = soup.title.string.strip()
+    print("Website Title:", title)
+
+    # Print the status code and whether the website is active
     print("Status Code:", status_code)
-    print("Status Message:", status_message)
-    print("Website Active:", is_active)
+    print("Is Active:", is_active)
 
 except requests.exceptions.RequestException as e:
-    if isinstance(e, requests.exceptions.HTTPError) and e.response.status_code == 404:
-        print("Status Code: 404")
-        print("Status Message: Not Found")
-        print("Website Active: False")
-    else:
-        print("Error:", str(e))
+    print("Error:", e)
 except Exception as e:
-    print("Error:", str(e))
+    print("An unexpected error occurred:", str(e))
