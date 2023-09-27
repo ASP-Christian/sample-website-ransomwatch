@@ -3,6 +3,7 @@ import requests
 from stem import Signal
 from stem.control import Controller
 from bs4 import BeautifulSoup
+import json
 
 # Function to renew the TOR IP address
 def renew_tor_ip():
@@ -16,36 +17,63 @@ tor_proxy = {
     'https': 'socks5h://localhost:9050',
 }
 
-# URL of the onion website
-url = 'https://3f1231231231237nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
+# Load the JSON data from the file
+json_file = 'Groups/Overall_data/small_sample.json'
 
-# Send a request through the TOR proxy with certificate verification disabled
 try:
-    renew_tor_ip()  # Renew TOR IP address before making the request
-    response = requests.get(url, proxies=tor_proxy, verify=False)
-    response.raise_for_status()
+    with open(json_file, 'r') as file:
+        data = json.load(file)
 
-    # Get the status code
-    status_code = response.status_code
+    # Initialize a list to store the group data
+    group_data = []
 
-    # Determine if the website is active based on status code
-    if 200 <= status_code < 300:
-        is_active = True
-    else:
-        is_active = False
+    for group_entry in data:
+        group_url = group_entry.get('group')
 
-    # Parse the HTML content
-    soup = BeautifulSoup(response.text, 'html.parser')
+        # Send a request through the TOR proxy with certificate verification disabled
+        try:
+            renew_tor_ip()  # Renew TOR IP address before making the request
+            response = requests.get(group_url, proxies=tor_proxy, verify=False)
+            response.raise_for_status()
 
-    # Get the title of the website
-    title = soup.title.string.strip()
-    print("Website Title:", title)
+            # Get the status code
+            status_code = response.status_code
 
-    # Print the status code and whether the website is active
-    print("Status Code:", status_code)
-    print("Is Active:", is_active)
+            # Determine if the website is active based on status code
+            if 200 <= status_code < 300:
+                is_active = True
+            else:
+                is_active = False
 
-except requests.exceptions.RequestException as e:
-    print("Error:", e)
+            # Parse the HTML content
+            soup = BeautifulSoup(response.text, 'html.parser')
+
+            # Get the title of the website
+            title = soup.title.string.strip()
+
+            # Store group data in a dictionary
+            group_info = {
+                'group_url': group_url,
+                'title': title,
+                'status_code': status_code,
+                'is_active': is_active
+            }
+
+            # Append the group data to the list
+            group_data.append(group_info)
+
+        except requests.exceptions.RequestException as e:
+            print(f"Error for {group_url}: {e}")
+        except Exception as e:
+            print(f"An unexpected error occurred for {group_url}: {str(e)}")
+
+    # Save the group data to a JSON file
+    with open('index_group.json', 'w') as output_file:
+        json.dump(group_data, output_file, indent=4)
+
+    print("Data collected and saved to 'index_group.json'.")
+
+except FileNotFoundError:
+    print(f"File '{json_file}' not found.")
 except Exception as e:
-    print("An unexpected error occurred:", str(e))
+    print(f"An unexpected error occurred: {str(e)}")
