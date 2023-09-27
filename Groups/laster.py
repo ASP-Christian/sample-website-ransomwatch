@@ -85,18 +85,18 @@ try:
     # Get the current date in the format (year, month, day)
     current_date = datetime.now().strftime("%Y-%m-%d")
 
-    # Update existing data based on Group_url or add new entries
-    for new_item in group_data:
-        updated = False
-        for item in existing_data:
+    # Update existing data where is_active is True
+    for item in existing_data:
+        for new_item in group_data:
             if item['group_url'] == new_item['group_url']:
                 item['date'] = current_date
                 item['status_code'] = new_item['status_code']
                 item['title'] = new_item['title']
                 item['is_active'] = new_item['is_active']
-                updated = True
-                break
-        if not updated:
+
+    # Append new data to the existing data or add it if it doesn't exist
+    for new_item in group_data:
+        if new_item not in existing_data:
             new_item['date'] = current_date
             existing_data.append(new_item)
 
