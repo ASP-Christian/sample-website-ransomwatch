@@ -1,23 +1,9 @@
 [
     {
-        "group_url": "https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/",
-        "title": "Magazine",
-        "status_code": 200,
+        "group_url": "samplehttps:1231231231231//3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/",
+        "title": "sample123123Magazine",
+        "status_code": 404,
         "is_active": true,
-        "date": "2023-09-27"
-    },
-    {
-        "group_url": "http://g5sbltooh2okkcb2.onion",
-        "title": "g5sbltooh2",
-        "status_code": 404,
-        "is_active": false,
-        "date": "2023-09-27"
-    },
-    {
-        "group_url": "http://helloworldq7i7cbs23lb6llryd.onion/",
-        "title": "helloworld",
-        "status_code": 404,
-        "is_active": false,
         "date": "2023-09-27"
     }
 ]
