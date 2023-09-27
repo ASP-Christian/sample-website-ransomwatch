@@ -4,6 +4,7 @@ from stem import Signal
 from stem.control import Controller
 from bs4 import BeautifulSoup
 import json
+from datetime import datetime
 
 # Function to renew the TOR IP address
 def renew_tor_ip():
@@ -19,6 +20,7 @@ tor_proxy = {
 
 # Load the JSON data from the file
 json_file = 'Groups/Overall_data/small_sample.json'
+index_file = 'index_group.json'  # Existing index file
 
 try:
     with open(json_file, 'r') as file:
@@ -71,14 +73,40 @@ try:
             'is_active': is_active
         }
 
-        # Append the group data to the list
-        group_data.append(group_info)
+        # Append the group data to the list only if is_active is True
+        if is_active:
+            group_data.append(group_info)
 
-    # Save the group data to a JSON file
-    with open('index_group.json', 'w') as output_file:
-        json.dump(group_data, output_file, indent=4)
+    # Load the existing index data
+    try:
+        with open(index_file, 'r') as existing_file:
+            existing_data = json.load(existing_file)
+    except FileNotFoundError:
+        existing_data = []
 
-    print("Data collected and saved to 'index_group.json'.")
+    # Get the current date in the format (year, month, day)
+    current_date = datetime.now().strftime("%Y-%m-%d")
+
+    # Update existing data where is_active is True
+    for item in existing_data:
+        for new_item in group_data:
+            if item['group_url'] == new_item['group_url'] and new_item['is_active']:
+                item['date'] = current_date
+                item['status_code'] = new_item['status_code']
+                item['title'] = new_item['title']
+                item['is_active'] = True
+
+    # Append new data to the existing data
+    for new_item in group_data:
+        if new_item['is_active']:
+            new_item['date'] = current_date
+            existing_data.append(new_item)
+
+    # Save the combined data to the index file
+    with open(index_file, 'w') as output_file:
+        json.dump(existing_data, output_file, indent=4)
+
+    print("Data collected and updated in 'index_group.json'.")
 
 except FileNotFoundError:
     print(f"File '{json_file}' not found.")
