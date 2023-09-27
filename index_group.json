@@ -12,5 +12,12 @@
         "status_code": 404,
         "is_active": false,
         "date": "2023-09-27"
+    },
+    {
+        "group_url": "http://helloworldq7i7cbs23lb6llryd.onion/",
+        "title": "helloworld",
+        "status_code": 404,
+        "is_active": false,
+        "date": "2023-09-27"
     }
 ]
