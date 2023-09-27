@@ -45,7 +45,6 @@ try:
         try:
             renew_tor_ip()  # Renew TOR IP address before making the request
             response = requests.get(group_url, proxies=tor_proxy, verify=False)
-            response.raise_for_status()
 
             # Get the status code
             status_code = response.status_code
@@ -73,9 +72,8 @@ try:
             'is_active': is_active
         }
 
-        # Append the group data to the list only if is_active is True
-        if is_active:
-            group_data.append(group_info)
+        # Append the group data to the list
+        group_data.append(group_info)
 
     # Load the existing index data
     try:
@@ -90,17 +88,18 @@ try:
     # Update existing data where is_active is True
     for item in existing_data:
         for new_item in group_data:
-            if item['group_url'] == new_item['group_url'] and new_item['is_active']:
+            if item['group_url'] == new_item['group_url']:
                 item['date'] = current_date
                 item['status_code'] = new_item['status_code']
                 item['title'] = new_item['title']
-                item['is_active'] = True
+                item['is_active'] = new_item['is_active']
 
-    # Append new data to the existing data
+    # Append new data to the existing data or add it if it doesn't exist
     for new_item in group_data:
         if new_item['is_active']:
             new_item['date'] = current_date
-            existing_data.append(new_item)
+            if new_item not in existing_data:
+                existing_data.append(new_item)
 
     # Save the combined data to the index file
     with open(index_file, 'w') as output_file:
