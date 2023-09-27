@@ -19,7 +19,7 @@ tor_proxy = {
 }
 
 # URL of the onion website
-url = 'https://3f7nx123123kjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
+url = 'https://3f7n123123123123xkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
 
 # Send a request through the TOR proxy with certificate verification disabled
 try:
@@ -29,7 +29,10 @@ try:
     # Get the status code
     status_code = response.status_code
 
-    if status_code >= 200 and status_code < 300:
+    if status_code == 404:
+        status_message = "Not Found"
+        is_active = False
+    elif status_code >= 200 and status_code < 300:
         status_message = "Success"
         is_active = True
     elif status_code >= 400 and status_code < 500:
@@ -46,5 +49,12 @@ try:
     print("Status Message:", status_message)
     print("Website Active:", is_active)
 
+except requests.exceptions.RequestException as e:
+    if isinstance(e, requests.exceptions.HTTPError) and e.response.status_code == 404:
+        print("Status Code: 404")
+        print("Status Message: Not Found")
+        print("Website Active: False")
+    else:
+        print("Error:", str(e))
 except Exception as e:
     print("Error:", str(e))
