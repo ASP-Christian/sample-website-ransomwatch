@@ -20,7 +20,7 @@ tor_proxy = {
 
 # Load the JSON data from the file
 json_file = 'Groups/Overall_data/small_sample.json'
-index_file = 'Groups/Overall_data/index_group.json'  # Updated path to index file
+index_file = 'index_group.json'  # Existing index file
 
 try:
     with open(json_file, 'r') as file:
