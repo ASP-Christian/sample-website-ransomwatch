@@ -96,10 +96,9 @@ try:
 
     # Append new data to the existing data or add it if it doesn't exist
     for new_item in group_data:
-        if new_item['is_active']:
+        if new_item not in existing_data:
             new_item['date'] = current_date
-            if new_item not in existing_data:
-                existing_data.append(new_item)
+            existing_data.append(new_item)
 
     # Save the combined data to the index file
     with open(index_file, 'w') as output_file:
