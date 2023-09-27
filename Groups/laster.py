@@ -30,6 +30,15 @@ try:
     for group_entry in data:
         group_url = group_entry.get('group')
 
+        # Initialize default values
+        title = ""
+        status_code = 404  # Default status code
+        is_active = False
+
+        # Extract the first 10 characters after "http://"
+        if group_url.startswith("http://"):
+            title = group_url[7:17]
+
         # Send a request through the TOR proxy with certificate verification disabled
         try:
             renew_tor_ip()  # Renew TOR IP address before making the request
@@ -42,8 +51,6 @@ try:
             # Determine if the website is active based on status code
             if 200 <= status_code < 300:
                 is_active = True
-            else:
-                is_active = False
 
             # Parse the HTML content
             soup = BeautifulSoup(response.text, 'html.parser')
@@ -51,21 +58,21 @@ try:
             # Get the title of the website
             title = soup.title.string.strip()
 
-            # Store group data in a dictionary
-            group_info = {
-                'group_url': group_url,
-                'title': title,
-                'status_code': status_code,
-                'is_active': is_active
-            }
-
-            # Append the group data to the list
-            group_data.append(group_info)
-
         except requests.exceptions.RequestException as e:
             print(f"Error for {group_url}: {e}")
         except Exception as e:
             print(f"An unexpected error occurred for {group_url}: {str(e)}")
+
+        # Store group data in a dictionary
+        group_info = {
+            'group_url': group_url,
+            'title': title,
+            'status_code': status_code,
+            'is_active': is_active
+        }
+
+        # Append the group data to the list
+        group_data.append(group_info)
 
     # Save the group data to a JSON file
     with open('index_group.json', 'w') as output_file:
