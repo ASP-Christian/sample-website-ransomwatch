@@ -20,7 +20,7 @@ tor_proxy = {
 
 # Load the JSON data from the file
 json_file = 'Groups/Overall_data/small_sample.json'
-index_file = 'Groups/Overall_data/index_group.json'  # Existing index file
+index_file = 'index_group.json'  # Existing index file
 
 try:
     with open(json_file, 'r') as file:
@@ -85,18 +85,18 @@ try:
     # Get the current date in the format (year, month, day)
     current_date = datetime.now().strftime("%Y-%m-%d")
 
-    # Update existing data where is_active is True
-    for item in existing_data:
-        for new_item in group_data:
+    # Update existing data based on Group_url or add new entries
+    for new_item in group_data:
+        updated = False
+        for item in existing_data:
             if item['group_url'] == new_item['group_url']:
                 item['date'] = current_date
                 item['status_code'] = new_item['status_code']
                 item['title'] = new_item['title']
                 item['is_active'] = new_item['is_active']
-
-    # Append new data to the existing data or add it if it doesn't exist
-    for new_item in group_data:
-        if new_item not in existing_data:
+                updated = True
+                break
+        if not updated:
             new_item['date'] = current_date
             existing_data.append(new_item)
 
