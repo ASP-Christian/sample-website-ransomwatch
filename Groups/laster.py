@@ -5,7 +5,7 @@ from stem.control import Controller
 from bs4 import BeautifulSoup
 import json
 from datetime import datetime
-import time
+
 
 # Function to renew the TOR IP address
 def renew_tor_ip():
@@ -13,103 +13,41 @@ def renew_tor_ip():
         controller.authenticate(password="YOUR_TOR_PASSWORD")
         controller.signal(Signal.NEWNYM)
 
+
 # TOR proxy settings
 tor_proxy = {
     'http': 'socks5h://localhost:9050',
     'https': 'socks5h://localhost:9050',
 }
 
-# Load the JSON data from the file
-json_file = 'Groups/Overall_data/small_sample.json'
-index_file = 'Groups/Overall_data/index_group.json'  # Existing index file
+# .onion URL to scrape
+onion_url = 'http://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
+
+# Set the headers to use Tor proxy
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
+}
+
+# Renew Tor IP address before making the request
+renew_tor_ip()
 
 try:
-    with open(json_file, 'r') as file:
-        data = json.load(file)
+    # Make a request using Tor proxy
+    response = requests.get(onion_url, proxies=tor_proxy, headers=headers)
 
-    # Initialize a list to store the group data
-    group_data = []
+    # Check the status code
+    status_code = response.status_code
 
-    for group_entry in data:
-        group_url = group_entry.get('group')
+    # Parse the HTML content
+    soup = BeautifulSoup(response.text, 'html.parser')
 
-        # Initialize default values
-        title = ""
-        status_code = None  # Default status code is None
-        is_active = False
+    # Find and print the title
+    title = soup.title.string if soup.title else 'Title not found'
+    print(f'Title: {title}')
 
-        # Send a request through the TOR proxy with certificate verification disabled
-        try:
-            renew_tor_ip()  # Renew TOR IP address before making the request
-            response = requests.get(group_url, proxies=tor_proxy, verify=False, timeout=30)  # Adjust timeout as needed
+    # Print the status code
+    print(f'Status Code: {status_code}')
 
-            # Get the status code
-            status_code = response.status_code
-
-            # Determine if the website is active based on status code
-            if 200 <= status_code < 300:
-                is_active = True
-
-            # Parse the HTML content if the status code is valid and you need to extract data
-            if is_active:
-                soup = BeautifulSoup(response.text, 'html.parser')
-                # Get the title of the website
-                title = soup.title.string.strip()
-
-        except requests.exceptions.RequestException as e:
-            print(f"Error for {group_url}: {e}")
-        except Exception as e:
-            print(f"An unexpected error occurred for {group_url}: {str(e)}")
-
-        # Determine the "status" based on is_active
-        status = "Active" if is_active else "Inactive"
-
-        # Store group data in a dictionary
-        group_info = {
-            'group_url': group_url,
-            'title': title,
-            'status_code': status_code,
-            'status': status
-        }
-
-        # Append the group data to the list
-        group_data.append(group_info)
-
-        # Sleep for a few seconds to avoid overloading the TOR network
-        time.sleep(2)
-
-    # Load the existing index data
-    try:
-        with open(index_file, 'r') as existing_file:
-            existing_data = json.load(existing_file)
-    except FileNotFoundError:
-        existing_data = []
-
-    # Get the current date in the format (year, month, day)
-    current_date = datetime.now().strftime("%Y-%m-%d")
-
-    # Update existing data based on Group_url or add new entries
-    for new_item in group_data:
-        updated = False
-        for item in existing_data:
-            if item['group_url'] == new_item['group_url']:
-                item['date'] = current_date
-                item['status_code'] = new_item['status_code']
-                item['status'] = new_item['status']
-                item['title'] = new_item['title']
-                updated = True
-                break
-        if not updated:
-            new_item['date'] = current_date
-            existing_data.append(new_item)
-
-    # Save the combined data to the index file
-    with open(index_file, 'w') as output_file:
-        json.dump(existing_data, output_file, indent=4)
-
-    print("Data collected and updated in 'index_group.json'.")
-
-except FileNotFoundError:
-    print(f"File '{json_file}' not found.")
 except Exception as e:
-    print(f"An unexpected error occurred: {str(e)}")
+    print(f'Error: {e}')
+
