@@ -5,6 +5,7 @@ from stem.control import Controller
 from bs4 import BeautifulSoup
 import json
 from datetime import datetime
+import time  # Import the time module
 
 # Function to renew the TOR IP address
 def renew_tor_ip():
@@ -34,17 +35,13 @@ try:
 
         # Initialize default values
         title = ""
-        status_code = 404  # Default status code
+        status_code = None  # Default status code is None
         is_active = False
-
-        # Extract the first 10 characters after "http://"
-        if group_url.startswith("http://"):
-            title = group_url[7:17]
 
         # Send a request through the TOR proxy with certificate verification disabled
         try:
             renew_tor_ip()  # Renew TOR IP address before making the request
-            response = requests.get(group_url, proxies=tor_proxy, verify=False)
+            response = requests.get(group_url, proxies=tor_proxy, verify=False, timeout=30)  # Adjust timeout as needed
 
             # Get the status code
             status_code = response.status_code
@@ -53,11 +50,11 @@ try:
             if 200 <= status_code < 300:
                 is_active = True
 
-            # Parse the HTML content
-            soup = BeautifulSoup(response.text, 'html.parser')
-
-            # Get the title of the website
-            title = soup.title.string.strip()
+            # Parse the HTML content if the status code is valid
+            if is_active:
+                soup = BeautifulSoup(response.text, 'html.parser')
+                # Get the title of the website
+                title = soup.title.string.strip()
 
         except requests.exceptions.RequestException as e:
             print(f"Error for {group_url}: {e}")
@@ -74,6 +71,9 @@ try:
 
         # Append the group data to the list
         group_data.append(group_info)
+
+        # Sleep for a few seconds to avoid overloading the TOR network
+        time.sleep(2)
 
     # Load the existing index data
     try:
