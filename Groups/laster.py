@@ -110,3 +110,4 @@ except FileNotFoundError:
     print(f"File '{json_file}' not found.")
 except Exception as e:
     print(f"An unexpected error occurred: {str(e)}")
+print(title)
