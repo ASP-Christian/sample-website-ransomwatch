@@ -21,7 +21,7 @@ tor_proxy = {
 }
 
 # .onion URL to scrape
-onion_url = 'http://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
+onion_url = 'http://lorenzmlwpzgxq736jzseuterytjueszsvznuibanxomlpkyxk6ksoyd.onion'
 
 # Set the headers to use Tor proxy
 headers = {
