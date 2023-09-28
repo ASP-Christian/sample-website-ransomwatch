@@ -50,7 +50,7 @@ try:
             status_code = response.status_code
 
             # Determine if the website is active based on status code
-            if 200 <= status_code < 300:
+            if status_code == 200:  # Check if status code is 200
                 is_active = True
 
             # Parse the HTML content
