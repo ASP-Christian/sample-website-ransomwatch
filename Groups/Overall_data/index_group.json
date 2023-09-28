@@ -1,6 +1,21 @@
-[   {
+[
+    {
         "group_url": "http://n4hzyuotli6maqa4u.onion",
         "title": "n4hzyuotli",
+        "status_code": 404,
+        "is_active": false,
+        "date": "2023-09-28"
+    },
+    {
+        "group_url": "http://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion",
+        "title": "3f7nxkjway",
+        "status_code": 404,
+        "is_active": false,
+        "date": "2023-09-28"
+    },
+    {
+        "group_url": "http://cuba4ikm4jakjgmkezytyawtdgr2xymvy6nvzgw5cglswg3si76icnqd.onion",
+        "title": "cuba4ikm4j",
         "status_code": 404,
         "is_active": false,
         "date": "2023-09-28"
