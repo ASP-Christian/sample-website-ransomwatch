@@ -12,10 +12,17 @@ def renew_tor_ip():
         controller.authenticate(password="YOUR_TOR_PASSWORD")
         controller.signal(Signal.NEWNYM)
 
-# TOR proxy settings
+# TOR proxy settings for regular websites
 tor_proxy = {
     'http': 'socks5h://localhost:9050',
     'https': 'socks5h://localhost:9050',
+}
+
+# TOR proxy settings for ".onion" websites
+tor_proxy_onion = {
+    'http': 'socks5h://localhost:9050',
+    'https': 'socks5h://localhost:9050',
+    'onion': 'socks5h://localhost:9050',
 }
 
 # Load the JSON data from the file
@@ -41,16 +48,22 @@ try:
         if group_url.startswith("http://"):
             title = group_url[7:17]
 
+        # Determine the proxy settings based on the URL
+        if group_url.endswith(".onion"):
+            tor_proxy_to_use = tor_proxy_onion
+        else:
+            tor_proxy_to_use = tor_proxy
+
         # Send a request through the TOR proxy with certificate verification disabled
         try:
             renew_tor_ip()  # Renew TOR IP address before making the request
-            response = requests.get(group_url, proxies=tor_proxy, verify=False)
+            response = requests.get(group_url, proxies=tor_proxy_to_use, verify=False)
 
             # Get the status code
             status_code = response.status_code
 
             # Determine if the website is active based on status code
-            if status_code == 200:  # Check if status code is 200
+            if status_code == 200:
                 is_active = True
 
             # Parse the HTML content
