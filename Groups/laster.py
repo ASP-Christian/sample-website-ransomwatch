@@ -5,7 +5,7 @@ from stem.control import Controller
 from bs4 import BeautifulSoup
 import json
 from datetime import datetime
-import time  # Import the time module
+import time
 
 # Function to renew the TOR IP address
 def renew_tor_ip():
@@ -50,7 +50,7 @@ try:
             if 200 <= status_code < 300:
                 is_active = True
 
-            # Parse the HTML content if the status code is valid
+            # Parse the HTML content if the status code is valid and you need to extract data
             if is_active:
                 soup = BeautifulSoup(response.text, 'html.parser')
                 # Get the title of the website
@@ -61,12 +61,15 @@ try:
         except Exception as e:
             print(f"An unexpected error occurred for {group_url}: {str(e)}")
 
+        # Determine the "status" based on is_active
+        status = "Active" if is_active else "Inactive"
+
         # Store group data in a dictionary
         group_info = {
             'group_url': group_url,
             'title': title,
             'status_code': status_code,
-            'is_active': is_active
+            'status': status
         }
 
         # Append the group data to the list
@@ -92,8 +95,8 @@ try:
             if item['group_url'] == new_item['group_url']:
                 item['date'] = current_date
                 item['status_code'] = new_item['status_code']
+                item['status'] = new_item['status']
                 item['title'] = new_item['title']
-                item['is_active'] = new_item['is_active']
                 updated = True
                 break
         if not updated:
@@ -110,4 +113,3 @@ except FileNotFoundError:
     print(f"File '{json_file}' not found.")
 except Exception as e:
     print(f"An unexpected error occurred: {str(e)}")
-print(title)
