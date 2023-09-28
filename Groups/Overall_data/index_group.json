@@ -1061,7 +1061,8 @@
         "title": "",
         "status_code": null,
         "is_active": false,
-        "date": "2023-09-28"
+        "date": "2023-09-28",
+        "status": "Inactive"
     },
     {
         "group_url": "http://blog2hkbm6gogpv2b3uytzi3bj5d5zmc4asbybumjkhuqhas355janyd.onion",
