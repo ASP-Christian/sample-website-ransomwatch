@@ -24,9 +24,10 @@ jobs:
           python-version: 3.x
 
       - name: Install dependencies
-        run: pip install requests[socks] stem beautifulsoup4
+        run: |
+          pip install requests[socks] stem beautifulsoup4
 
-      - name: Run Qilin Blog Script
+      - name: Run TOR Scraper Script
         run: python Groups/laster.py
 
       - name: Commit and push changes

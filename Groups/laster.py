@@ -18,9 +18,6 @@ tor_proxy = {
     'https': 'socks5h://localhost:9050',
 }
 
-# Disable SSL/TLS certificate verification
-requests.packages.urllib3.disable_warnings()
-
 # Load the JSON data from the file
 json_file = 'Groups/Overall_data/small_sample.json'
 index_file = 'Groups/Overall_data/index_group.json'  # Existing index file
@@ -47,7 +44,13 @@ try:
         # Send a request through the TOR proxy with certificate verification disabled
         try:
             renew_tor_ip()  # Renew TOR IP address before making the request
-            response = requests.get(group_url, proxies=tor_proxy, verify=False)
+
+            # Create a session with a custom adapter to ignore SSL/TLS warnings
+            session = requests.Session()
+            session.proxies = tor_proxy
+            session.verify = False
+
+            response = session.get(group_url)
 
             # Get the status code
             status_code = response.status_code
