@@ -14,8 +14,8 @@ def renew_tor_ip():
 
 # TOR proxy settings
 tor_proxy = {
-    'http': 'socks5h://localhost:9051',
-    'https': 'socks5h://localhost:9051',
+    'http': 'socks5h://localhost:9050',
+    'https': 'socks5h://localhost:9050',
 }
 
 # Load the JSON data from the file
