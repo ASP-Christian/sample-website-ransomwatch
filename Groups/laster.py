@@ -1,6 +1,5 @@
 import os
 import requests
-import urllib3
 from stem import Signal
 from stem.control import Controller
 from bs4 import BeautifulSoup
@@ -12,9 +11,6 @@ def renew_tor_ip():
     with Controller.from_port(port=9051) as controller:
         controller.authenticate(password="YOUR_TOR_PASSWORD")
         controller.signal(Signal.NEWNYM)
-
-# Disable SSL/TLS certificate warnings
-urllib3.disable_warnings()
 
 # TOR proxy settings
 tor_proxy = {
@@ -49,12 +45,8 @@ try:
         try:
             renew_tor_ip()  # Renew TOR IP address before making the request
 
-            # Create a session with a custom adapter to ignore SSL/TLS warnings
-            session = requests.Session()
-            session.proxies = tor_proxy
-            session.verify = False
-
-            response = session.get(group_url)
+            # Send the request with verify=False to ignore SSL/TLS warnings
+            response = requests.get(group_url, proxies=tor_proxy, verify=False)
 
             # Get the status code
             status_code = response.status_code
