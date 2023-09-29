@@ -1,8 +1,8 @@
+
 name: BS$ TOR SCRAPER
 
 on:
   workflow_dispatch:
-
 jobs:
   scrape:
     runs-on: ubuntu-latest
@@ -17,7 +17,6 @@ jobs:
           echo "ControlPort 9051" | sudo tee -a /etc/tor/torrc
           echo "HashedControlPassword $(tor --hash-password YOUR_TOR_PASSWORD)" | sudo tee -a /etc/tor/torrc
           sudo systemctl restart tor
-
       - name: Install Python
         uses: actions/setup-python@v2
         with:
@@ -26,5 +25,5 @@ jobs:
       - name: Install dependencies
         run: pip install requests[socks] stem beautifulsoup4
 
-      - name: Run Python Script
-        run: python scraper.py
+      - name: Run Qilin Blog Script
+        run: python Groups/laster.py
