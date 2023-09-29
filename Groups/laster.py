@@ -41,18 +41,18 @@ try:
         if group_url.startswith("http://"):
             title = group_url[7:17]
 
-        # Send a request through the TOR proxy with certificate verification disabled
+        # Send a request through the TOR proxy with certificate verification enabled
         try:
             renew_tor_ip()  # Renew TOR IP address before making the request
 
-            # Send the request with verify=False to ignore SSL/TLS warnings
-            response = requests.get(group_url, proxies=tor_proxy, verify=False)
+            # Send the request with verify=True (default) to check SSL/TLS certificates
+            response = requests.get(group_url, proxies=tor_proxy)
 
             # Get the status code
             status_code = response.status_code
 
-            # Determine if the website is active based on status code
-            if 200 <= status_code < 300:
+            # Check if the website has SSL/TLS certificate warnings (status code 5xx)
+            if 500 <= status_code < 600:
                 is_active = True
 
             # Parse the HTML content
