@@ -4,6 +4,7 @@ from stem import Signal
 from stem.control import Controller
 from bs4 import BeautifulSoup
 import json
+from datetime import datetime
 
 # Function to renew the TOR IP address
 def renew_tor_ip():
@@ -19,6 +20,7 @@ tor_proxy = {
 
 # Load the JSON data from the file
 json_file = 'Groups/Overall_data/small_sample.json'
+index_file = 'Groups/Overall_data/index_group.json'  # Existing index file
 
 try:
     with open(json_file, 'r') as file:
@@ -34,6 +36,10 @@ try:
         title = ""
         status_code = 404  # Default status code
         is_active = False
+
+        # Extract the first 10 characters after "http://"
+        if group_url.startswith("http://"):
+            title = group_url[7:17]
 
         # Send a request through the TOR proxy with certificate verification disabled
         try:
@@ -69,11 +75,36 @@ try:
         # Append the group data to the list
         group_data.append(group_info)
 
-    # Save the collected data to a JSON file
-    with open('Groups/Overall_data/collected_data.json', 'w') as output_file:
-        json.dump(group_data, output_file, indent=4)
+    # Load the existing index data
+    try:
+        with open(index_file, 'r') as existing_file:
+            existing_data = json.load(existing_file)
+    except FileNotFoundError:
+        existing_data = []
 
-    print("Data collected and saved in 'collected_data.json'.")
+    # Get the current date in the format (year, month, day)
+    current_date = datetime.now().strftime("%Y-%m-%d")
+
+    # Update existing data based on Group_url or add new entries
+    for new_item in group_data:
+        updated = False
+        for item in existing_data:
+            if item['group_url'] == new_item['group_url']:
+                item['date'] = current_date
+                item['status_code'] = new_item['status_code']
+                item['title'] = new_item['title']
+                item['is_active'] = new_item['is_active']
+                updated = True
+                break
+        if not updated:
+            new_item['date'] = current_date
+            existing_data.append(new_item)
+
+    # Save the combined data to the index file
+    with open(index_file, 'w') as output_file:
+        json.dump(existing_data, output_file, indent=4)
+
+    print("Data collected and updated in 'index_group.json'.")
 
 except FileNotFoundError:
     print(f"File '{json_file}' not found.")
