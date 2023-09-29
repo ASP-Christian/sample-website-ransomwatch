@@ -1,5 +1,6 @@
 import os
 import requests
+import urllib3
 from stem import Signal
 from stem.control import Controller
 from bs4 import BeautifulSoup
@@ -11,6 +12,9 @@ def renew_tor_ip():
     with Controller.from_port(port=9051) as controller:
         controller.authenticate(password="YOUR_TOR_PASSWORD")
         controller.signal(Signal.NEWNYM)
+
+# Disable SSL/TLS certificate warnings
+urllib3.disable_warnings()
 
 # TOR proxy settings
 tor_proxy = {
