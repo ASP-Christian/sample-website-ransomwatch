@@ -1,14 +1,14 @@
 [
     {
         "group_url": "https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/",
-        "title": "Magazine",
-        "status_code": 200,
-        "is_active": true
+        "title": "223",
+        "status_code": 400,
+        "is_active": false
     },
     {
         "group_url": "https://omx5iqrdbsoitf3q4xexrqw5r5tfw7vp3vl3li3lfo7saabxazshnead.onion",
-        "title": "Chat",
-        "status_code": 200,
-        "is_active": true
+        "title": "12323",
+        "status_code": 400,
+        "is_active": false
     }
 ]
