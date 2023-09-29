@@ -24,19 +24,7 @@ jobs:
           python-version: 3.x
 
       - name: Install dependencies
-        run: |
-          pip install requests[socks] stem beautifulsoup4
+        run: pip install requests[socks] stem beautifulsoup4
 
-      - name: Run TOR Scraper Script
-        run: python Groups/laster.py
-
-      - name: Commit and push changes
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git config credential.helper store
-          git add .  # Add all changes to the staging area
-          git commit -m "Auto-commit by GitHub Actions"
-          git push https://GH_PAT@github.com/ASP-Christian/sample-website-ransomwatch.git HEAD:main
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
+      - name: Run Python Script
+        run: python scraper.py
