@@ -18,6 +18,9 @@ tor_proxy = {
     'https': 'socks5h://localhost:9050',
 }
 
+# Disable SSL/TLS certificate verification
+requests.packages.urllib3.disable_warnings()
+
 # Load the JSON data from the file
 json_file = 'Groups/Overall_data/small_sample.json'
 index_file = 'Groups/Overall_data/index_group.json'  # Existing index file
