@@ -1,14 +1,14 @@
 [
     {
-        "group_url": "https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/",
-        "title": "223",
-        "status_code": 400,
+        "group_url": "http://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion",
+        "title": "",
+        "status_code": 404,
         "is_active": false
     },
     {
-        "group_url": "https://omx5iqrdbsoitf3q4xexrqw5r5tfw7vp3vl3li3lfo7saabxazshnead.onion",
-        "title": "12323",
-        "status_code": 400,
+        "group_url": "http://omx5iqrdbsoitf3q4xexrqw5r5tfw7vp3vl3li3lfo7saabxazshnead.onion",
+        "title": "",
+        "status_code": 404,
         "is_active": false
     }
 ]
