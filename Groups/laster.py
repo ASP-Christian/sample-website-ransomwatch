@@ -34,7 +34,7 @@ try:
         existing_data = []
 
     # Get the current date in the format (year, month, day)
-    current_date = datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
+    current_date = datetime.now().strftime("%Y-%m-%d")
 
     # Iterate through the data from small_sample.json
     for group_entry in data:

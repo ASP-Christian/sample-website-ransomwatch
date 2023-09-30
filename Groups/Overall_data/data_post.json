@@ -23,11 +23,11 @@
         "data_date": "2023-08-21 ",
         "download_data": "https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/companies/d21de1c7-286b-485d-bb66-7f889b952eff",
         "company_website": "https://rivercityscience.org/",
-        "group_url": "https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion",
-        "title": "Magazine",
-        "status_code": 200,
-        "is_active": true,
-        "date": "2023-09-30-16:59:57"
+        "group_url": "https://123123123ggg.onion/",
+        "title": "",
+        "status_code": 404,
+        "is_active": false,
+        "date": "2023-09-30"
     },
     {
         "company": "Bevolution Group",
@@ -38,20 +38,5 @@
         "data_date": "2023-08-21 ",
         "download_data": "https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/companies/5ca45851-af59-46d7-a74c-c384fc980367",
         "company_website": "https://bevolutiongroup.com/"
-    },
-    {
-        "company": "",
-        "company_description": "",
-        "ransomware_name": "",
-        "ransomware_site": "http://4ikm4jakjgmkezytyawtdgr2xymvy6nvzgw5cglswg3si76icnqd.onion",
-        "data_description": "",
-        "data_date": "",
-        "download_data": "",
-        "company_website": "",
-        "group_url": "http://4ikm4jakjgmkezytyawtdgr2xymvy6nvzgw5cglswg3si76icnqd.onion",
-        "title": "",
-        "status_code": 404,
-        "is_active": false,
-        "date": "2023-09-30-16:59:57"
     }
 ]
