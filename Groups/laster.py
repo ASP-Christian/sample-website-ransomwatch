@@ -34,7 +34,7 @@ try:
         existing_data = []
 
     # Get the current date in the format (year, month, day)
-    current_date = datetime.now().strftime("%Y-%m-%d")
+    current_date = datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
 
     # Iterate through the data from small_sample.json
     for group_entry in data:
@@ -64,12 +64,31 @@ try:
         matching_entry = next((item for item in existing_data if 'ransomware_site' in item and item['ransomware_site'] == group_url), None)
 
         if matching_entry:
-            # Update the existing entry if a match is found
-            matching_entry['group_url'] = group_url
-            matching_entry['title'] = title
-            matching_entry['status_code'] = status_code
-            matching_entry['is_active'] = is_active
-            matching_entry['date'] = current_date
+            # Only update the entry if incoming "is_active" is True or if the existing entry has "is_active" as True
+            if is_active or matching_entry.get('is_active', False):
+                matching_entry['group_url'] = group_url
+                matching_entry['title'] = title
+                matching_entry['status_code'] = status_code
+                matching_entry['is_active'] = is_active
+                matching_entry['date'] = current_date
+        else:
+            # If no match is found, create a new entry with the required keys and "is_active" as True
+            new_item = {
+                'company': group_entry.get('company', ""),
+                'company_description': group_entry.get('company_description', ""),
+                'ransomware_name': group_entry.get('ransomware_name', ""),
+                'ransomware_site': group_url,
+                'data_description': group_entry.get('data_description', ""),
+                'data_date': group_entry.get('data_date', ""),
+                'download_data': group_entry.get('download_data', ""),
+                'company_website': group_entry.get('company_website', ""),
+                'group_url': group_url,
+                'title': title,
+                'status_code': status_code,
+                'is_active': is_active,
+                'date': current_date,
+            }
+            existing_data.append(new_item)
 
     # Save the updated data to the index file
     with open(index_file, 'w') as output_file:
