@@ -34,7 +34,10 @@ try:
         existing_data = []
 
     # Get the current date in the format (year, month, day)
-    current_date = datetime.now().strftime("%Y-%m-%d")
+    current_date = datetime.now().strftime("%Y-%m-%d-%H,%M,%S")
+
+    # Create a set to store the "ransomware_site" values from existing_data for faster lookups
+    existing_ransomware_sites = {item.get('ransomware_site', '') for item in existing_data}
 
     # Iterate through the data from small_sample.json
     for group_entry in data:
@@ -60,35 +63,19 @@ try:
         except Exception as e:
             print(f"An unexpected error occurred for {group_url}: {str(e)}")
 
-        # Search for a matching entry in existing_data based on "ransomware_site"
-        matching_entry = next((item for item in existing_data if 'ransomware_site' in item and item['ransomware_site'] == group_url), None)
+        # Check if the "ransomware_site" exists in existing_data
+        if group_url in existing_ransomware_sites:
+            # Find the matching entry in existing_data
+            matching_entry = next((item for item in existing_data if item.get('ransomware_site', '') == group_url), None)
 
-        if matching_entry:
             # Only update the entry if incoming "is_active" is True or if the existing entry has "is_active" as True
-            if is_active or matching_entry.get('is_active', False):
-                matching_entry['group_url'] = group_url
-                matching_entry['title'] = title
-                matching_entry['status_code'] = status_code
-                matching_entry['is_active'] = is_active
-                matching_entry['date'] = current_date
-        else:
-            # If no match is found, create a new entry with the required keys and "is_active" as True
-            new_item = {
-                'company': group_entry.get('company', ""),
-                'company_description': group_entry.get('company_description', ""),
-                'ransomware_name': group_entry.get('ransomware_name', ""),
-                'ransomware_site': group_url,
-                'data_description': group_entry.get('data_description', ""),
-                'data_date': group_entry.get('data_date', ""),
-                'download_data': group_entry.get('download_data', ""),
-                'company_website': group_entry.get('company_website', ""),
-                'group_url': group_url,
-                'title': title,
-                'status_code': status_code,
-                'is_active': is_active,
-                'date': current_date,
-            }
-            existing_data.append(new_item)
+            if matching_entry:
+                if is_active or matching_entry.get('is_active', False):
+                    matching_entry['group_url'] = group_url
+                    matching_entry['title'] = title
+                    matching_entry['status_code'] = status_code
+                    matching_entry['is_active'] = is_active
+                    matching_entry['date'] = current_date
 
     # Save the updated data to the index file
     with open(index_file, 'w') as output_file:
