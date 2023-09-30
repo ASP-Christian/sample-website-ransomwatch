@@ -61,34 +61,17 @@ try:
             print(f"An unexpected error occurred for {group_url}: {str(e)}")
 
         # Search for a matching entry in existing_data based on "ransomware_site"
-        for item in existing_data:
-            if 'ransomware_site' in item and item['ransomware_site'] == group_url:
-                item['group_url'] = group_url
-                item['title'] = title
-                item['status_code'] = status_code
-                item['is_active'] = is_active
-                item['date'] = current_date
-                break
-        else:
-            # If no match is found, create a new entry with the required keys
-            new_item = {
-                'company': group_entry.get('company', ""),
-                'company_description': group_entry.get('company_description', ""),
-                'ransomware_name': group_entry.get('ransomware_name', ""),
-                'ransomware_site': group_url,
-                'data_description': group_entry.get('data_description', ""),
-                'data_date': group_entry.get('data_date', ""),
-                'download_data': group_entry.get('download_data', ""),
-                'company_website': group_entry.get('company_website', ""),
-                'group_url': group_url,
-                'title': title,
-                'status_code': status_code,
-                'is_active': is_active,
-                'date': current_date,
-            }
-            existing_data.append(new_item)
+        matching_entry = next((item for item in existing_data if 'ransomware_site' in item and item['ransomware_site'] == group_url), None)
 
-    # Save the combined data to the index file
+        if matching_entry:
+            # Update the existing entry if a match is found
+            matching_entry['group_url'] = group_url
+            matching_entry['title'] = title
+            matching_entry['status_code'] = status_code
+            matching_entry['is_active'] = is_active
+            matching_entry['date'] = current_date
+
+    # Save the updated data to the index file
     with open(index_file, 'w') as output_file:
         json.dump(existing_data, output_file, indent=4)
 
