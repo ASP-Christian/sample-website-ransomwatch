@@ -34,7 +34,7 @@ try:
         existing_data = []
 
     # Get the current date in the format (year, month, day)
-    current_date = datetime.now().strftime("%Y-%m-%d-%H")
+    current_date = datetime.now().strftime("%Y-%m-%d-%H-%S")
 
     # Iterate through the data and update existing entries based on ransomware_site
     for group_entry in data:
