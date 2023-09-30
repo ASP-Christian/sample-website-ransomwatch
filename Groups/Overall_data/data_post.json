@@ -17,7 +17,12 @@
         "data_description": "River City Science Academy (RCSA) is a tuition-free, public charter school located in Duval County in Jacksonville, Florida. RCSA was founded in 2007 and currently serves grades K \u2013 12 through 4 differ EXPAND",
         "data_date": "2023-08-21 ",
         "download_data": "https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/companies/d21de1c7-286b-485d-bb66-7f889b952eff",
-        "company_website": "https://rivercityscience.org/"
+        "company_website": "https://rivercityscience.org/",
+        "group_url": "https://123123123ggg.onion/",
+        "title": "",
+        "status_code": 404,
+        "is_active": true,
+        "date": "2023-09-30-14-34"
     },
     {
         "company": "Bevolution Group",
@@ -28,19 +33,5 @@
         "data_date": "2023-08-21 ",
         "download_data": "https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/companies/5ca45851-af59-46d7-a74c-c384fc980367",
         "company_website": "https://bevolutiongroup.com/"
-    },
-    {
-        "company": null,
-        "company_description": null,
-        "ransomware_name": null,
-        "ransomware_site": null,
-        "data_description": null,
-        "data_date": null,
-        "download_data": null,
-        "group_url": "https://123123123ggg.onion/",
-        "title": "",
-        "status_code": 404,
-        "is_active": true,
-        "date": "2023-09-30-14-32"
     }
 ]
