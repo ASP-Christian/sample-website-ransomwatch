@@ -30,7 +30,7 @@ options.add_argument('-headless')
 # Create a Firefox WebDriver instance with the options
 driver = webdriver.Firefox(options=options)
 # Navigate to the website
-site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
+site = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion'
 driver.get(site)
 
 company_names = []
@@ -50,7 +50,7 @@ company_elements = driver.find_elements("xpath", '//div[@class="category-mid-pos
 for element in company_elements:
     href = element.get_attribute("href")
     if href:
-        company_websites.append(href.replace('https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/', ''))
+        company_websites.append(href.replace('https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion', ''))
     else:
         company_websites.append('n/a')
 
@@ -83,11 +83,16 @@ for i in range(len(company_names)):
             'company': company_names[i],
             'company_description': company_description[i],
             'ransomware_name': 'Magazine',
-            'ransomware_site': 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/',
+            'ransomware_site': 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion',
             'data_description': company_description[i],
             'data_date': current_date,  # Use the modified current_date
             'download_data': Data[i],
-            'company_website': company_websites[i]
+            'company_website': company_websites[i],
+            "group_url": "1",
+            "title": "1",
+            "status_code": 1,
+            "is_active": False,
+            "date": "2023-09-30"
         }
         new_entries.append(data_dict)
 
