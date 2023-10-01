@@ -64,18 +64,15 @@ try:
             print(f"An unexpected error occurred for {group_url}: {str(e)}")
 
         # Check if the "ransomware_site" exists in existing_data
-        if group_url in existing_ransomware_sites:
-            # Find the matching entry in existing_data
-            matching_entry = next((item for item in existing_data if item.get('ransomware_site', '') == group_url), None)
+        matching_entries = [item for item in existing_data if item.get('ransomware_site', '') == group_url]
 
-            # Only update the entry if incoming "is_active" is True or if the existing entry has "is_active" as True
-            if matching_entry:
-                if is_active or matching_entry.get('is_active', False):
-                    matching_entry['group_url'] = group_url
-                    matching_entry['title'] = title
-                    matching_entry['status_code'] = status_code
-                    matching_entry['is_active'] = is_active
-                    matching_entry['date'] = current_date
+        # Update all matching entries
+        for matching_entry in matching_entries:
+            matching_entry['group_url'] = group_url
+            matching_entry['title'] = title
+            matching_entry['status_code'] = status_code
+            matching_entry['is_active'] = is_active
+            matching_entry['date'] = current_date
 
     # Save the updated data to the index file
     with open(index_file, 'w') as output_file:
