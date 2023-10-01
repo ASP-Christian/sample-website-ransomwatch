@@ -31,14 +31,19 @@
             color: black;
         }
 
-        /* Adjust the width of the "Title" cell */
-        .title {
+        /* Adjust the width of the "Ransomware Name" cell */
+        .ransomware-name {
+            width: 5%;
+        }
+
+        /* Adjust the width of the "Web Title" cell */
+        .web-title {
             width: 5%;
         }
 
         /* Adjust the width of the "Status" cell */
         .status {
-            width: 0.00001%;
+            width: 0.01%;
         }
 
         /* Adjust the width of the "Code" cell */
@@ -57,7 +62,8 @@
     <table>
         <thead>
             <tr>
-                <th class="title">Title</th>
+                <th class="ransomware-name">Ransomware Name</th>
+                <th class="web-title">Web Title</th>
                 <th class="status">Status</th>
                 <th class="code">Code</th>
                 <th class="date">Date</th>
@@ -69,30 +75,50 @@
     </table>
 
     <script>
-        // Fetch data from 'index_group.json'
-        fetch('Groups/Overall_data/index_group.json')
+        // Function to open select2viewer.html with a ransomware name and update the search bar
+        function openSelect2WithRansomware(ransomwareName) {
+            // Navigate to select2viewer.html in the same window
+            window.location.href = `select2viewer.html?ransomware=${encodeURIComponent(ransomwareName)}`;
+
+            // Add logic to highlight the link in home.html's sidebar
+            const links = parent.document.querySelectorAll('a');
+            links.forEach(link => {
+                link.classList.remove('active'); // Remove 'active' class from all links
+                if (link.getAttribute('href') === 'select2.html') {
+                    link.classList.add('active'); // Add 'active' class to select2.html link
+                }
+            });
+        }
+
+        // Fetch data from 'Groups/Overall_data/data_post.json'
+        fetch('Groups/Overall_data/data_post.json')
             .then(response => response.json())
             .then(data => {
-                // Function to populate the table with data
-                function populateTable() {
-                    const dataRows = document.getElementById('dataRows');
-                    data.forEach(entry => {
+                const dataRows = document.getElementById('dataRows');
+                const uniqueRansomwareNames = {}; // To keep track of unique ransomware names
+                data.forEach(entry => {
+                    const statusClass = entry.is_active ? 'active' : 'inactive';
+
+                    // Check if the ransomware name is unique
+                    if (!uniqueRansomwareNames[entry.ransomware_name]) {
                         const row = document.createElement('tr');
-                        // Determine the class and background color based on 'is_active' field
-                        const statusClass = entry.is_active ? 'active' : 'inactive';
-                        const bgColor = entry.is_active ? 'lightgreen' : 'lightcoral';
                         row.innerHTML = `
-                            <td class="title">${entry.title}</td>
-                            <td class="status ${statusClass}" style="background-color: ${bgColor};">${entry.is_active ? 'Active' : 'Inactive'}</td>
+                            <td class="ransomware-name">
+                                <a href="javascript:void(0);" onclick="openSelect2WithRansomware('${entry.ransomware_name}')">
+                                    ${entry.ransomware_name}
+                                </a>
+                            </td>
+                            <td class="web-title">${entry.title}</td>
+                            <td class="status ${statusClass}" style="background-color: ${entry.is_active ? 'lightgreen' : 'lightcoral'}">
+                                ${entry.is_active ? 'Active' : 'Inactive'}
+                            </td>
                             <td class="code">${entry.status_code}</td>
                             <td class="date">${entry.date}</td>
                         `;
                         dataRows.appendChild(row);
-                    });
-                }
-
-                // Populate the table with the fetched data
-                populateTable();
+                        uniqueRansomwareNames[entry.ransomware_name] = true; // Mark the ransomware name as seen
+                    }
+                });
             })
             .catch(error => {
                 console.error('Error fetching JSON data:', error);
