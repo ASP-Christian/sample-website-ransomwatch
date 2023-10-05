@@ -86,7 +86,21 @@ while True:
         # if there's no "Next" button, we've reached the last page
         break
 
+indices_to_remove = []
+for i, name in enumerate(company_names):
+    if not name:
+        indices_to_remove.append(i)
 
+# remove the rows with blank Company Names
+company_names = [name for i, name in enumerate(company_names) if i not in indices_to_remove]
+Company_Description = [desc for i, desc in enumerate(company_description) if i not in indices_to_remove]
+Company_Website = [website for i, website in enumerate(Company_Website) if i not in indices_to_remove]
+Data_Leaks_Link = [link for i, link in enumerate(Data_Leaks_Link) if i not in indices_to_remove]
+dls_descriptions = [desc for i, desc in enumerate(dls_descriptions) if i not in indices_to_remove]
+dls_websites = [desc for i, desc in enumerate(dls_websites) if i not in indices_to_remove]
+dls_links = [desc for i, desc in enumerate(dls_links) if i not in indices_to_remove]
+data_leak_dates = [desc for i, desc in enumerate(data_leak_dates) if i not in indices_to_remove]
+# create the dataframe using the remaining data
 # Load existing data from the JSON file if it exists
 json_file_path = os.path.join(datas_folder, 'data_post.json')
 existing_data = []
