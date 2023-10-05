@@ -34,7 +34,7 @@ try:
         existing_data = []
 
     # Get the current date in the format (year, month, day)
-    current_date = datetime.now().strftime("%Y-%m-%d")
+    current_date = datetime.now().strftime("%Y-%m-%d-%M %S")
 
     # Create a set to store the "ransomware_site" values from existing_data for faster lookups
     existing_ransomware_sites = {item.get('ransomware_site', '') for item in existing_data}
