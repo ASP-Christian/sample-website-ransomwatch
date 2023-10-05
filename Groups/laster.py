@@ -66,13 +66,14 @@ try:
         # Check if the "ransomware_site" exists in existing_data
         matching_entries = [item for item in existing_data if item.get('ransomware_site', '') == group_url]
 
-        # Update all matching entries
+        # Update all matching entries if the statuses are different
         for matching_entry in matching_entries:
-            matching_entry['group_url'] = group_url
-            matching_entry['title'] = title
-            matching_entry['status_code'] = status_code
-            matching_entry['is_active'] = is_active
-            matching_entry['date'] = current_date
+            if matching_entry['is_active'] != is_active:
+                matching_entry['group_url'] = group_url
+                matching_entry['title'] = title
+                matching_entry['status_code'] = status_code
+                matching_entry['is_active'] = is_active
+                matching_entry['date'] = current_date
 
     # Save the updated data to the index file
     with open(index_file, 'w') as output_file:
