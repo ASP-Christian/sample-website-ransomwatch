@@ -66,7 +66,7 @@ try:
         # Check if the "ransomware_site" exists in existing_data
         matching_entries = [item for item in existing_data if item.get('ransomware_site', '') == group_url]
 
-        # Update all matching entries if the status has changed
+        # Update all matching entries if the status changes
         for matching_entry in matching_entries:
             if matching_entry['is_active'] != is_active:
                 matching_entry['group_url'] = group_url
@@ -74,7 +74,6 @@ try:
                 matching_entry['status_code'] = status_code
                 matching_entry['is_active'] = is_active
                 matching_entry['date'] = current_date
-
     # Save the updated data to the index file
     with open(index_file, 'w') as output_file:
         json.dump(existing_data, output_file, indent=4)
