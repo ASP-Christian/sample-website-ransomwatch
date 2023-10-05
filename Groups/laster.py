@@ -66,9 +66,9 @@ try:
         # Check if the "ransomware_site" exists in existing_data
         matching_entries = [item for item in existing_data if item.get('ransomware_site', '') == group_url]
 
-        # Update matching entries if the old status is inactive and the new status is also inactive
+        # Update all matching entries if the status has changed and it's not both "Inactive"
         for matching_entry in matching_entries:
-            if not matching_entry['is_active'] and not is_active:
+            if matching_entry['is_active'] != is_active and not (matching_entry['is_active'] == False and is_active == False):
                 matching_entry['group_url'] = group_url
                 matching_entry['title'] = title
                 matching_entry['status_code'] = status_code
