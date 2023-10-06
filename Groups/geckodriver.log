@@ -15141,3 +15141,36 @@ console.error: RemoteSecuritySettings.jsm:
   Failed to download attachment: TypeError: NetworkError: Network request failed
 console.error: RemoteSecuritySettings.jsm: 
   Failed to download attachment: TypeError: NetworkError: Network request failed
+1696560239108	geckodriver	INFO	Listening on 127.0.0.1:55306
+1696560242177	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--remote-debugging-port" "55307" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\calgo\\AppData\\Local\\Temp\\rust_mozprofileWyti3Y"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1696560242690	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+WebDriver BiDi listening on ws://localhost:55307
+1696560242758	Marionette	INFO	Listening on port 55323
+Read port: 55323
+1696560242958	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+DevTools listening on ws://localhost:55307/devtools/browser/5f64693c-e4ac-44d9-b8a3-1932aac37c70
+console.error: Region.sys.mjs: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.sys.mjs", 759))
+console.error: Region.sys.mjs: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.sys.mjs", 411))
+1696560248502	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1696560313121	geckodriver	INFO	Listening on 127.0.0.1:55476
+1696560316180	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-headless" "--remote-debugging-port" "55477" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\calgo\\AppData\\Local\\Temp\\rust_mozprofile6AaBHv"
+*** You are running in headless mode.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1696560316563	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+WebDriver BiDi listening on ws://localhost:55477
+1696560316643	Marionette	INFO	Listening on port 55489
+Read port: 55489
+1696560316845	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.error: ({})
+DevTools listening on ws://localhost:55477/devtools/browser/dd006844-03be-47d2-9eb2-166f72d9e250
+1696560333908	Marionette	INFO	Stopped listening on port 55489
+Dynamically enable window occlusion 1
