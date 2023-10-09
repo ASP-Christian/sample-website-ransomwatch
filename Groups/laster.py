@@ -5,6 +5,7 @@ from stem.control import Controller
 from bs4 import BeautifulSoup
 import json
 from datetime import datetime
+import time  # Import the time module
 
 # Function to renew the TOR IP address
 def renew_tor_ip():
@@ -48,6 +49,7 @@ try:
 
         try:
             renew_tor_ip()
+            time.sleep(20)  # Wait for 20 seconds before making the request
             response = requests.get(group_url, proxies=tor_proxy, verify=False)
 
             status_code = response.status_code
