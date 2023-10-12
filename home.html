@@ -6,7 +6,7 @@
     <title>Main Website</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             display: flex;
             flex-direction: row;
             margin: 0;
@@ -46,8 +46,9 @@
             color: #fff;
             text-decoration: none;
             display: block;
-            padding: 5px; /* Add some padding to make the links clickable */
+            padding: 10px 20px; /* Increase padding for better clickability */
             border-radius: 5px; /* Add rounded corners */
+            transition: background-color 0.3s; /* Smooth transition for hover effect */
         }
 
         a:hover {
@@ -59,33 +60,28 @@
             background-color: #555;
             font-weight: bold;
         }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Style for the website title */
+        #sidebar h1 {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <div id="sidebar">
-        <h1>Rnsm-Srch</h1>
+        <h1>Main Website</h1>
         <ul>
-            <!-- Existing Rnsm-Srch -->
             <li><a href="index.html" target="contentFrame">Start</a></li>
-
             <li><a href="select3.html" target="contentFrame">Search Victim</a></li>
-
             <li><a href="select2.html" target="contentFrame">Search Group</a></li>
-
             <li><a href="dashboard.html" target="contentFrame">Data Charts</a></li>
-
             <li><a href="recent4.html" target="contentFrame">Recent Uploads</a></li>
-
             <li><a href="active_inactive.html" target="contentFrame">Group Index</a></li>
-            
-
-
-
-            <!-- New Rnsm-Srch -->
-
-
-
-
         </ul>
     </div>
     <div id="content">
