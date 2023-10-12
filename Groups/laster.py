@@ -49,7 +49,7 @@ try:
 
         try:
             renew_tor_ip()
-            time.sleep(5)  # Add a delay to avoid overwhelming the TOR network
+            time.sleep(40)  # Add a delay to avoid overwhelming the TOR network
 
             response = requests.get(group_url, proxies=tor_proxy, verify=False)
 
