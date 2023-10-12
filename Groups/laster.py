@@ -5,21 +5,12 @@ from stem.control import Controller
 from bs4 import BeautifulSoup
 import json
 from datetime import datetime
-import time
 
 # Function to renew the TOR IP address
 def renew_tor_ip():
     with Controller.from_port(port=9051) as controller:
         controller.authenticate(password="YOUR_TOR_PASSWORD")
         controller.signal(Signal.NEWNYM)
-
-# Function to make requests through TOR
-def tor_request(url):
-    renew_tor_ip()  # Renew the TOR IP before each request
-    session = requests.session()
-    session.proxies = tor_proxy
-    session.verify = False
-    return session.get(url)
 
 # TOR proxy settings
 tor_proxy = {
@@ -56,7 +47,8 @@ try:
         is_active = False
 
         try:
-            response = tor_request(group_url)
+            renew_tor_ip()
+            response = requests.get(group_url, proxies=tor_proxy, verify=False)
 
             status_code = response.status_code
 
