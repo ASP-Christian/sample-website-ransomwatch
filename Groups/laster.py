@@ -5,6 +5,7 @@ from stem.control import Controller
 from bs4 import BeautifulSoup
 import json
 from datetime import datetime
+import time
 
 # Function to renew the TOR IP address
 def renew_tor_ip():
@@ -48,6 +49,8 @@ try:
 
         try:
             renew_tor_ip()
+            time.sleep(5)  # Add a delay to avoid overwhelming the TOR network
+
             response = requests.get(group_url, proxies=tor_proxy, verify=False)
 
             status_code = response.status_code
@@ -85,4 +88,3 @@ except FileNotFoundError:
     print(f"File '{json_file}' not found.")
 except Exception as e:
     print(f"An unexpected error occurred: {str(e)}")
-print(existing_data)
