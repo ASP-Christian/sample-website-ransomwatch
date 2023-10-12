@@ -13,6 +13,14 @@ def renew_tor_ip():
         controller.authenticate(password="YOUR_TOR_PASSWORD")
         controller.signal(Signal.NEWNYM)
 
+# Function to make requests through TOR
+def tor_request(url):
+    renew_tor_ip()  # Renew the TOR IP before each request
+    session = requests.session()
+    session.proxies = tor_proxy
+    session.verify = False
+    return session.get(url)
+
 # TOR proxy settings
 tor_proxy = {
     'http': 'socks5h://localhost:9050',
@@ -48,10 +56,7 @@ try:
         is_active = False
 
         try:
-            renew_tor_ip()
-            time.sleep(40)  # Add a delay to avoid overwhelming the TOR network
-
-            response = requests.get(group_url, proxies=tor_proxy, verify=False)
+            response = tor_request(group_url)
 
             status_code = response.status_code
 
@@ -88,4 +93,3 @@ except FileNotFoundError:
     print(f"File '{json_file}' not found.")
 except Exception as e:
     print(f"An unexpected error occurred: {str(e)}")
-print(existing_data)
