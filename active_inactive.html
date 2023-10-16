@@ -5,60 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Display</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin: 0;
+        }
         table {
             border-collapse: collapse;
-            width: 100%;
+            width: 98%;
             margin: 10px auto;
         }
-
         th, td {
             border: 1px solid #ccc;
             padding: 8px;
             text-align: left;
         }
-
         th {
             background-color: #f2f2f2;
         }
-
+        .active, .inactive {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
         .active {
             background-color: lightgreen;
             color: black;
         }
-
         .inactive {
             background-color: lightcoral;
             color: black;
         }
-
-        /* Adjust the width of the "Ransomware Name" cell */
         .ransomware-name {
-            width: 5%;
+            width: 20%;
         }
-
-        /* Adjust the width of the "Web Title" cell */
         .web-title {
-            width: 5%;
+            width: 25%;
         }
-
-        /* Adjust the width of the "Status" cell */
         .status {
-            width: 0.01%;
+            width: 10%;
         }
-
-        /* Adjust the width of the "Code" cell */
         .code {
-            width: 5%;
+            width: 10%;
+        }
+        .date {
+            width: 15%;
         }
 
-        /* Adjust the width of the "Date" cell */
-        .date {
-            width: 5%;
+                /* Remove underline for Company name links */
+        table a {
+            text-decoration: none;
+            color: #0074d9;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <h1>Data Display</h1>
+    <h1>Group Status</h1>
     <table>
         <thead>
             <tr>

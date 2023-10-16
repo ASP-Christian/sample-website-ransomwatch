@@ -4,22 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            margin: 0;
+        }
+        main {
+            padding: 20px;
+        }
+        #summary {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        /* Style the titles in black and the values in red */
+        #summary p {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+    </style>
 </head>
 <body>
     <header>
-        <h1>Home</h1>
-        <div id="summary"></div>
+        <h1>Data Summary</h1>
     </header>
     <main>
         <!-- Add other sections or content here as needed -->
     </main>
+
+    <div id="summary">
+        <p><span class="title">Total Ransomware Groups:</span> <span class="value" style="color: red;">20</span></p>
+        <p><span class="title">Total Companies:</span> <span class="value" style="color: red;">3229</span></p>
+    </div>
 
     <script>
         // JavaScript code to fetch and display JSON data
         fetch('Groups/Overall_data/data_post.json')
             .then(response => response.json())
             .then(data => {
-                // Calculate unique counts
                 const uniqueRansomwareNames = new Set();
                 const uniqueCompanies = new Set();
 
@@ -28,11 +65,10 @@
                     uniqueCompanies.add(entry.company);
                 });
 
-                // Display summary
                 const summaryElement = document.getElementById('summary');
                 summaryElement.innerHTML = `
-                    <p>Current number of Unique Count of ransomware_name: ${uniqueRansomwareNames.size}</p>
-                    <p>Count of company: ${uniqueCompanies.size}</p>
+                    <p><span class="title">Total Ransomware Groups:</span> <span class="value" style="color: red;">${uniqueRansomwareNames.size}</span></p>
+                    <p><span class="title">Total Companies:</span> <span class="value" style="color: red;">${uniqueCompanies.size}</span></p>
                 `;
             })
             .catch(error => {

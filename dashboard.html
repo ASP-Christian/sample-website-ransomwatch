@@ -7,28 +7,43 @@
     <!-- Include Chart.js library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        canvas {
-            max-width: 6000px;
-            margin: 100px;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
         }
-        #pieChartContainer {
-            max-width: 600px; /* Adjust the maximum width as needed for the pie chart */
-            margin: 20px;
+        h1 {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin: 0;
+        }
+        canvas {
+            display: block;
+            margin: 0 auto;
+        }
+        #chartContainer {
+            max-width: 800px;
+            margin: 20px auto;
         }
     </style>
 </head>
 <body>
     <h1>Dashboard</h1>
 
-    <!-- Bar Chart -->
-    <div>
-        <canvas id="barChart"></canvas>
-    </div>
+    <!-- Chart Container -->
+    <div id="chartContainer">
+        <!-- Bar Chart -->
+        <div>
+            <canvas id="barChart"></canvas>
+        </div>
 
-    <!-- Pie Chart -->
-    <div id="pieChartContainer">
-        <canvas id="pieChart" width="300" height="300"></canvas> <!-- Adjust the width and height attributes for the pie chart -->
-        <div id="pieChartLabel" style="text-align: center; margin-top: 10px; font-weight: bold;">Ransomware Distribution</div>
+        <!-- Pie Chart -->
+        <div>
+            <canvas id="pieChart"></canvas>
+        </div>
     </div>
 
     <script>
