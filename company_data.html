@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Company Data</title>
+    <link rel="icon" type="image/png" href="targeted01.png">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -67,10 +68,10 @@
                 const filteredData = data.filter(entry => entry.company === companyName);
                 filteredData.forEach(entry => {
                     for (const key in entry) {
-                        if (entry.hasOwnProperty(key)) {
+                        if (entry.hasOwnProperty(key) && key !== 'date' && key !== 'is_active' && key !== 'status_code') {
                             const row = document.createElement('tr');
                             row.innerHTML = `
-                                <td>${key}</td>
+                                <td style="font-weight: bold; color: #8B00FF;">${key}</td>
                                 <td>${entry[key]}</td>
                             `;
                             companyDataRows.appendChild(row);

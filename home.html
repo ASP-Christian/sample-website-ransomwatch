@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Website</title>
+    <title>Main</title>
+
+    <!-- Add the link to the favicon -->
+    <link rel="icon" href="logo1.png" type="image/png">
+
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -51,30 +55,44 @@
             transition: background-color 0.3s; /* Smooth transition for hover effect */
         }
 
-        a:hover {
-            background-color: #555; /* Change background color on hover */
+        /* Hover effect for other links */
+        a:hover, a.active {
+            background-color: #555; /* Change background color on hover and active */
         }
 
-        /* Style for the active link */
-        a.active {
-            background-color: #555;
-            font-weight: bold;
+        /* Add this style to remove underline on hover for specific links */
+        #sidebar a {
+            text-decoration: none;
         }
 
         h1 {
             font-size: 24px;
             margin-bottom: 20px;
+            cursor: pointer; /* Add cursor pointer to make it look clickable */
         }
 
         /* Style for the website title */
         #sidebar h1 {
             text-align: center;
         }
+
+        /* Style for the sidebar logo */
+        #sidebar img {
+            width: 100px; /* Adjust the width as needed */
+            height: 100px; /* Adjust the height as needed */
+            display: block; /* To center the image */
+            margin: 0 auto; /* To center the image */
+            margin-bottom: 20px; /* Spacing below the logo */
+            cursor: pointer; /* Add cursor pointer to make it look clickable */
+        }
     </style>
 </head>
 <body>
     <div id="sidebar">
-        <h1>Rnsm Search</h1>
+        <a href="select3.html" target="contentFrame">
+            <img src="logo_in.png" alt="Rnsm Search Logo" width="100" height="100">
+            <h1>Rnsm Search</h1>
+        </a>
         <ul>
             <li><a href="index.html" target="contentFrame">Start</a></li>
             <li><a href="dashboard.html" target="contentFrame">Data Charts</a></li>
@@ -87,20 +105,16 @@
     <div id="content">
         <iframe name="contentFrame" src="index.html"></iframe>
     </div>
-
     <script>
         // JavaScript to highlight the active link
         const links = document.querySelectorAll('a');
         const iframe = document.querySelector('iframe[name="contentFrame"]');
-
         links.forEach(link => {
             link.addEventListener('click', () => {
                 // Remove the "active" class from all links
                 links.forEach(otherLink => otherLink.classList.remove('active'));
-
                 // Add the "active" class to the clicked link
-                link.classList.add('active');
-
+                link.classList add('active');
                 // Update the iframe source to the clicked link's href
                 iframe.src = link.href;
             });
