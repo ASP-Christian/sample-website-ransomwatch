@@ -1,5 +1,5 @@
 from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
 import pandas as pd
 import time
 import json
@@ -45,33 +45,38 @@ company_names = []
 urls = []
 company_descriptions = []
 
-# Iterate over the data_elements, click, and scrape company names and hrefs
 while True:
     for data_element in data_elements:
-        # Click on the data_element
-        data_element.click()
-
-        # Extract the company name
-        desc_element = driver.find_element("xpath", '//div[@class="company_body"]')
-        desc_name = desc_element.text
-        company_descriptions.append(desc_name)
-
-        company_element = driver.find_element("xpath", '//div[@class="company_title"]')
-        company_name = company_element.text
-        company_names.append(company_name)
-
-        # Find the href element
         try:
-            href_element = driver.find_element("xpath", '//iframe[@class="bastaframe"]')
-            href = href_element.get_attribute("src")
-        except NoSuchElementException:
-            href = driver.current_url
+            # Click on the data_element
+            data_element.click()
 
-        urls.append(href)
+            # Extract the company name
+            desc_element = driver.find_element("xpath", '//div[@class="company_body"]')
+            desc_name = desc_element.text
+            company_descriptions.append(desc_name)
 
-        # Press ESC key
-        close = driver.find_element("xpath", '//div[@class="close_container"]/img')
-        close.click()
+            company_element = driver.find_element("xpath", '//div[@class="company_title"]')
+            company_name = company_element.text
+            company_names.append(company_name)
+
+            # Find the href element
+            try:
+                href_element = driver.find_element("xpath", '//iframe[@class="bastaframe"]')
+                href = href_element.get_attribute("src")
+            except NoSuchElementException:
+                href = driver.current_url
+
+            urls.append(href)
+
+            # Press ESC key
+            close = driver.find_element("xpath", '//div[@class="close_container"]/img')
+            close.click()
+
+        except StaleElementReferenceException:
+            # Handle the exception by refreshing the data_elements
+            data_elements = driver.find_elements("xpath", '//div[@class="action"]/button')
+            continue
 
     # Check if the next page button exists
     try:
