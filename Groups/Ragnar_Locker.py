@@ -126,7 +126,7 @@ for i in range(len(Company)):
             "group_url": "1",
             "title": "1",
             "status_code": 1,
-            "is_active": False,
+            "is_active": True,
             "date": "2023-09-30"
         }
         new_entries.append(data_dict)
