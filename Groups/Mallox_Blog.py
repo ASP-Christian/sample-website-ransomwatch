@@ -1,6 +1,6 @@
 
 from selenium.common.exceptions import NoSuchElementException
-from datetime import datetime
+
 from selenium import webdriver
 import json
 from datetime import datetime

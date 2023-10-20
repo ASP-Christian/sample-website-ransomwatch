@@ -1,8 +1,6 @@
 from selenium import webdriver
 import json
-from datetime import datetime
 import os
-import pytz
 import time
 
 # Set the working directory to the directory where your script is located

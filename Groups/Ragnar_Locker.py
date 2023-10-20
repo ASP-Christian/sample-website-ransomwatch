@@ -1,12 +1,10 @@
 from tqdm import tqdm
 from selenium import webdriver
-import pandas as pd
-import time
-from selenium import webdriver
 import json
 from datetime import datetime
 import os
 import pytz
+
 
 # Set the working directory to the directory where your script is located
 script_dir = os.path.dirname(os.path.abspath(__file__))

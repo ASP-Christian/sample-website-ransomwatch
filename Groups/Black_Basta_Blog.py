@@ -1,6 +1,6 @@
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
-import pandas as pd
+
 import time
 import json
 from datetime import datetime

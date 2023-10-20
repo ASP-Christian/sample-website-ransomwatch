@@ -6,7 +6,7 @@ scripts_to_run = [
     'ALPHV.py',
     'Babuk_leak_site.py',
     'BB_Auction.py',
-    'bianlian.py',
+    'Bianlian.py',
     'Black_Basta_Blog.py',
     'Cuba.py',
     'D#nuts.py',

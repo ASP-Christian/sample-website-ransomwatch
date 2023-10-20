@@ -1,5 +1,4 @@
-from selenium import webdriver
-import pandas as pd
+
 import time
 from tqdm import tqdm
 from selenium import webdriver
