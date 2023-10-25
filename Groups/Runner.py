@@ -21,6 +21,7 @@ scripts_to_run = [
     'MONTI_Leak_site.py',
     'Quantum_Blog.py',
     'Ragnar_Locker.py',
+    'Ransomhouse.py',
     'Snatch.py',
 ]
 
