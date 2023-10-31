@@ -22,6 +22,8 @@ scripts_to_run = [
     'Quantum_Blog.py',
     'Ragnar_Locker.py',
     'Ransomhouse.py',
+    'ransomexx2.py',
+    'Ransomware_Blog.py'
     'Snatch.py',
 ]
 
