@@ -12,7 +12,7 @@
         "title": "",
         "status_code": 200,
         "is_active": true,
-        "date": "2023-10-31"
+        "date": "2023-11-01"
     },
     {
         "company": "VOLEX.COM",
@@ -57,7 +57,7 @@
         "title": "Medusa Blog",
         "status_code": 200,
         "is_active": true,
-        "date": "2023-10-31"
+        "date": "2023-11-01"
     },
     {
         "company": "Prasan Enterprises",
@@ -69,10 +69,10 @@
         "download_data": "http://bianlianlbc5an4kgnay3opdemgcryg2kpfcbgczopmm3dnbz3uaunad.onion/companies/prasan.net/",
         "company_website": "N/A",
         "group_url": "http://bianlianlbc5an4kgnay3opdemgcryg2kpfcbgczopmm3dnbz3uaunad.onion",
-        "title": "BianLian | Home",
-        "status_code": 200,
-        "is_active": true,
-        "date": "2023-10-31"
+        "title": "",
+        "status_code": 404,
+        "is_active": false,
+        "date": "2023-11-01"
     },
     {
         "company": "N****",
@@ -84,10 +84,10 @@
         "download_data": "http://bianlianlbc5an4kgnay3opdemgcryg2kpfcbgczopmm3dnbz3uaunad.onion/companies/n____.com/",
         "company_website": "N/A",
         "group_url": "http://bianlianlbc5an4kgnay3opdemgcryg2kpfcbgczopmm3dnbz3uaunad.onion",
-        "title": "BianLian | Home",
-        "status_code": 200,
-        "is_active": true,
-        "date": "2023-10-31"
+        "title": "",
+        "status_code": 404,
+        "is_active": false,
+        "date": "2023-11-01"
     },
     {
         "company": "B*****",
@@ -99,10 +99,10 @@
         "download_data": "http://bianlianlbc5an4kgnay3opdemgcryg2kpfcbgczopmm3dnbz3uaunad.onion/companies/b_____.com/",
         "company_website": "N/A",
         "group_url": "http://bianlianlbc5an4kgnay3opdemgcryg2kpfcbgczopmm3dnbz3uaunad.onion",
-        "title": "BianLian | Home",
-        "status_code": 200,
-        "is_active": true,
-        "date": "2023-10-31"
+        "title": "",
+        "status_code": 404,
+        "is_active": false,
+        "date": "2023-11-01"
     },
     {
         "company": "Auswide Services",
@@ -114,10 +114,10 @@
         "download_data": "http://bianlianlbc5an4kgnay3opdemgcryg2kpfcbgczopmm3dnbz3uaunad.onion/companies/auswideservices.net/",
         "company_website": "N/A",
         "group_url": "http://bianlianlbc5an4kgnay3opdemgcryg2kpfcbgczopmm3dnbz3uaunad.onion",
-        "title": "BianLian | Home",
-        "status_code": 200,
-        "is_active": true,
-        "date": "2023-10-31"
+        "title": "",
+        "status_code": 404,
+        "is_active": false,
+        "date": "2023-11-01"
     },
     {
         "company": "TNT Plastic Molding",
@@ -129,10 +129,10 @@
         "download_data": "http://bianlianlbc5an4kgnay3opdemgcryg2kpfcbgczopmm3dnbz3uaunad.onion/companies/tntplasticmolding.com/",
         "company_website": "N/A",
         "group_url": "http://bianlianlbc5an4kgnay3opdemgcryg2kpfcbgczopmm3dnbz3uaunad.onion",
-        "title": "BianLian | Home",
-        "status_code": 200,
-        "is_active": true,
-        "date": "2023-10-31"
+        "title": "",
+        "status_code": 404,
+        "is_active": false,
+        "date": "2023-11-01"
     },
     {
         "company": "Jebsen & Co. Ltd.",
@@ -144,10 +144,10 @@
         "download_data": "http://bianlianlbc5an4kgnay3opdemgcryg2kpfcbgczopmm3dnbz3uaunad.onion/companies/jebsen.com/",
         "company_website": "N/A",
         "group_url": "http://bianlianlbc5an4kgnay3opdemgcryg2kpfcbgczopmm3dnbz3uaunad.onion",
-        "title": "BianLian | Home",
-        "status_code": 200,
-        "is_active": true,
-        "date": "2023-10-31"
+        "title": "",
+        "status_code": 404,
+        "is_active": false,
+        "date": "2023-11-01"
     },
     {
         "company": "International Biomedical Ltd",
@@ -159,10 +159,10 @@
         "download_data": "http://bianlianlbc5an4kgnay3opdemgcryg2kpfcbgczopmm3dnbz3uaunad.onion/companies/int-bio.com/",
         "company_website": "N/A",
         "group_url": "http://bianlianlbc5an4kgnay3opdemgcryg2kpfcbgczopmm3dnbz3uaunad.onion",
-        "title": "BianLian | Home",
-        "status_code": 200,
-        "is_active": true,
-        "date": "2023-10-31"
+        "title": "",
+        "status_code": 404,
+        "is_active": false,
+        "date": "2023-11-01"
     },
     {
         "company": "Griffing & Company, P.C",
@@ -174,10 +174,10 @@
         "download_data": "http://bianlianlbc5an4kgnay3opdemgcryg2kpfcbgczopmm3dnbz3uaunad.onion/companies/griffing.com/",
         "company_website": "N/A",
         "group_url": "http://bianlianlbc5an4kgnay3opdemgcryg2kpfcbgczopmm3dnbz3uaunad.onion",
-        "title": "BianLian | Home",
-        "status_code": 200,
-        "is_active": true,
-        "date": "2023-10-31"
+        "title": "",
+        "status_code": 404,
+        "is_active": false,
+        "date": "2023-11-01"
     },
     {
         "company": "Dow Golub Remels & Gilbreath",
@@ -189,10 +189,10 @@
         "download_data": "http://bianlianlbc5an4kgnay3opdemgcryg2kpfcbgczopmm3dnbz3uaunad.onion/companies/dowgolub.com/",
         "company_website": "N/A",
         "group_url": "http://bianlianlbc5an4kgnay3opdemgcryg2kpfcbgczopmm3dnbz3uaunad.onion",
-        "title": "BianLian | Home",
-        "status_code": 200,
-        "is_active": true,
-        "date": "2023-10-31"
+        "title": "",
+        "status_code": 404,
+        "is_active": false,
+        "date": "2023-11-01"
     },
     {
         "company": "** P*************s, Inc",
@@ -204,9 +204,234 @@
         "download_data": "http://bianlianlbc5an4kgnay3opdemgcryg2kpfcbgczopmm3dnbz3uaunad.onion/companies/k____.com/",
         "company_website": "N/A",
         "group_url": "http://bianlianlbc5an4kgnay3opdemgcryg2kpfcbgczopmm3dnbz3uaunad.onion",
-        "title": "BianLian | Home",
+        "title": "",
+        "status_code": 404,
+        "is_active": false,
+        "date": "2023-11-01"
+    },
+    {
+        "company": "ageroute.sn",
+        "company_description": "AGEROUTE Senegal is in charge of the implementation of all construction, rehabilitation, and maintenance of roads, bridges and other structures as well as the management of the classified road network.",
+        "ransomware_name": "LockBIT BLOG",
+        "ransomware_site": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "data_description": "AGEROUTE Senegal is in charge of the implementation of all construction, rehabilitation, and maintenance of roads, bridges and other structures as well as the management of the classified road network.",
+        "data_date": "2023-10-31 ",
+        "download_data": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion/post/EfKUERg2EoT2YMbd6541092fc3c3a",
+        "company_website": "https://ageroute.sn",
+        "group_url": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "title": "LockBit Anti-DDoS",
         "status_code": 200,
         "is_active": true,
-        "date": "2023-10-31"
+        "date": "2023-11-01"
+    },
+    {
+        "company": "bildco.ae",
+        "company_description": "Abu Dhabi National Building Materials Co. (BILDCO) Is A Public Shareholding Company, Established By Well-known Nationals, Subscribing To The Shares. Over The Past Four Decades BILDCO Has Honor To Contribute To The Growth And Building Infrastructure O...",
+        "ransomware_name": "LockBIT BLOG",
+        "ransomware_site": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "data_description": "Abu Dhabi National Building Materials Co. (BILDCO) Is A Public Shareholding Company, Established By Well-known Nationals, Subscribing To The Shares. Over The Past Four Decades BILDCO Has Honor To Contribute To The Growth And Building Infrastructure O...",
+        "data_date": "2023-10-31 ",
+        "download_data": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion/post/ludn2wPhxoaS4bdH6541049814b22",
+        "company_website": "https://bildco.ae",
+        "group_url": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "title": "LockBit Anti-DDoS",
+        "status_code": 200,
+        "is_active": true,
+        "date": "2023-11-01"
+    },
+    {
+        "company": "utec.com.sa",
+        "company_description": "United Transformers Electric Company (Utec), a subsidiary of Bawan, was founded in 2001 as a limited liability company. Over the past few years, Utec has built a strong presence in the local, regional and international markets as a leading company in...",
+        "ransomware_name": "LockBIT BLOG",
+        "ransomware_site": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "data_description": "United Transformers Electric Company (Utec), a subsidiary of Bawan, was founded in 2001 as a limited liability company. Over the past few years, Utec has built a strong presence in the local, regional and international markets as a leading company in...",
+        "data_date": "2023-10-31 ",
+        "download_data": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion/post/mInlFWzcwMEjieAM6540fca12d8c2",
+        "company_website": "https://utec.com.sa",
+        "group_url": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "title": "LockBit Anti-DDoS",
+        "status_code": 200,
+        "is_active": true,
+        "date": "2023-11-01"
+    },
+    {
+        "company": "riohondo.edu",
+        "company_description": "R\u00edo Hondo College is an educational and community partner committed to advancing social justice and equity as an antiracist institution that collectively invests in all students\u2019 academic and career pathways that lead to attainment of degree, certifi...",
+        "ransomware_name": "LockBIT BLOG",
+        "ransomware_site": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "data_description": "R\u00edo Hondo College is an educational and community partner committed to advancing social justice and equity as an antiracist institution that collectively invests in all students\u2019 academic and career pathways that lead to attainment of degree, certifi...",
+        "data_date": "2023-10-31 ",
+        "download_data": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion/post/E0bNNV7fbl4RK6Yj6540f9796bf80",
+        "company_website": "https://riohondo.edu",
+        "group_url": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "title": "LockBit Anti-DDoS",
+        "status_code": 200,
+        "is_active": true,
+        "date": "2023-11-01"
+    },
+    {
+        "company": "smartuigroup.com.au",
+        "company_description": "SmartUi was founded by three guys with slightly different skillsets that all share a passion for helping business owners future-proof their businesses. We came together with the strong belief we could provide more adaptable and flexible automation so...",
+        "ransomware_name": "LockBIT BLOG",
+        "ransomware_site": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "data_description": "SmartUi was founded by three guys with slightly different skillsets that all share a passion for helping business owners future-proof their businesses. We came together with the strong belief we could provide more adaptable and flexible automation so...",
+        "data_date": "2023-10-31 ",
+        "download_data": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion/post/9setA9NlOQkI1lSZ6540ee2a8ca22",
+        "company_website": "https://smartuigroup.com.au",
+        "group_url": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "title": "LockBit Anti-DDoS",
+        "status_code": 200,
+        "is_active": true,
+        "date": "2023-11-01"
+    },
+    {
+        "company": "aiq.com.mx",
+        "company_description": "Aeropuerto Internacional de Quer\u00e9taro - Business Information",
+        "ransomware_name": "LockBIT BLOG",
+        "ransomware_site": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "data_description": "Aeropuerto Internacional de Quer\u00e9taro - Business Information",
+        "data_date": "2023-10-31 ",
+        "download_data": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion/post/bj9ns3qflI85o950654007e525b6e",
+        "company_website": "https://aiq.com.mx",
+        "group_url": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "title": "LockBit Anti-DDoS",
+        "status_code": 200,
+        "is_active": true,
+        "date": "2023-11-01"
+    },
+    {
+        "company": "aces-int.com",
+        "company_description": "At ACES, we offer a wide range of specialized engineering services including site and geotechnical investigation, materials technology and testing, quality control of projects, special studies, land and marine surveying, and chemical and environment...",
+        "ransomware_name": "LockBIT BLOG",
+        "ransomware_site": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "data_description": "At ACES, we offer a wide range of specialized engineering services including site and geotechnical investigation, materials technology and testing, quality control of projects, special studies, land and marine surveying, and chemical and environment...",
+        "data_date": "2023-10-31 ",
+        "download_data": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion/post/Wl4dqqOkhUyTig9h653ff6cc164cd",
+        "company_website": "https://aces-int.com",
+        "group_url": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "title": "LockBit Anti-DDoS",
+        "status_code": 200,
+        "is_active": true,
+        "date": "2023-11-01"
+    },
+    {
+        "company": "groupemontclair.com",
+        "company_description": "Building communities for more than 75 years Groupe Montclair not only builds high-quality residences, but also seeks to reduce the ecological footprint of each one by taking this aspect into account when planning and constructing these projects",
+        "ransomware_name": "LockBIT BLOG",
+        "ransomware_site": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "data_description": "Building communities for more than 75 years Groupe Montclair not only builds high-quality residences, but also seeks to reduce the ecological footprint of each one by taking this aspect into account when planning and constructing these projects",
+        "data_date": "2023-10-31 ",
+        "download_data": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion/post/RBFgaJ2z7QoAzxk5653fc1f0a67a5",
+        "company_website": "https://groupemontclair.com",
+        "group_url": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "title": "LockBit Anti-DDoS",
+        "status_code": 200,
+        "is_active": true,
+        "date": "2023-11-01"
+    },
+    {
+        "company": "frontlineequipment.com.au",
+        "company_description": "Frontline Equipment Maintenance Pty Ltd is based in Mackay, Queensland and owned/operated by Craig Garth and Tim Granter. Between them, Craig and Tim have more than 60 years of experience within the industry, and a wealth of knowledge across all aspe...",
+        "ransomware_name": "LockBIT BLOG",
+        "ransomware_site": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "data_description": "Frontline Equipment Maintenance Pty Ltd is based in Mackay, Queensland and owned/operated by Craig Garth and Tim Granter. Between them, Craig and Tim have more than 60 years of experience within the industry, and a wealth of knowledge across all aspe...",
+        "data_date": "2023-10-31 ",
+        "download_data": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion/post/L4sCa4MjJP2kuGyx653fbf1475f84",
+        "company_website": "https://frontlineequipment.com.au",
+        "group_url": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "title": "LockBit Anti-DDoS",
+        "status_code": 200,
+        "is_active": true,
+        "date": "2023-11-01"
+    },
+    {
+        "company": "ecabusinessenergy.com",
+        "company_description": "Business energy services We provide independent electricity, gas, water procurement advice, carbon management and Net0 strategies and compliance services to businesses throughout the UK We have downloaded a lot of private data: accounting, conf...",
+        "ransomware_name": "LockBIT BLOG",
+        "ransomware_site": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "data_description": "Business energy services We provide independent electricity, gas, water procurement advice, carbon management and Net0 strategies and compliance services to businesses throughout the UK We have downloaded a lot of private data: accounting, conf...",
+        "data_date": "2023-10-31 ",
+        "download_data": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion/post/SiULXPsyDHKwa8bX653fbe4825540",
+        "company_website": "https://ecabusinessenergy.com",
+        "group_url": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "title": "LockBit Anti-DDoS",
+        "status_code": 200,
+        "is_active": true,
+        "date": "2023-11-01"
+    },
+    {
+        "company": "mottamaholdings.com",
+        "company_description": "Mottama Holdings Ltd is one of the largest conglomerates in Myanmar specializing in industries such as Construction, Manufacturing, Trading and Property Development.With a robust vision and deep commitment to helping the nation grow, Mottama Holdings...",
+        "ransomware_name": "LockBIT BLOG",
+        "ransomware_site": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "data_description": "Mottama Holdings Ltd is one of the largest conglomerates in Myanmar specializing in industries such as Construction, Manufacturing, Trading and Property Development.With a robust vision and deep commitment to helping the nation grow, Mottama Holdings...",
+        "data_date": "2023-10-31 ",
+        "download_data": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion/post/XQP0NXlxj96hiJtt653f872b417a7",
+        "company_website": "https://mottamaholdings.com",
+        "group_url": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "title": "LockBit Anti-DDoS",
+        "status_code": 200,
+        "is_active": true,
+        "date": "2023-11-01"
+    },
+    {
+        "company": "topcharoen.co.th",
+        "company_description": "From over 70 years of experience of \"Top Charoen Eyeglasses\", we are pleased to provide a complete and superior vision service. Under the standards of quality service Detailed eye examination with care and sincerity from eye experts who have passed i...",
+        "ransomware_name": "LockBIT BLOG",
+        "ransomware_site": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "data_description": "From over 70 years of experience of \"Top Charoen Eyeglasses\", we are pleased to provide a complete and superior vision service. Under the standards of quality service Detailed eye examination with care and sincerity from eye experts who have passed i...",
+        "data_date": "2023-10-31 ",
+        "download_data": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion/post/YIExK35OoF9CPDpl653f86548ef70",
+        "company_website": "https://topcharoen.co.th",
+        "group_url": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "title": "LockBit Anti-DDoS",
+        "status_code": 200,
+        "is_active": true,
+        "date": "2023-11-01"
+    },
+    {
+        "company": "tilden-coil.com",
+        "company_description": "Tilden-Coil Constructors, Inc. is a general contractor and construction manager focusing on high quality educational, institutional, commercial and industrial facilities throughout Southern California for over 80 years.",
+        "ransomware_name": "LockBIT BLOG",
+        "ransomware_site": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "data_description": "Tilden-Coil Constructors, Inc. is a general contractor and construction manager focusing on high quality educational, institutional, commercial and industrial facilities throughout Southern California for over 80 years.",
+        "data_date": "2023-10-31 ",
+        "download_data": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion/post/sJNb9QubIGzWiZRK653ba83d05afd",
+        "company_website": "https://tilden-coil.com",
+        "group_url": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion",
+        "title": "LockBit Anti-DDoS",
+        "status_code": 200,
+        "is_active": true,
+        "date": "2023-11-01"
+    },
+    {
+        "company": "Mount Carmel Care Center",
+        "company_description": "Mount Carmel Care Center, Inc. is a member of the Carmelite System, exclusively comprised of nursing and rehabilitation, independent living and assisted living facilities that span the Northeast and the Midwest, as well as a facility in Dublin, Ireland.",
+        "ransomware_name": "Medusa Blog",
+        "ransomware_site": "http://medusaxko7jxtrojdkxo66j7ck4q5tgktf7uqsqyfry4ebnxlcbkccyd.onion/",
+        "data_description": "Mount Carmel Care Center, Inc. is a member of the Carmelite System, exclusively comprised of nursing and rehabilitation, independent living and assisted living facilities that span the Northeast and the Midwest, as well as a facility in Dublin, Ireland.",
+        "data_date": "2023-10-31",
+        "download_data": "http://medusaxko7jxtrojdkxo66j7ck4q5tgktf7uqsqyfry4ebnxlcbkccyd.onion/detail?id=82f95f6e884162556d6993063429a31c",
+        "company_website": "Website in Description ",
+        "group_url": "http://medusaxko7jxtrojdkxo66j7ck4q5tgktf7uqsqyfry4ebnxlcbkccyd.onion/",
+        "title": "Medusa Blog",
+        "status_code": 200,
+        "is_active": true,
+        "date": "2023-11-01"
+    },
+    {
+        "company": "Advarra Inc.(PFIZER,GILEAD ETC AFFECTED)",
+        "company_description": "Advarra advances the way clinical research is conducted: bringing life sciences companies, CROs, research sites, investigators, and academia together at the intersection of safety, technology, and collaboration. With trusted IRB and IBC review solutions, innovative technologies, experienced consultants, and deep-seated connections across the industry, Advarra provides integrated solutions that safeguard trial participants, empower clinical sites, ensure compliance, and optimize research performance. Advarra is advancing clinical trials to make them safer, smarter, and faster. For more information, visit advarra.com.",
+        "ransomware_name": "ALPHV",
+        "ransomware_site": "http://alphvmmm27o3abo3r2mlmjrpdmzle3rykajqc5xsj7j7ejksbpsa36ad.onion",
+        "data_description": "Advarra advances the way clinical research is conducted: bringing life sciences companies, CROs, research sites, investigators, and academia together at the intersection of safety, technology, and collaboration. With trusted IRB and IBC review solutions, innovative technologies, experienced consultants, and deep-seated connections across the industry, Advarra provides integrated solutions that safeguard trial participants, empower clinical sites, ensure compliance, and optimize research performance. Advarra is advancing clinical trials to make them safer, smarter, and faster. For more information, visit advarra.com.",
+        "data_date": "2023-11-01",
+        "download_data": "http://alphvmmm27o3abo3r2mlmjrpdmzle3rykajqc5xsj7j7ejksbpsa36ad.onion/317fe7fa-9145-4fb6-a19b-22f5168102be",
+        "company_website": "website in description",
+        "group_url": "http://alphvmmm27o3abo3r2mlmjrpdmzle3rykajqc5xsj7j7ejksbpsa36ad.onion",
+        "title": "",
+        "status_code": 200,
+        "is_active": true,
+        "date": "2023-11-01"
     }
 ]
