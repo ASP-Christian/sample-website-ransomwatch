@@ -20,13 +20,16 @@
             padding: 20px 0;
             margin: 0;
         }
-        canvas {
-            display: block;
-            margin: 0 auto;
-        }
         #chartContainer {
-            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        canvas {
+            width: 1000px; /* Set your preferred width */
+            height: 300px; /* Set your preferred height */
             margin: 20px auto;
+            border: 1px solid #ddd; /* Add a border if needed */
         }
     </style>
 </head>
@@ -36,14 +39,10 @@
     <!-- Chart Container -->
     <div id="chartContainer">
         <!-- Bar Chart -->
-        <div>
-            <canvas id="barChart"></canvas>
-        </div>
+        <canvas id="barChart"></canvas>
 
         <!-- Pie Chart -->
-        <div>
-            <canvas id="pieChart"></canvas>
-        </div>
+        <canvas id="pieChart"></canvas>
     </div>
 
     <script>
