@@ -59,7 +59,7 @@ if __name__ == "__main__":
 
     for entry in starting_urls_data:
         starting_url = entry["download_data"]
-        title = entry["title"]
+        title = entry["ransomware_name"]
 
         renew_tor_ip()  # Renew Tor IP before starting
         discovered_websites = crawl_with_tor(starting_url)
