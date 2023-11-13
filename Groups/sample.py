@@ -44,7 +44,7 @@ def is_internal_link(base_url, link):
     return base_domain == link_domain
 
 if __name__ == "__main__":
-    starting_url = "https://www.youtube.com/watch?v=8vfgdjG8874"
+    starting_url = "http://mblogci3rudehaagbryjznltdp33ojwzkq6hn2pckvjq33rycmzczpid.onion/"
     max_crawl_depth = 1
 
     renew_tor_ip()  # Renew Tor IP before starting
