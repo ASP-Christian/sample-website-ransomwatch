@@ -1,22 +1,31 @@
-name: Run Selenium Script HEEEEEEEEEEEEEEEEEERE
+name: Domain Crawler
 
 on:
   workflow_dispatch:
+
 jobs:
   scrape:
     runs-on: ubuntu-latest
-    steps:
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
 
+    steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Set up Tor
+        run: |
+          sudo apt-get install tor
+          echo "ControlPort 9051" | sudo tee -a /etc/tor/torrc
+          echo "HashedControlPassword $(tor --hash-password YOUR_TOR_PASSWORD)" | sudo tee -a /etc/tor/torrc
+          sudo systemctl restart tor
+
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
       - name: Install dependencies
         run: |
-          pip install selenium
+          pip install requests[socks] stem beautifulsoup4
 
-      - name: Run Tor Scraper
+      - name: Run Tor Scraper Script
         run: python Groups/sample.py

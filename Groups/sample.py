@@ -1,29 +1,55 @@
-from selenium import webdriver
-from selenium.webdriver.firefox.firefox_profile import FirefoxProfile
-from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
-from selenium.webdriver.common.keys import Keys
+import os
+import requests
+from stem import Signal
+from stem.control import Controller
+from bs4 import BeautifulSoup
+from urllib.parse import urljoin, urlparse
 
-# Configure Firefox to use Tor as a proxy
-tor_binary = 'C:/path/to/tor_browser/Tor Browser/firefox.exe'
-tor_profile = 'C:/path/to/tor_browser/tor_profile/profile.default'
+# Function to renew the TOR IP address
+def renew_tor_ip():
+    with Controller.from_port(port=9051) as controller:
+        controller.authenticate(password="YOUR_TOR_PASSWORD")
+        controller.signal(Signal.NEWNYM)
 
+# TOR proxy settings
+tor_proxy = {
+    'http': 'socks5h://localhost:9050',
+    'https': 'socks5h://localhost:9050',
+}
 
-binary = FirefoxBinary(tor_binary)
-profile = FirefoxProfile(tor_profile)
+def crawl_with_tor(url, max_depth=2, current_depth=0, discovered=set()):
+    if current_depth > max_depth:
+        return discovered
 
-# Rest of the script remains the same
+    try:
+        response = requests.get(url, proxies=tor_proxy)
+        if response.status_code == 200:
+            discovered.add(url)
 
+            soup = BeautifulSoup(response.text, 'html.parser')
+            links = [urljoin(url, link.get('href')) for link in soup.find_all('a')]
 
-# Set up the Firefox WebDriver with the Tor settings
-driver = webdriver.Firefox(firefox_binary=binary, firefox_profile=profile)
+            for link in links:
+                if link not in discovered and is_internal_link(url, link):
+                    discovered = crawl_with_tor(link, max_depth, current_depth + 1, discovered)
 
-# Navigate to the Tor hidden service URL
-url = 'https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/'
-driver.get(url)
+    except Exception as e:
+        print(f"Error crawling {url}: {e}")
 
-# Scrape the website title
-title = driver.title
-print(f'Title of the website: {title}')
+    return discovered
 
-# Close the browser
-driver.quit()
+def is_internal_link(base_url, link):
+    base_domain = urlparse(base_url).netloc
+    link_domain = urlparse(link).netloc
+    return base_domain == link_domain
+
+if __name__ == "__main__":
+    starting_url = "https://www.youtube.com/watch?v=8vfgdjG8874"
+    max_crawl_depth = 1
+
+    renew_tor_ip()  # Renew Tor IP before starting
+    discovered_websites = crawl_with_tor(starting_url, max_depth=max_crawl_depth)
+
+    print("Discovered Websites:")
+    for website in discovered_websites:
+        print(website)
