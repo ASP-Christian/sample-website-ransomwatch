@@ -67,7 +67,7 @@ if __name__ == "__main__":
         # Filter out websites that are already in data_post.json's "download_data"
         discovered_websites = [site for site in discovered_websites if site != starting_url]
 
-        crawled_entry = {"group_url": starting_url, "title": title}
+        crawled_entry = {"ransomware_site": starting_url, "ransomware_name": title}
         for i, website in enumerate(discovered_websites, start=1):
             crawled_entry[f"Discovered website {i}"] = website
 
