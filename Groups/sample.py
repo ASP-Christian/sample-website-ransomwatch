@@ -54,7 +54,7 @@ def save_to_crawled_json(crawled_data):
 
 if __name__ == "__main__":
     # Read starting URLs from data_post.json
-    with open('Groups/Overall_data/data_post.json', 'r', encoding='utf-8') as json_file:
+    with open('Groups/Overall_data/data1_post.json', 'r', encoding='utf-8') as json_file:
         json_data = json.load(json_file)
 
     # Count unique group URLs
