@@ -4,6 +4,7 @@ from stem import Signal
 from stem.control import Controller
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
+import json
 
 # Function to renew the TOR IP address
 def renew_tor_ip():
@@ -43,13 +44,56 @@ def is_internal_link(base_url, link):
     link_domain = urlparse(link).netloc
     return base_domain == link_domain
 
+def count_unique_group_urls(json_data):
+    unique_group_urls = set(item['group_url'] for item in json_data)
+    return len(unique_group_urls)
+
+def save_to_crawled_json(crawled_data):
+    with open('Groups/Overall_data/crawled.json', 'w', encoding='utf-8') as json_file:
+        json.dump(crawled_data, json_file, indent=2)
+
 if __name__ == "__main__":
-    starting_url = "http://ransomocmou6mnbquqz44ewosbkjk3o5qjsl3orawojexfook2j7esad.onion"
-    max_crawl_depth = 4
+    # Read starting URLs from data_post.json
+    with open('Groups/Overall_data/data_post.json', 'r', encoding='utf-8') as json_file:
+        json_data = json.load(json_file)
 
-    renew_tor_ip()  # Renew Tor IP before starting
-    discovered_websites = crawl_with_tor(starting_url, max_depth=max_crawl_depth)
+    # Count unique group URLs
+    unique_group_url_count = count_unique_group_urls(json_data)
+    print(f"Unique Group URL Count: {unique_group_url_count}")
 
-    print("Discovered Websites:")
-    for website in discovered_websites:
-        print(website)
+    # Initialize crawled data
+    crawled_data = []
+
+    # Iterate through each starting URL
+    for item in json_data:
+        starting_url = item['group_url']
+        title = item['title']
+
+        # Renew Tor IP before starting for each URL
+        renew_tor_ip()
+
+        # Crawl and get discovered websites
+        max_crawl_depth = 4
+        discovered_websites = crawl_with_tor(starting_url, max_depth=max_crawl_depth)
+
+        # Filter out discovered websites present in 'download_data'
+        filtered_discovered_websites = [website for website in discovered_websites
+                                        if website not in item.get('download_data', '')]
+
+        # Create a dictionary for the crawled JSON
+        crawled_entry = {
+            'group_url': starting_url,
+            'title': title,
+        }
+
+        # Add discovered websites to the dictionary
+        for i, website in enumerate(filtered_discovered_websites, start=1):
+            crawled_entry[f'Discovered website {i}'] = website
+
+        # Append the dictionary to the list
+        crawled_data.append(crawled_entry)
+
+    # Save the crawled data to crawled.json
+    save_to_crawled_json(crawled_data)
+
+    print("Crawled data has been saved to crawled.json")
