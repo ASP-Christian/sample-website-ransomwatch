@@ -6,20 +6,17 @@ from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
 import json
 
-
 # Function to renew the TOR IP address
 def renew_tor_ip():
     with Controller.from_port(port=9051) as controller:
         controller.authenticate(password="YOUR_TOR_PASSWORD")
         controller.signal(Signal.NEWNYM)
 
-
 # TOR proxy settings
 tor_proxy = {
     'http': 'socks5h://localhost:9050',
     'https': 'socks5h://localhost:9050',
 }
-
 
 def crawl_with_tor(url, max_depth=2, current_depth=0, discovered=set()):
     if current_depth > max_depth:
@@ -42,52 +39,41 @@ def crawl_with_tor(url, max_depth=2, current_depth=0, discovered=set()):
 
     return discovered
 
-
 def is_internal_link(base_url, link):
     base_domain = urlparse(base_url).netloc
     link_domain = urlparse(link).netloc
     return base_domain == link_domain
 
-
 def load_json(file_path):
     with open(file_path, 'r') as file:
-        return json.load(file)
-
+        data = json.load(file)
+    return data
 
 def save_json(file_path, data):
     with open(file_path, 'w') as file:
         json.dump(data, file, indent=2)
 
-
 if __name__ == "__main__":
-    starting_urls = [data['ransomware_site'] for data in load_json('Groups/Overall_data/data1_post.json')]
-    max_crawl_depth = 4
+    starting_urls_data = load_json('Groups/Overall_data/data1_post.json')
+    crawled_data = []
 
-    results = []
-    for starting_url in starting_urls:
+    for entry in starting_urls_data:
+        starting_url = entry["download_data"]
+        title = entry["title"]
+
         renew_tor_ip()  # Renew Tor IP before starting
-        discovered_websites = crawl_with_tor(starting_url, max_depth=max_crawl_depth)
+        discovered_websites = crawl_with_tor(starting_url)
 
-        group_info = {
-            "group_url": starting_url,
-            "title": [data['ransomware_name'] for data in load_json('Groups/Overall_data/data1_post.json') if
-                      data['ransomware_site'] == starting_url][0]
-        }
+        # Filter out websites that are already in data1_post.json's "download_data"
+        discovered_websites = [site for site in discovered_websites if site != starting_url]
 
+        crawled_entry = {"group_url": starting_url, "title": title}
         for i, website in enumerate(discovered_websites, start=1):
-            group_info[f"Discovered website {i}"] = website
+            crawled_entry[f"Discovered website {i}"] = website
 
-        results.append(group_info)
+        crawled_data.append(crawled_entry)
 
-    crawled_data = load_json('Groups/Overall_data/crawled.json')
-
-    for group_info in results:
-        group_url = group_info["group_url"]
-        title = group_info["title"]
-
-        if not any(entry["group_url"] == group_url and entry["title"] == title for entry in crawled_data):
-            crawled_data.append(group_info)
-
+    # Save the crawled data to crawled.json
     save_json('Groups/Overall_data/crawled.json', crawled_data)
 
-    print("Crawling and updating crawled.json completed.")
+    print("Crawling and saving completed.")
