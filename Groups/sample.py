@@ -53,11 +53,19 @@ def save_json(file_path, data):
     with open(file_path, 'w') as file:
         json.dump(data, file, indent=2)
 
+def remove_duplicates(data):
+    unique_entries = {}
+    for entry in data:
+        key = (entry["ransomware_site"], entry["ransomware_name"])
+        if key not in unique_entries:
+            unique_entries[key] = entry
+    return list(unique_entries.values())
+
 if __name__ == "__main__":
     starting_urls_data = load_json('Groups/Overall_data/data1_post.json')
     crawled_data = []
 
-    for entry in starting_urls_data:
+    for entry in remove_duplicates(starting_urls_data):
         starting_url = entry["ransomware_site"]
         ransomware_name = entry["ransomware_name"]
         download_data = entry["download_data"]
