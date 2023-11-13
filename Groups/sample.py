@@ -54,7 +54,7 @@ def save_json(file_path, data):
         json.dump(data, file, indent=2)
 
 if __name__ == "__main__":
-    starting_urls_data = load_json('Groups/Overall_data/data1_post.json')
+    starting_urls_data = load_json('Groups/Overall_data/data_post.json')
     crawled_data = []
 
     for entry in starting_urls_data:
