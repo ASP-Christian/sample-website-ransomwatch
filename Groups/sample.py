@@ -59,7 +59,7 @@ if __name__ == "__main__":
 
     for entry in starting_urls_data:
         starting_url = entry["download_data"]
-        title = entry["title"]
+        ransomware_name = entry["ransomware_name"]
 
         renew_tor_ip()  # Renew Tor IP before starting
         discovered_websites = crawl_with_tor(starting_url)
@@ -67,7 +67,7 @@ if __name__ == "__main__":
         # Filter out websites that are already in data1_post.json's "download_data"
         discovered_websites = [site for site in discovered_websites if site != starting_url]
 
-        crawled_entry = {"group_url": starting_url, "title": title}
+        crawled_entry = {"group_url": starting_url, "ransomware_name": ransomware_name}
         for i, website in enumerate(discovered_websites, start=1):
             crawled_entry[f"Discovered website {i}"] = website
 
