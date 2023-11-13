@@ -68,7 +68,7 @@ if __name__ == "__main__":
         # Filter out websites that are in data1_post.json's "download_data"
         discovered_websites = [site for site in discovered_websites if site != download_data]
 
-        crawled_entry = {"group_url": starting_url, "ransomware_name": ransomware_name}
+        crawled_entry = {"ransomware_site": starting_url, "ransomware_name": ransomware_name}
         for i, website in enumerate(discovered_websites, start=1):
             crawled_entry[f"Discovered website {i}"] = website
 
