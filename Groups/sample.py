@@ -30,14 +30,16 @@ def crawl_with_tor(url, max_depth=2, current_depth=0, discovered=None):
     try:
         response = requests.get(url, proxies=tor_proxy)
         if response.status_code == 200:
-            discovered.add(url)
+            normalized_url = normalize_url(url)
+            if normalized_url not in discovered:
+                discovered.add(normalized_url)
 
-            soup = BeautifulSoup(response.text, 'html.parser')
-            links = [urljoin(url, link.get('href')) for link in soup.find_all('a')]
+                soup = BeautifulSoup(response.text, 'html.parser')
+                links = [urljoin(url, link.get('href')) for link in soup.find_all('a')]
 
-            for link in links:
-                if link not in discovered and is_internal_link(url, link):
-                    discovered = crawl_with_tor(link, max_depth, current_depth + 1, discovered)
+                for link in links:
+                    if is_internal_link(url, link):
+                        discovered = crawl_with_tor(link, max_depth, current_depth + 1, discovered)
 
     except Exception as e:
         print(f"Error crawling {url}: {e}")
@@ -52,10 +54,6 @@ def is_internal_link(base_url, link):
 def normalize_url(url):
     # Remove trailing slashes and convert to lowercase for case-insensitive comparison
     return url.rstrip('/').lower()
-
-def compare_urls(url1, url2):
-    # Custom comparison function for sorting URLs
-    return int(normalize_url(url1) != normalize_url(url2))
 
 def load_json(file_path):
     with open(file_path, 'r') as file:
@@ -95,7 +93,7 @@ if __name__ == "__main__":
         discovered_websites = crawl_with_tor(starting_url)
 
         # Filter out websites that are in data_post.json's "download_data"
-        discovered_websites = [site for site in discovered_websites if normalize_url(site) != normalize_url(download_data) and site not in matching_entry.get("Discovered websites", [])]
+        discovered_websites = [site for site in discovered_websites if normalize_url(site) != normalize_url(download_data) and normalize_url(site) not in [normalize_url(existing_site) for existing_site in matching_entry.get("Discovered websites", [])]]
 
         # Update the matching entry with the discovered websites
         if matching_entry:
