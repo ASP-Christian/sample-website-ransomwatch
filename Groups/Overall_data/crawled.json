@@ -1,0 +1,40 @@
+[
+  {
+    "ransomware_site": "http://nq4zyac4ukl4tykmidbzgdlvaboqeqsemkp4t35bzvjeve6zm2lqcjid.onion",
+    "ransomware_name": "Babuk - Leak site",
+    "Discovered websites": [
+      "http://nq4zyac4ukl4tykmidbzgdlvaboqeqsemkp4t35bzvjeve6zm2lqcjid.onion#rules",
+      "http://nq4zyac4ukl4tykmidbzgdlvaboqeqsemkp4t35bzvjeve6zm2lqcjid.onion/blog/11ac6b8c40ceefc19fdefe1df6e614ab9f8ba80dd5f38c78ec6bc90f22668cdc",
+      "http://nq4zyac4ukl4tykmidbzgdlvaboqeqsemkp4t35bzvjeve6zm2lqcjid.onion#section-3",
+      "http://nq4zyac4ukl4tykmidbzgdlvaboqeqsemkp4t35bzvjeve6zm2lqcjid.onion#section-2",
+      "http://nq4zyac4ukl4tykmidbzgdlvaboqeqsemkp4t35bzvjeve6zm2lqcjid.onion",
+      "http://nq4zyac4ukl4tykmidbzgdlvaboqeqsemkp4t35bzvjeve6zm2lqcjid.onion/blog/8e727d2c25e6977f456254dcd8be14b8586951d2816d3ef3d8afb06b1de3f3ad",
+      "http://nq4zyac4ukl4tykmidbzgdlvaboqeqsemkp4t35bzvjeve6zm2lqcjid.onion/blog/7fd2e7bd0b942ee4b7319d5fc9d52f784bc9f5161edd94ab5257e9f0c00079ff",
+      "http://nq4zyac4ukl4tykmidbzgdlvaboqeqsemkp4t35bzvjeve6zm2lqcjid.onion/blog/3483b78af6ee44881238e7fc60509b54c0e83edce7687f606c2682e60ab9b981",
+      "http://nq4zyac4ukl4tykmidbzgdlvaboqeqsemkp4t35bzvjeve6zm2lqcjid.onion#about",
+      "http://nq4zyac4ukl4tykmidbzgdlvaboqeqsemkp4t35bzvjeve6zm2lqcjid.onion/blog/efcc06636b8343665024cac5fca80b93a04e96c5a54ccf8c4fbe7f3c1986c5c6"
+    ]
+  },
+  {
+    "ransomware_site": "https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion",
+    "ransomware_name": "Magazine",
+    "Discovered websites": []
+  },
+  {
+    "ransomware_site": "http://alphvmmm27o3abo3r2mlmjrpdmzle3rykajqc5xsj7j7ejksbpsa36ad.onion",
+    "ransomware_name": "ALPHV",
+    "Discovered websites": [
+      "http://alphvmmm27o3abo3r2mlmjrpdmzle3rykajqc5xsj7j7ejksbpsa36ad.onion"
+    ]
+  },
+  {
+    "ransomware_site": "http://jbeg2dct2zhku6c2vwnpxtm2psnjo2xnqvvpoiiwr5hxnc6wrp3uhnad.onion",
+    "ransomware_name": "BB Auction",
+    "Discovered websites": []
+  },
+  {
+    "ransomware_site": "http://bianlianlbc5an4kgnay3opdemgcryg2kpfcbgczopmm3dnbz3uaunad.onion",
+    "ransomware_name": "Bianlian",
+    "Discovered websites": []
+  }
+]
