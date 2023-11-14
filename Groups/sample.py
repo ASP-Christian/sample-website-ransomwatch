@@ -85,7 +85,7 @@ if __name__ == "__main__":
         discovered_websites = crawl_with_tor(starting_url)
 
         # Filter out websites that are in data_post.json's "download_data"
-        discovered_websites = [site for site in discovered_websites if site != download_data]
+        discovered_websites = [site for site in discovered_websites if site != download_data and site not in matching_entry.get("Discovered websites", [])]
 
         crawled_entry = {"ransomware_site": starting_url, "ransomware_name": ransomware_name}
         for i, website in enumerate(discovered_websites, start=1):
