@@ -4,9 +4,7 @@ from stem import Signal
 from stem.control import Controller
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
-
 import json
-from functools import cmp_to_key
 
 # Function to renew the TOR IP address
 def renew_tor_ip():
@@ -30,16 +28,14 @@ def crawl_with_tor(url, max_depth=2, current_depth=0, discovered=None):
     try:
         response = requests.get(url, proxies=tor_proxy)
         if response.status_code == 200:
-            normalized_url = normalize_url(url)
-            if normalized_url not in discovered:
-                discovered.add(normalized_url)
+            discovered.add(url)
 
-                soup = BeautifulSoup(response.text, 'html.parser')
-                links = [urljoin(url, link.get('href')) for link in soup.find_all('a')]
+            soup = BeautifulSoup(response.text, 'html.parser')
+            links = [urljoin(url, link.get('href')) for link in soup.find_all('a')]
 
-                for link in links:
-                    if is_internal_link(url, link):
-                        discovered = crawl_with_tor(link, max_depth, current_depth + 1, discovered)
+            for link in links:
+                if link not in discovered and is_internal_link(url, link):
+                    discovered = crawl_with_tor(link, max_depth, current_depth + 1, discovered)
 
     except Exception as e:
         print(f"Error crawling {url}: {e}")
@@ -50,10 +46,6 @@ def is_internal_link(base_url, link):
     base_domain = urlparse(base_url).netloc
     link_domain = urlparse(link).netloc
     return base_domain == link_domain
-
-def normalize_url(url):
-    # Remove trailing slashes and convert to lowercase for case-insensitive comparison
-    return url.rstrip('/').lower()
 
 def load_json(file_path):
     with open(file_path, 'r') as file:
@@ -93,13 +85,12 @@ if __name__ == "__main__":
         discovered_websites = crawl_with_tor(starting_url)
 
         # Filter out websites that are in data_post.json's "download_data"
-        discovered_websites = [site for site in discovered_websites if normalize_url(site) != normalize_url(download_data) and normalize_url(site) not in [normalize_url(existing_site) for existing_site in matching_entry.get("Discovered websites", [])]]
+        discovered_websites = [site for site in discovered_websites if site != download_data and site not in matching_entry.get("Discovered websites", [])]
 
-        # Update the matching entry with the discovered websites
-        if matching_entry:
-            matching_entry["Discovered websites"] = discovered_websites
+        crawled_entry = {"ransomware_site": starting_url, "ransomware_name": ransomware_name}
+        for i, website in enumerate(discovered_websites, start=1):
+            crawled_entry[f"Discovered website {i}"] = website
 
-        crawled_entry = {"ransomware_site": starting_url, "ransomware_name": ransomware_name, "Discovered websites": discovered_websites}
         crawled_data.append(crawled_entry)
 
     # Save the crawled data to crawled.json
