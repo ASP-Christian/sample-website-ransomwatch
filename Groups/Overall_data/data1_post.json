@@ -1,62 +1,93 @@
 [
     {
-        "company": "River City Science Academy",
-        "company_description": "River City Science Academy (RCSA) is a tuition-free, public charter school located in Duval County in Jacksonville, Florida. RCSA was founded in 2007 and currently serves grades K \u2013 12 through 4 differ EXPAND",
+        "ransomware_name": "Babuk - Leak site",
+        "ransomware_site": "http://nq4zyac4ukl4tykmidbzgdlvaboqeqsemkp4t35bzvjeve6zm2lqcjid.onion"
+    },
+    {
         "ransomware_name": "Magazine",
-        "ransomware_site": "https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion",
-        "data_description": "River City Science Academy (RCSA) is a tuition-free, public charter school located in Duval County in Jacksonville, Florida. RCSA was founded in 2007 and currently serves grades K \u2013 12 through 4 differ EXPAND",
-        "data_date": "2023-10-01 ",
-        "download_data": "https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/companies/d21de1c7-286b-485d-bb66-7f889b952eff",
-        "company_website": "https://rivercityscience.org/",
-        "group_url": "https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion",
-        "title": "Magazine",
-        "status_code": 200,
-        "is_active": true,
-        "date": "2023-11-10"
+        "ransomware_site": "https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion"
+
     },
     {
-          "company": "River City Science Academy",
-        "company_description": "River City Science Academy (RCSA) is a tuition-free, public charter school located in Duval County in Jacksonville, Florida. RCSA was founded in 2007 and currently serves grades K \u2013 12 through 4 differ EXPAND",
-        "ransomware_name": "Magazine",
-        "ransomware_site": "https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion",
-        "data_description": "River City Science Academy (RCSA) is a tuition-free, public charter school located in Duval County in Jacksonville, Florida. RCSA was founded in 2007 and currently serves grades K \u2013 12 through 4 differ EXPAND",
-        "data_date": "2023-10-01 ",
-        "download_data": "https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion/companies/d21de1c7-286b-485d-bb66-7f889b952eff",
-        "company_website": "https://rivercityscience.org/",
-        "group_url": "https://3f7nxkjway3d223j27lyad7v5cgmyaifesycvmwq7i7cbs23lb6llryd.onion",
-        "title": "Magazine",
-        "status_code": 200,
-        "is_active": true,
-        "date": "2023-11-10"
+        "ransomware_name": "ALPHV",
+        "ransomware_site": "http://alphvmmm27o3abo3r2mlmjrpdmzle3rykajqc5xsj7j7ejksbpsa36ad.onion"
     },
     {
-        "company": "ayakitchens.com",
-        "company_description": "AYA Founded in 2000 with the vision of being a \u2018game-changer\u2019 AyA Kitchens and Baths has become Canada\u2019s foremost manufacturer of high quality, frameless cabinetry. By combining old world craftsmanship and attention to detail with high tech manufacturing processes AyA offers innovative, quality cabinetry at competitive, manufacturer direct prices to clients across North America. AyA\u2019s state of the art manufacturing process combines the efficiencies of just in time manufacturing with the customization and quality of old-world craftsmanship. Rather than assembling from stock parts, every kitchen is made from scratch to the individual specifications of every customer. We call it mass customization \u2013 your kitchen, the way you want it for a great price. AyA (i\u2019ya) means Design and good design starts from the ground up. AyA has designed and continues to refine one of the most efficient and environmentally friendly cabinet manufacturing facilities in North America. AyA Kitchens and Baths is proud to have earned the KCMA Certification Seal and Environmental Stewardship Program Certification. The Kitchen Cabinet Manufacturers Association Certification program assures that cabinetry bearing the KCMA seal complies with the rigorous standards set by the American National Standards Institute (ANSII)\nSITE: www.ayakitchens.com\nADDRESS:\nAyA Kitchens and Baths\n1551 Caterpillar Rd\nMississauga, ON\nT.1.866.AyA-4-YOU\nT.905.848.1999",
-        "ransomware_name": "Black Basta Blog",
-        "ransomware_site": "http://stniiomyjliimcgkvdszvgen3eaaoz55hreqqx6o77yvmpwt7gklffqd.onion",
-        "data_description": "AYA Founded in 2000 with the vision of being a \u2018game-changer\u2019 AyA Kitchens and Baths has become Canada\u2019s foremost manufacturer of high quality, frameless cabinetry. By combining old world craftsmanship and attention to detail with high tech manufacturing processes AyA offers innovative, quality cabinetry at competitive, manufacturer direct prices to clients across North America. AyA\u2019s state of the art manufacturing process combines the efficiencies of just in time manufacturing with the customization and quality of old-world craftsmanship. Rather than assembling from stock parts, every kitchen is made from scratch to the individual specifications of every customer. We call it mass customization \u2013 your kitchen, the way you want it for a great price. AyA (i\u2019ya) means Design and good design starts from the ground up. AyA has designed and continues to refine one of the most efficient and environmentally friendly cabinet manufacturing facilities in North America. AyA Kitchens and Baths is proud to have earned the KCMA Certification Seal and Environmental Stewardship Program Certification. The Kitchen Cabinet Manufacturers Association Certification program assures that cabinetry bearing the KCMA seal complies with the rigorous standards set by the American National Standards Institute (ANSII)\nSITE: www.ayakitchens.com\nADDRESS:\nAyA Kitchens and Baths\n1551 Caterpillar Rd\nMississauga, ON\nT.1.866.AyA-4-YOU\nT.905.848.1999",
-        "data_date": "2023-11-10 ",
-        "download_data": "http://ransomocmou6mnbquqz44ewosbkjk3o5qjsl3orawojexfook2j7esad.onion/access-to-the-large-database-of-a-us-medical-organization/",
-        "company_website": "Website inside description",
-        "group_url": "1",
-        "title": "1",
-        "status_code": 1,
-        "is_active": false,
-        "date": "2023-09-30"
+        "ransomware_name": "BB Auction",
+        "ransomware_site": "http://jbeg2dct2zhku6c2vwnpxtm2psnjo2xnqvvpoiiwr5hxnc6wrp3uhnad.onion"
     },
     {
-        "company": "montcalm.com.br",
-        "company_description": "Acting throughout the Brazilian territory, MONTCALM offers complete and integrated solutions in engineering, construction and electromechanical assembly for the implantation, modernization and maintenance of process industries in several industrial segments, such as: Cement, Mining, Pulp and Paper, Chemistry and Petrochemicals , Fertilizers, Oil and Gas, Power Generation, Infrastructure, Metallurgy, Iron and Steel, Pharmaceutical, Food, Sugar and Alcohol among others.\nSITE: www.montcalm.com.br\nADDRESS\nRua Ibituruna, 561 - Jabaquara\nCEP: 04302-052, S\u00e3o Paulo, SP",
-        "ransomware_name": "Black Basta Blog",
-        "ransomware_site": "http://ransomocmou6mnbquqz44ewosbkjk3o5qjsl3orawojexfook2j7esad.onion",
-        "data_description": "Acting throughout the Brazilian territory, MONTCALM offers complete and integrated solutions in engineering, construction and electromechanical assembly for the implantation, modernization and maintenance of process industries in several industrial segments, such as: Cement, Mining, Pulp and Paper, Chemistry and Petrochemicals , Fertilizers, Oil and Gas, Power Generation, Infrastructure, Metallurgy, Iron and Steel, Pharmaceutical, Food, Sugar and Alcohol among others.\nSITE: www.montcalm.com.br\nADDRESS\nRua Ibituruna, 561 - Jabaquara\nCEP: 04302-052, S\u00e3o Paulo, SP",
-        "data_date": "2023-11-10 ",
-        "download_data": "http://ransomocmou6mnbquqz44ewosbkjk3o5qjsl3orawojexfook2j7esad.onion/access-to-the-large-database-of-a-us-medical-organization/",
-        "company_website": "Website inside description",
-        "group_url": "1",
-        "title": "1",
-        "status_code": 1,
-        "is_active": false,
-        "date": "2023-09-30"
+        "ransomware_name": "Bianlian",
+        "ransomware_site": "http://bianlianlbc5an4kgnay3opdemgcryg2kpfcbgczopmm3dnbz3uaunad.onion"
+    },
+    {
+        "ransomware_name": "Cuba",
+        "ransomware_site": "http://cuba4ikm4jakjgmkezytyawtdgr2xymvy6nvzgw5cglswg3si76icnqd.onion/"
+    },
+    {
+        "ransomware_name": "D#NUT",
+        "ransomware_site": "http://sbc2zv2qnz5vubwtx3aobfpkeao6l4igjegm3xx7tk5suqhjkp5jxtqd.onion/"
+    },
+    {
+        "ransomware_name": "DAIXIN Team",
+        "ransomware_site": "http://7ukmkdtyxdkdivtjad57klqnd3kdsmq6tp45rrsxqnu76zzv3jvitlqd.onion/"
+    },
+    {
+        "ransomware_name": "Everest Ransomware Group",
+        "ransomware_site": "http://ransomocmou6mnbquqz44ewosbkjk3o5qjsl3orawojexfook2j7esad.onion"
+    },
+    {
+        "ransomware_name": "LockBIT Leaked",
+        "ransomware_site": "http://lockbit7z6f3gu6rjvrysn5gjbsqj3hk3bvsg64ns6pjldqr2xhvhsyd.onion/"
+    },
+    {
+        "ransomware_name": "LockBIT BLOG",
+        "ransomware_site": "http://lockbitapt2d73krlbewgv27tquljgxr33xbwwsp6rkyieto7u4ncead.onion"
+    },
+    {
+        "ransomware_name": "Lorenz",
+        "ransomware_site": "http://lorenzmlwpzgxq736jzseuterytjueszsvznuibanxomlpkyxk6ksoyd.onion"
+    },
+    {
+        "ransomware_name": "Mallox_Blog",
+        "ransomware_site": "http://wtyafjyhwqrgo4a45wdvvwhen3cx4euie73qvlhkhvlrexljoyuklaad.onion"
+    },
+    {
+        "ransomware_name": "Medusa Blog",
+        "ransomware_site": "http://medusaxko7jxtrojdkxo66j7ck4q5tgktf7uqsqyfry4ebnxlcbkccyd.onion/"
+    },
+    {
+        "ransomware_name": "MONTI Leak-site",
+        "ransomware_site": "http://mblogci3rudehaagbryjznltdp33ojwzkq6hn2pckvjq33rycmzczpid.onion/"
+    },
+    {
+        "ransomware_name": "News-Snatch",
+        "ransomware_site": "http://hl66646wtlp2naoqnhattngigjp5palgqmbwixepcjyq5i534acgqyad.onion"
+    },
+    {
+        "ransomware_name": "Omega Blog",
+        "ransomware_site": "http://omegalock5zxwbhswbisc42o2q2i54vdulyvtqqbudqousisjgc7j7yd.onion/"
+    },
+    {
+        "ransomware_name": "Quantum Blog",
+        "ransomware_site": "http://quantum445bh3gzuyilxdzs5xdepf3b7lkcupswvkryf3n7hgzpxebid.onion/"
+    },
+    {
+        "ransomware_name": "Ragnar Locker",
+        "ransomware_site": "http://rgleaktxuey67yrgspmhvtnrqtgogur35lwdrup4d3igtbm3pupc4lyd.onion"
+    },
+    {
+        "ransomware_name": "RansomHouse",
+        "ransomware_site": "http://zohlm7ahjwegcedoz7lrdrti7bvpofymcayotp744qhx6gjmxbuo2yid.onion/"
+    },
+    {
+        "ransomware_name": "RANSOMWARE BLOG",
+        "ransomware_site": "http://z6wkgghtoawog5noty5nxulmmt2zs7c3yvwr22v4czbffdoly2kl4uad.onion/"
+    },
+    {
+        "ransomware_name": "ransomexx2",
+        "ransomware_site": "http://rnsm777cdsjrsdlbs4v5qoeppu3px6sb2igmh53jzrx7ipcrbjz5b2ad.onion/"
     }
+
 ]
+
