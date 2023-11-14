@@ -62,18 +62,26 @@ def remove_duplicates(data):
     return list(unique_entries.values())
 
 if __name__ == "__main__":
-    starting_urls_data = load_json('Groups/Overall_data/data1_post.json')
+    data1_post = load_json('Groups/Overall_data/data1_post.json')
+    data_post = load_json('Groups/Overall_data/data_post.json')
     crawled_data = []
 
-    for entry in remove_duplicates(starting_urls_data):
-        starting_url = entry["ransomware_site"]
-        ransomware_name = entry["ransomware_name"]
-        download_data = entry["download_data"]
+    for entry1 in remove_duplicates(data1_post):
+        starting_url = entry1["ransomware_site"]
+        ransomware_name = entry1["ransomware_name"]
+
+        # Find corresponding entry in data_post.json
+        matching_entry = next((entry for entry in data_post if entry["ransomware_site"] == starting_url), None)
+
+        if matching_entry:
+            download_data = matching_entry["download_data"]
+        else:
+            download_data = None
 
         renew_tor_ip()  # Renew Tor IP before starting
         discovered_websites = crawl_with_tor(starting_url)
 
-        # Filter out websites that are in data1_post.json's "download_data"
+        # Filter out websites that are in data_post.json's "download_data"
         discovered_websites = [site for site in discovered_websites if site != download_data]
 
         crawled_entry = {"ransomware_site": starting_url, "ransomware_name": ransomware_name}
