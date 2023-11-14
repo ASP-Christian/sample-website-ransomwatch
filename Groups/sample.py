@@ -4,7 +4,9 @@ from stem import Signal
 from stem.control import Controller
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
+
 import json
+from functools import cmp_to_key
 
 # Function to renew the TOR IP address
 def renew_tor_ip():
@@ -47,6 +49,14 @@ def is_internal_link(base_url, link):
     link_domain = urlparse(link).netloc
     return base_domain == link_domain
 
+def normalize_url(url):
+    # Remove trailing slashes and convert to lowercase for case-insensitive comparison
+    return url.rstrip('/').lower()
+
+def compare_urls(url1, url2):
+    # Custom comparison function for sorting URLs
+    return int(normalize_url(url1) != normalize_url(url2))
+
 def load_json(file_path):
     with open(file_path, 'r') as file:
         data = json.load(file)
@@ -85,12 +95,13 @@ if __name__ == "__main__":
         discovered_websites = crawl_with_tor(starting_url)
 
         # Filter out websites that are in data_post.json's "download_data"
-        discovered_websites = [site for site in discovered_websites if site != download_data and site not in matching_entry.get("Discovered websites", [])]
+        discovered_websites = [site for site in discovered_websites if normalize_url(site) != normalize_url(download_data) and site not in matching_entry.get("Discovered websites", [])]
 
-        crawled_entry = {"ransomware_site": starting_url, "ransomware_name": ransomware_name}
-        for i, website in enumerate(discovered_websites, start=1):
-            crawled_entry[f"Discovered website {i}"] = website
+        # Update the matching entry with the discovered websites
+        if matching_entry:
+            matching_entry["Discovered websites"] = discovered_websites
 
+        crawled_entry = {"ransomware_site": starting_url, "ransomware_name": ransomware_name, "Discovered websites": discovered_websites}
         crawled_data.append(crawled_entry)
 
     # Save the crawled data to crawled.json
