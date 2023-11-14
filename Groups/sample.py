@@ -18,7 +18,10 @@ tor_proxy = {
     'https': 'socks5h://localhost:9050',
 }
 
-def crawl_with_tor(url, max_depth=2, current_depth=0, discovered=set()):
+def crawl_with_tor(url, max_depth=2, current_depth=0, discovered=None):
+    if discovered is None:
+        discovered = set()
+
     if current_depth > max_depth:
         return discovered
 
