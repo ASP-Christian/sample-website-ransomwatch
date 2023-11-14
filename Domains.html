@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domains</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            margin: 0;
+        }
+        .ransomware {
+            font-weight: bold;
+            color: #333; /* Darker color */
+            margin-bottom: 10px;
+            font-size: 1.2em; /* Slightly bigger font size */
+        }
+        .discovered-website {
+            margin-left: 20px;
+            font-weight: bold;
+            color: #0074d9; /* Bluish color */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Domains</h1>
+    </header>
+    <main id="dataContainer">
+        <!-- Data will be dynamically populated here -->
+    </main>
+
+    <script>
+        // Function to fetch JSON data from the specified path
+        async function fetchData() {
+            const response = await fetch('Groups/Overall_data/crawled.json');
+            const jsonData = await response.json();
+            return jsonData;
+        }
+
+        // Function to dynamically populate the HTML based on JSON data
+        async function populateData() {
+            const dataContainer = document.getElementById('dataContainer');
+            const jsonData = await fetchData();
+
+            jsonData.forEach(entry => {
+                const ransomwareDiv = document.createElement('div');
+                ransomwareDiv.className = 'ransomware';
+                ransomwareDiv.textContent = entry.ransomware_name || 'N/A';
+
+                dataContainer.appendChild(ransomwareDiv);
+
+                // Display discovered websites
+                if (entry['Discovered websites'].length > 0) {
+                    entry['Discovered websites'].forEach(website => {
+                        const discoveredWebsiteDiv = document.createElement('div');
+                        discoveredWebsiteDiv.className = 'discovered-website';
+                        discoveredWebsiteDiv.textContent = website;
+
+                        dataContainer.appendChild(discoveredWebsiteDiv);
+                    });
+                } else {
+                    const discoveredWebsiteDiv = document.createElement('div');
+                    discoveredWebsiteDiv.className = 'discovered-website';
+                    discoveredWebsiteDiv.textContent = 'N/A';
+
+                    dataContainer.appendChild(discoveredWebsiteDiv);
+                }
+            });
+        }
+
+        // Call the function to populate data on page load
+        populateData();
+    </script>
+</body>
+</html>
