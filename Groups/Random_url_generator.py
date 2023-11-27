@@ -54,6 +54,3 @@ test_urls = [
     "http://5n4qdkw2wavc55peppyrelmb2rgsx7ohcb2tkxhub2gyfurxulfyd3id.onion/",
     "http://12323332ub2gyfurxulfyd3id.onion/"
 ]
-
-# Run the test function
-test_urls(test_urls)
