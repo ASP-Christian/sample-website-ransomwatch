@@ -42,14 +42,18 @@ def check_active(link):
         print(f"An unexpected error occurred for {link}: {str(e)}")
     return False  # Link is not active
 
+# Function to test a list of URLs
+def test_urls(urls):
+    for url in urls:
+        is_active = check_active(url)
+        status = "Success" if is_active else "Not Active"
+        print(f"{url}: {status}")
+
 # Test URLs
 test_urls = [
     "http://5n4qdkw2wavc55peppyrelmb2rgsx7ohcb2tkxhub2gyfurxulfyd3id.onion/",
     "http://12323332ub2gyfurxulfyd3id.onion/"
 ]
 
-# Check status for each test URL
-for url in test_urls:
-    is_active = check_active(url)
-    status = "Success" if is_active else "Not Active"
-    print(f"{url}: {status}")
+# Run the test function
+test_urls(test_urls)
