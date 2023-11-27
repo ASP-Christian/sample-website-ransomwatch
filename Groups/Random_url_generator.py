@@ -61,7 +61,7 @@ with open('Overall_data/small_sample.json') as json_file:
     base_codes = [group['group'] for group in data]
 
 # Number of codes to generate
-num_codes = 10000
+num_codes = 5
 
 # Generate and store the codes
 generated_codes = []
