@@ -41,7 +41,7 @@ def check_active(link):
 
 # Test URLs
 test_urls = [
-    "http://5n4qdkw2wavc55peppyrelmb2rgsx7ohcb2tkxhub2gyfurxulfyd3id.onion/",
+    "https://ahmia.fi/",
     "http://12323332ub2gyfurxulfyd3id.onion/"
 ]
 
