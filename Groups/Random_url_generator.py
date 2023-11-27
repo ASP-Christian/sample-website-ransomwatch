@@ -4,7 +4,7 @@ import json
 import requests
 import socks
 import socket
-from requests.exceptions import ConnectionError
+from requests.exceptions import RequestException
 from stem import Signal
 from stem.control import Controller
 from bs4 import BeautifulSoup
@@ -30,27 +30,25 @@ def check_active(link):
         status_code = response.status_code
 
         if 200 <= status_code < 300:
-            return True  # Link is active
-        else:
-            print(f"Unexpected status code {status_code} for {link}")
-            print(response.text)  # Print response content for debugging
-            print(response.headers)  # Print response headers for debugging
+            return status_code  # Return status code if link is active
 
-    except requests.exceptions.RequestException as e:
+    except RequestException as e:
         print(f"Error for {link}: {e}")
     except Exception as e:
         print(f"An unexpected error occurred for {link}: {str(e)}")
-    return False  # Link is not active
-
-# Function to test a list of URLs
-def test_urls(urls):
-    for url in urls:
-        is_active = check_active(url)
-        status = "Success" if is_active else "Not Active"
-        print(f"{url}: {status}")
+    
+    return None  # Return None if link is not active or an error occurred
 
 # Test URLs
 test_urls = [
     "http://5n4qdkw2wavc55peppyrelmb2rgsx7ohcb2tkxhub2gyfurxulfyd3id.onion/",
     "http://12323332ub2gyfurxulfyd3id.onion/"
 ]
+
+# Print status code for each test URL
+for url in test_urls:
+    status_code = check_active(url)
+    if status_code is not None:
+        print(f"{url}: Status Code {status_code}")
+    else:
+        print(f"{url}: Not Active")
