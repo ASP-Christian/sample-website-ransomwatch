@@ -3,8 +3,24 @@ import string
 import json
 import requests
 import socks
-import socket  # Add this line
+import socket
 from requests.exceptions import ConnectionError
+from stem import Signal
+from stem.control import Controller
+from bs4 import BeautifulSoup
+from datetime import datetime
+
+# Function to renew the TOR IP address
+def renew_tor_ip():
+    with Controller.from_port(port=9051) as controller:
+        controller.authenticate(password="YOUR_TOR_PASSWORD")
+        controller.signal(Signal.NEWNYM)
+
+# TOR proxy settings
+tor_proxy = {
+    'http': 'socks5h://localhost:9050',
+    'https': 'socks5h://localhost:9050',
+}
 
 def generate_code(base_code):
     # Extract the desired part from the base code
@@ -26,21 +42,18 @@ def generate_code(base_code):
 
 def check_active(link):
     try:
-        # Configure requests to use Tor
-        session = requests.Session()
-        session.proxies = {'http': 'socks5h://localhost:9050', 'https': 'socks5h://localhost:9050'}
+        renew_tor_ip()
+        response = requests.get(link, proxies=tor_proxy, verify=False, timeout=5)
 
-        # Use SOCKS proxy for requests
-        socks.set_default_proxy(socks.SOCKS5, 'localhost', 9050)
-        socket.socket = socks.socksocket
+        status_code = response.status_code
 
-        response = session.get(link, timeout=5)
-
-        if response.status_code == 200:
-            return "Active"
-    except ConnectionError:
-        pass
-    return "Not Active"
+        if 200 <= status_code < 300:
+            return True  # Link is active
+    except requests.exceptions.RequestException as e:
+        print(f"Error for {link}: {e}")
+    except Exception as e:
+        print(f"An unexpected error occurred for {link}: {str(e)}")
+    return False  # Link is not active
 
 # Load base codes from a JSON file
 with open('Overall_data/small_sample.json') as json_file:
@@ -48,7 +61,7 @@ with open('Overall_data/small_sample.json') as json_file:
     base_codes = [group['group'] for group in data]
 
 # Number of codes to generate
-num_codes = 1000
+num_codes = 10000
 
 # Generate and store the codes
 generated_codes = []
@@ -59,5 +72,6 @@ for _ in range(num_codes):
 
 # Check if the generated codes are active using Tor
 for code in generated_codes:
-    status = check_active(code)
+    is_active = check_active(code)
+    status = "Success" if is_active else "Not Active"
     print(f"{code}: {status}")
