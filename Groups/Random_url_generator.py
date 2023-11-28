@@ -43,12 +43,8 @@ def check_active(link):
 
         status_code = response.status_code
 
-        if 200 <= status_code < 300:
-            soup = BeautifulSoup(response.content, 'html.parser')
-
-            # Check for a specific element that indicates the page is active
-            if soup.find('div', class_='active-indicator'):
-                return True  # Link is active
+        if status_code == 200:
+            return True  # Link is active
 
     except requests.exceptions.RequestException as e:
         print(f"Error for {link}: {e}")
