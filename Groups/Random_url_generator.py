@@ -30,6 +30,13 @@ def check_active(link):
         status_code = response.status_code
 
         if 200 <= status_code < 300:
+            soup = BeautifulSoup(response.content, 'html.parser')
+            # Add your BeautifulSoup parsing logic here
+
+            # For demonstration, let's print the title of the page
+            title = soup.title.string.strip()
+            print(f"{link}: Status Code {status_code}, Title: {title}")
+
             return status_code  # Return status code if link is active
 
     except RequestException as e:
@@ -41,14 +48,10 @@ def check_active(link):
 
 # Test URLs
 test_urls = [
-    "https://ahmia.fi/",
+    "http://5n4qdkw2wavc55peppyrelmb2rgsx7ohcb2tkxhub2gyfurxulfyd3id.onion/",
     "http://12323332ub2gyfurxulfyd3id.onion/"
 ]
 
-# Print status code for each test URL
+# Check status for each test URL
 for url in test_urls:
-    status_code = check_active(url)
-    if status_code is not None:
-        print(f"{url}: Status Code {status_code}")
-    else:
-        print(f"{url}: Not Active")
+    check_active(url)
