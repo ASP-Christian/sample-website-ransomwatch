@@ -44,14 +44,14 @@ def check_active(link):
         status_code = response.status_code
 
         if status_code == 200:
-            return True  # Link is active
+            return True, status_code  # Link is active
 
     except requests.exceptions.RequestException as e:
         print(f"Error for {link}: {e}")
     except Exception as e:
         print(f"An unexpected error occurred for {link}: {str(e)}")
     
-    return False  # Link is not active
+    return False, status_code  # Link is not active
 
 # Add the URLs for testing
 test_urls = [
@@ -61,6 +61,6 @@ test_urls = [
 
 # Check status for each test URL
 for url in test_urls:
-    is_active = check_active(url)
+    is_active, status_code = check_active(url)
     status = "Success" if is_active else "Not Active"
-    print(f"{url}: {status}")
+    print(f"{url}: {status}, Status Code: {status_code}")
