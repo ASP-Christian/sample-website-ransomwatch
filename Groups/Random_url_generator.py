@@ -57,23 +57,14 @@ def check_active(link):
     
     return False  # Link is not active
 
-# Load base codes from a JSON file
-with open('Overall_data/small_sample.json') as json_file:
-    data = json.load(json_file)
-    base_codes = [group['group'] for group in data]
+# Add the URLs for testing
+test_urls = [
+    "https://ahmia.fi/",
+    "http://5n4qdkw2wavc55peppyrelmb2rgsx7ohcb2tkxhub2gyfurxulfyd3id.onion/"
+]
 
-# Number of codes to generate
-num_codes = 10000
-
-# Generate and store the codes
-generated_codes = []
-for _ in range(num_codes):
-    random_base_code = random.choice(base_codes)
-    generated_code = generate_code(random_base_code)
-    generated_codes.append(generated_code)
-
-# Check if the generated codes are active using Tor
-for code in generated_codes:
-    is_active = check_active(code)
+# Check status for each test URL
+for url in test_urls:
+    is_active = check_active(url)
     status = "Success" if is_active else "Not Active"
-    print(f"{code}: {status}")
+    print(f"{url}: {status}")
