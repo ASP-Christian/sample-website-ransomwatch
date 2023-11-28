@@ -58,18 +58,11 @@ with open('Overall_data/small_sample.json') as json_file:
     data = json.load(json_file)
     base_codes = [group['group'] for group in data]
 
-# Number of codes to generate
-num_codes = 3000
-
-# Generate and store the codes
-generated_codes = []
-for _ in range(num_codes):
-    random_base_code = random.choice(base_codes)
-    generated_code = generate_code(random_base_code)
-    generated_codes.append(generated_code)
-
-# Check if the generated codes are active using Tor
-for code in generated_codes:
-    is_active = check_active(code)
+# Continue generating codes until a success status is found
+success_found = False
+while not success_found:
+    generated_code = generate_code(random.choice(base_codes))
+    is_active = check_active(generated_code)
     status = "Success" if is_active else "Not Active"
-    print(f"{code}: {status}")
+    print(f"{generated_code}: {status}")
+    success_found = is_active
