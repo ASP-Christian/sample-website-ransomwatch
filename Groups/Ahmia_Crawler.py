@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup
 import requests
 import random
+from stem import Signal
+from stem.control import Controller
 
 Search_Bar = "vice"
 yourquery = Search_Bar
@@ -27,18 +29,39 @@ response = requests.get(website)
 soup = BeautifulSoup(response.content, 'html.parser')
 results = soup.find_all('li', {'class': 'result'})
 
+
+# Function to renew the TOR IP address
+def renew_tor_ip():
+    with Controller.from_port(port=9051) as controller:
+        controller.authenticate(password="YOUR_TOR_PASSWORD")
+        controller.signal(Signal.NEWNYM)
+
+
 for result in results:
     try:
         onion_link = result.cite.get_text()
     except:
         onion_link = 'n/a'
+
     try:
         title = result.a.text.strip()
     except:
         title = 'n/a'
+
     try:
         description = result.p.text
     except:
         description = 'n/a'
 
-    print(f"Onion Link: {onion_link}\nTitle: {title}\nDescription: {description}\n")
+    try:
+        # Renew TOR IP before making a request
+        renew_tor_ip()
+
+        # Make a request using TOR proxy
+        response = requests.get(onion_link, headers=headers,
+                                proxies={'http': 'socks5://127.0.0.1:9050', 'https': 'socks5://127.0.0.1:9050'})
+
+        status_code = response.status_code
+        print(f"Onion Link: {onion_link}\nTitle: {title}\nDescription: {description}\nStatus Code: {status_code}\n")
+    except Exception as e:
+        print(f"Error for Onion Link: {onion_link}\nError Message: {str(e)}\n")
