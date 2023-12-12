@@ -15,8 +15,9 @@ jobs:
         run: |
           sudo apt-get install tor
           echo "ControlPort 9051" | sudo tee -a /etc/tor/torrc
-          echo "HashedControlPassword $(tor --hash-password YOUR_TOR_PASSWORD)" | sudo tee -a /etc/tor/torrc
+          echo "HashedControlPassword $(sudo tor --hash-password YOUR_TOR_PASSWORD)" | sudo tee -a /etc/tor/torrc
           sudo systemctl restart tor
+          sleep 5  # Wait for TOR to restart
 
       - name: Install Python
         uses: actions/setup-python@v2
