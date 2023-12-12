@@ -40,6 +40,9 @@ def renew_tor_ip():
 for result in results:
     try:
         onion_link = result.cite.get_text()
+        # Add "http://" if not present
+        if not onion_link.startswith("http://"):
+            onion_link = "http://" + onion_link
     except:
         onion_link = 'n/a'
 
