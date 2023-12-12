@@ -22,4 +22,4 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run Python script
-      run: python Ahmia_Crawler.py
+      run: python Groups/Ahmia_Crawler.py
