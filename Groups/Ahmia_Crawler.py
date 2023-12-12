@@ -23,7 +23,7 @@ ua_list = [
 ua = random.choice(ua_list)
 headers = {'User-Agent': ua}
 
-Search_Bar = "vice"
+Search_Bar = "Credit"
 yourquery = Search_Bar
 if " " in yourquery:
     yourquery = yourquery.replace(" ", "+")
