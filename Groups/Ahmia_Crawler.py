@@ -17,7 +17,7 @@ tor_proxy = {
 }
 
 # URL to check
-group_url = 'http://ssq4zimieeanazkzc5ld4v5hdibi2nzwzdibfh5n5w4pw5mcik76lzyd.onion/'
+group_url = 'ssq4zimieeanazkzc5ld4v5hdibi2nzwzdibfh5n5w4pw5mcik76lzyd.onion/'
 
 try:
     renew_tor_ip()
